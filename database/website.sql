@@ -13,7 +13,7 @@ CREATE TABLE product (
    price REAL,
    categoryID INTEGER,
    userID INTEGER,
-   images BLOB,  -- check out later
+   images VARCHAR,  -- check out later
    FOREIGN KEY (userID) REFERENCES users(userID),
    FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID)
 );
@@ -59,10 +59,18 @@ INSERT INTO productCategory (name) VALUES
 ('Books');
 
 -- Insert dummy products
-INSERT INTO product (name, description, price, categoryID, userID) VALUES
-('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1),
-('T-shirt', 'A comfortable cotton T-shirt', 19.99, 2, 2),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3);
+INSERT INTO product (name, description, price, categoryID, userID, images) VALUES
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
+('T-shirt', 'A comfortable cotton T-shirt', 19.99, 2, 2, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png');
 
 -- Insert dummy transactions
 INSERT INTO transactions (buyerID, sellerID, productID, transactionDate) VALUES

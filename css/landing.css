@@ -1,0 +1,40 @@
+* {
+   font-family: Georgia, 'Times New Roman', Times, serif
+}
+.article-grid {
+   display: flex;
+   overflow-x: auto;
+   white-space: nowrap;
+   padding: 0 2em 2em 2em;
+}
+
+.article {
+   flex: 0 0 auto;
+   margin-right: 0.5em;
+   border: 1px solid black;
+}
+
+.product-section{
+   padding: 1em 5em 5em 5em ;
+}
+
+.products-title{
+   font-size: xx-large;
+   font-weight: normal;
+}
+
+.product-img {
+   width: 200px;
+   height: auto;
+}
+
+.article h3 {
+   margin: 0 0 0.5em 0.5em;
+   font-size: small;
+}
+
+.article p { 
+   margin: 0 0 0.5em 0.5em;
+   font-size: small;
+   color: #77BFA3;
+}
