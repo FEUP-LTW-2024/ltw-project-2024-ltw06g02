@@ -1,9 +1,10 @@
 CREATE TABLE users (
    userID INTEGER PRIMARY KEY,
-   username VARCHAR unique,      -- unique username
-   password VARCHAR,                  -- password stored in sha-1
+   username VARCHAR unique,  
+   password VARCHAR,              
    email VARCHAR,
-   paymentMethodPassword VARCHAR  -- cartão (BPI, etc) ??                       -- real name
+   paymentMethodPassword VARCHAR,
+   avatar VARCHAR
 );
 
 CREATE TABLE product (
@@ -47,10 +48,10 @@ CREATE TABLE message (
 );
 
 -- Insert dummy users
-INSERT INTO users (username, password, email, paymentMethodPassword) VALUES
-('user1', 'password1', 'user1@example.com', '1234'),
-('user2', 'password2', 'user2@example.com', '5678'),
-('user3', 'password3', 'user3@example.com', '9012');
+INSERT INTO users (username, password, email, paymentMethodPassword, avatar) VALUES
+('user1', 'password1', 'user1@example.com', '1234', '../assets/goiana.jpg'),
+('user2', 'password2', 'user2@example.com', '5678', '../assets/user.jpg'),
+('user3', 'password3', 'user3@example.com', '9012', '../assets/user.jpg');
 
 -- Insert dummy product categories
 INSERT INTO productCategory (name) VALUES

@@ -1,11 +1,16 @@
 <?php
-   function getSingleArticle($name, $price, $image){
+   function getSingleArticle($name, $price, $image, $avatar){
 ?>
 
    <article class="article">
-    <img src=<?= $image ?> alt="" class="product-img">
-    <h3><?= $name ?></h3>
-    <p><?= $price ?>€</p>
+      <a href="#"><img src=<?= $image ?> alt="" class="product-img"></a>
+      <div class="article-details">
+         <div>
+            <h3><?= $name ?></h3>
+            <p><?= $price ?>€</p>
+         </div>
+         <img src=<?= $avatar ?>>
+      </div>
    </article>
 
 <?php
@@ -19,7 +24,7 @@
       <h3 class="products-title">Produtos recomendados</h3>
       <section class="article-grid">
          <?php foreach($articles as $article){
-            getSingleArticle($article['name'], $article['price'], $article['images']);
+            getSingleArticle($article['name'], $article['price'], $article['images'], $article['avatar']);
          } 
          ?>
       </section>

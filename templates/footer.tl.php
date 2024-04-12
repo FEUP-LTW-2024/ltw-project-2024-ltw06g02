@@ -3,7 +3,7 @@
 ?>
 
    <footer>
-      <p>Some test footer</p>
+      <p>Bazinga!</p>
     </footer>
   </body>
 </html>
