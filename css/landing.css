@@ -15,7 +15,7 @@
 }
 
 .product-section{
-   padding: 1em 5em 5em 5em ;
+   padding: 1em 7em 1em 7em;
 }
 
 .products-title{
@@ -37,4 +37,18 @@
    margin: 0 0 0.5em 0.5em;
    font-size: small;
    color: #77BFA3;
+}
+
+.filter-btn {
+   padding: 10px 20px;
+   font-size: 16px;
+   color: #BFD8BD;
+   border: 1px solid #BFD8BD;
+   border-radius: 1px;
+   background-color: white;
+}
+
+.filter-btn:hover {
+   background-color: whitesmoke;
+   cursor: pointer;
 }
