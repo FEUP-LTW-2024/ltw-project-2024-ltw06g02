@@ -15,7 +15,7 @@
   </head>
   <body>
     <header>
-      <?php printNavBar() ?>
+      <?php printNavBar() ?>  
     </header>
 
 <?php

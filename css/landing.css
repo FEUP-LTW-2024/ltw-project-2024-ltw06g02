@@ -1,11 +1,12 @@
 * {
    font-family: Georgia, 'Times New Roman', Times, serif
 }
+
 .article-grid {
    display: flex;
    overflow-x: auto;
    white-space: nowrap;
-   padding: 0 2em 2em 2em;
+   padding: 0 0 2em 0;
 }
 
 .article {
