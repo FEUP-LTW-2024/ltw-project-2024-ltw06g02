@@ -10,11 +10,11 @@
       $password = $_POST['password'];
 
       if(empty($username) || empty($email) || empty($password)){
-         die(header('Header: ../login.mock.php'));
+         die(header('Location: ../#'));
       }
 
       $user = new User($username, $email, $password);
-      if(!registerUser($user)) die(header('Location: ../login.mock.php'));
+      if(!registerUser($user)) die(header('Location: ../#'));
       
       $_SESSION['username'] = $username;
       header('Location: ../index.php');   

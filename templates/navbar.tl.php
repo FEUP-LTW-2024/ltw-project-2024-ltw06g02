@@ -1,5 +1,8 @@
 <?php
+   require_once('forms.tl.php');
    function printNavBar(){
+      buildLoginForm();
+      buildRegisterForm();
 ?>
 
 <div class="navbar">
@@ -16,7 +19,7 @@
       <?php 
          } else { ?>
 
-         <a class="register" href="../login.mock.php">
+         <a class="register" href="#" id="showLogin">
             Register / Login
          </a>
 
@@ -27,3 +30,32 @@
 <?php
    }
 ?>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+      const loginDialog = document.getElementById("loginDialog");
+      const registerDialog = document.getElementById("registerDialog");
+      const showLoginBtn = document.getElementById("showLogin");
+      const closeLoginBtn = loginDialog.querySelector(".close-button");
+      const closeRegisterBtn = registerDialog.querySelector(".close-button");
+      const registerLink = document.getElementById("registerLink");
+
+      showLoginBtn.addEventListener("click", () => {
+         loginDialog.showModal();
+      });
+
+      closeLoginBtn.addEventListener("click", () => {
+         loginDialog.close();
+      });
+
+      closeRegisterBtn.addEventListener("click", () => {
+         registerDialog.close();
+      });
+
+      registerLink.addEventListener("click", (event) => {
+         event.preventDefault();
+         loginDialog.close();
+         registerDialog.showModal();
+      });
+   });
+</script>
