@@ -1,9 +1,10 @@
 CREATE TABLE users (
    userID INTEGER PRIMARY KEY,
-   username VARCHAR unique,      -- unique username
-   password VARCHAR,                  -- password stored in sha-1
+   username VARCHAR unique,  
+   password VARCHAR,              
    email VARCHAR,
-   paymentMethodPassword VARCHAR  -- cartão (BPI, etc) ??                       -- real name
+   paymentMethodPassword VARCHAR,
+   avatar VARCHAR
 );
 
 CREATE TABLE product (
@@ -13,7 +14,7 @@ CREATE TABLE product (
    price REAL,
    categoryID INTEGER,
    userID INTEGER,
-   images BLOB,  -- check out later
+   images VARCHAR,  -- check out later
    FOREIGN KEY (userID) REFERENCES users(userID),
    FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID)
 );
@@ -47,10 +48,10 @@ CREATE TABLE message (
 );
 
 -- Insert dummy users
-INSERT INTO users (username, password, email, paymentMethodPassword) VALUES
-('user1', 'password1', 'user1@example.com', '1234'),
-('user2', 'password2', 'user2@example.com', '5678'),
-('user3', 'password3', 'user3@example.com', '9012');
+INSERT INTO users (username, password, email, paymentMethodPassword, avatar) VALUES
+('user1', 'password1', 'user1@example.com', '1234', '../assets/goiana.jpg'),
+('user2', 'password2', 'user2@example.com', '5678', '../assets/user.jpg'),
+('user3', 'password3', 'user3@example.com', '9012', '../assets/user.jpg');
 
 -- Insert dummy product categories
 INSERT INTO productCategory (name) VALUES
@@ -59,10 +60,18 @@ INSERT INTO productCategory (name) VALUES
 ('Books');
 
 -- Insert dummy products
-INSERT INTO product (name, description, price, categoryID, userID) VALUES
-('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1),
-('T-shirt', 'A comfortable cotton T-shirt', 19.99, 2, 2),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3);
+INSERT INTO product (name, description, price, categoryID, userID, images) VALUES
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
+('T-shirt', 'A comfortable cotton T-shirt', 19.99, 2, 2, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png');
 
 -- Insert dummy transactions
 INSERT INTO transactions (buyerID, sellerID, productID, transactionDate) VALUES

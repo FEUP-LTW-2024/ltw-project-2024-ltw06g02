@@ -1,6 +1,6 @@
 <?php
    function getDatabaseConnection(){
-      $db = new PDO('sqlite:database/website.db');
+      $db = new PDO('sqlite:' . __DIR__ . '/website.db');
       return $db;
    }
 ?>

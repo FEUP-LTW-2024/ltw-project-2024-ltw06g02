@@ -1,0 +1,68 @@
+* {
+   font-family: Georgia, 'Times New Roman', Times, serif
+}
+
+.article-grid {
+   display: flex;
+   overflow-x: auto;
+   white-space: nowrap;
+   padding: 0 0 2em 0;
+}
+
+.article {
+   flex: 0 0 auto;
+   margin-right: 0.5em;
+   border: 1px solid gray;
+   border-radius: 3px;
+}
+
+.article-details {
+   padding: 0 0.5em 0.5em 0;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+
+   img {
+      width: 35px;
+   }
+}
+
+.product-section{
+   padding: 1em 7em 1em 7em;
+}
+
+.products-title{
+   font-size: xx-large;
+   font-weight: normal;
+}
+
+.product-img {
+   width: 200px;
+   height: auto;
+}
+
+.article h3 {
+   margin: 0 0 0.5em 0.5em;
+   font-size: small;
+}
+
+.article p { 
+   margin: 0 0 0.5em 0.5em;
+   font-size: small;
+   color: #98C9A3;
+}
+
+.filter-btn {
+   padding: 10px;
+   font-size: 16px;
+   color: #BFD8BD;
+   border: 1px solid #98C9A3;
+   border-radius: 1px;
+   background-color: white;
+}
+
+.filter-btn:hover {
+   background-color: whitesmoke;
+   cursor: pointer;
+}
