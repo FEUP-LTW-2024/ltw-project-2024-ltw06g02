@@ -6,13 +6,18 @@
 ?>
 
 <div class="navbar">
-  <h1>Bazinga</h1>
+  <a style="text-decoration:none" href="../index.php"><h1>Bazinga</h1></a>
       <?php if(isset($_SESSION['username'])){ ?>
 
-         <div class="dropdown">
-            <button class="dropbtn"><?= $_SESSION['username'] ?></button>
-            <div class="dropdown-content">
-               <a href="../actions/logout.php">Logout</a>
+         <div class="nav-buttons">
+            <a class="nav-button" href="../sell.php">
+               sell
+            </a>
+            <div class="dropdown">
+               <button class="nav-button"><?= $_SESSION['username'] ?></button>
+               <div class="dropdown-content">
+                  <a href="../actions/logout.php">Logout</a>
+               </div>
             </div>
          </div>
 
@@ -20,11 +25,11 @@
          } else { ?>
 
          <div class="nav-buttons">
-            <a class="login" href="#" id="showLogin">
+            <a class="nav-button" href="#" id="showLogin">
                Login
             </a>
 
-            <a class="register" href="#" id="showRegister">
+            <a class="nav-button" href="#" id="showRegister">
                Register
             </a>
          </div>

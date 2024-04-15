@@ -13,6 +13,7 @@
     <link href="css/footer.css" rel="stylesheet">
     <link href="css/forms.css" rel="stylesheet">
     <link href="css/landing.css" rel="stylesheet">
+    <link href="css/sell.css" rel="stylesheet">
   </head>
   <body>
     <header>

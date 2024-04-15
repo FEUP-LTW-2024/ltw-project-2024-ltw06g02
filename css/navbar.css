@@ -18,11 +18,11 @@ body {
    margin: 0;
 }
 
-.navbar a:hover, .dropbtn:hover{
+.nav-button:hover{
    background-color: #75A07A;
 }
 
-.register, .dropbtn, .login{
+.nav-button{
    display: block;
    background-color: #98C9A3;
    color: #fff;
