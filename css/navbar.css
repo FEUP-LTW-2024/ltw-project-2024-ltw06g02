@@ -22,17 +22,22 @@ body {
    background-color: #75A07A;
 }
 
-.navbar .register, .dropbtn{
+.register, .dropbtn, .login{
    display: block;
    background-color: #98C9A3;
    color: #fff;
    text-align: center;
    font-size: 16px;
    text-decoration: none;
-   margin-left: auto;
    padding: 14px 16px;
    border: none;
+   border-radius: 5px;
    cursor: pointer;
+}
+
+.nav-buttons {
+   display: flex;
+   margin-left: auto;
 }
 
 @media screen and (max-width: 600px) {
@@ -58,6 +63,7 @@ body {
    background-color: #f9f9f9;
    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
    z-index: 1;
+   border-radius: 5px;
 }
 
 .dropdown-content a {
@@ -67,7 +73,10 @@ body {
    display: block;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+   background-color: #ddd;
+   border-radius: 5px;
+}
 
 .dropdown:hover .dropdown-content {
    display: block;

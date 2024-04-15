@@ -19,9 +19,15 @@
       <?php 
          } else { ?>
 
-         <a class="register" href="#" id="showLogin">
-            Register / Login
-         </a>
+         <div class="nav-buttons">
+            <a class="login" href="#" id="showLogin">
+               Login
+            </a>
+
+            <a class="register" href="#" id="showRegister">
+               Register
+            </a>
+         </div>
 
       <?php } ?>
 
@@ -36,6 +42,7 @@
       const loginDialog = document.getElementById("loginDialog");
       const registerDialog = document.getElementById("registerDialog");
       const showLoginBtn = document.getElementById("showLogin");
+      const showRegisterBtn = document.getElementById("showRegister");
       const closeLoginBtn = loginDialog.querySelector(".close-button");
       const closeRegisterBtn = registerDialog.querySelector(".close-button");
       const registerLink = document.getElementById("registerLink");
@@ -52,10 +59,15 @@
          registerDialog.close();
       });
 
+      showRegisterBtn.addEventListener("click", (event) => {
+         registerDialog.showModal();
+      });
+
       registerLink.addEventListener("click", (event) => {
          event.preventDefault();
          loginDialog.close();
          registerDialog.showModal();
       });
+
    });
 </script>
