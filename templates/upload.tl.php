@@ -5,8 +5,8 @@
    <div class="outer-rectangle">
       <h2>Adiciona fotografias</h2>
       <div class="inner-rectangle">
-         <form action="upload.php" method="post" enctype="multipart/form-data">
-            <input type="file" multiple>
+         <form action="actions/upload.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="files[]" required multiple>
       </div>
    </div>
 
@@ -20,15 +20,15 @@
       <h2>Descreve o produto</h2>
          <div class="input-grp">
             <label>Title</label>
-            <input type="text">
+            <input type="text" name="name" required>
          </div>
          <div class="input-grp">
             <label>Description</label>
-            <textarea></textarea>
+            <textarea name="description"></textarea>
          </div>
          <div class="input-grp">
             <label>Categories</label>
-            <select>
+            <select required name="category">
                <?php 
                   foreach($filters as $filter){
                      echo("<option>" . $filter['name']);
@@ -38,7 +38,7 @@
          </div>
          <div class="input-grp">
             <label>Price</label>
-            <input type="number">
+            <input type="number" name="price" required>
          </div>
    </div>
 

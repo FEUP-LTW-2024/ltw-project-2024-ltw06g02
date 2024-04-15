@@ -1,9 +1,10 @@
 <?php
    function getSingleArticle($name, $price, $image, $avatar){
+      $images = explode(",", $image);
 ?>
 
    <article class="article">
-      <a href="#"><img src=<?= $image ?> alt="" class="product-img"></a>
+      <a href="#"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
       <div class="article-details">
          <div>
             <h3><?= $name ?></h3>

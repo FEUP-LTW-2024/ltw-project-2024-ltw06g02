@@ -1,5 +1,6 @@
 <?php
    session_start();
+   
    require_once('templates/footer.tl.php');
    require_once('templates/header.tl.php');
    require_once('templates/upload.tl.php');
