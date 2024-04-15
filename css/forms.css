@@ -1,0 +1,88 @@
+#loginDialog {
+  width: 20%;
+  height: 45%;
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+#loginDialog p,  #registerDialog p{
+  text-align: center;
+  padding: 0.5em;
+  margin-top: 1em;
+}
+
+#loginDialog #loginForm, #registerDialog #registerForm {
+  text-align: center;
+}
+
+#loginDialog #loginForm input[id=username]::placeholder, #loginDialog #loginForm input[type=password]::placeholder,
+#registerDialog #registerForm input[type=password]::placeholder, #registerDialog #registerForm input[type=email]::placeholder,
+#registerDialog #registerForm input[type=text]::placeholder {
+  color: #999;
+}
+
+
+
+#loginDialog #loginForm input[id=username],
+#loginDialog #loginForm input[type=password],
+#registerDialog #registerForm input[type=password],
+#registerDialog #registerForm input[type=email],
+#registerDialog #registerForm input[type=text] {
+    width: 80%;
+    padding: 0.8em;
+    margin-bottom: 1.5em;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    border-bottom: 2px solid #98C9A3;
+}
+
+#loginDialog #loginForm input[id=username]:focus,
+#loginDialog #loginForm input[type=password]:focus,
+#registerDialog #registerForm input[type=password]:focus,
+#registerDialog #registerForm input[type=email]:focus,
+#registerDialog #registerForm input[type=text]:focus  {
+    border: 2px solid #98C9A3;
+}
+
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0.5em;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.close-button span {
+  font-size: xx-large;
+  color: #555;
+}
+
+#loginBtn, #registerBtn {
+  padding: 1em 1em;
+  background-color: #98C9A3;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#registerDialog {
+  height: 40%;
+  width: 20%;
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 5px;
+
+}
+
+#loginDialog a {
+  color: #98C9A3;
+  text-decoration: none;
+  cursor: pointer;
+}
