@@ -16,6 +16,7 @@
     <link href="css/sell.css" rel="stylesheet">
     <link href="css/profile.css" rel="stylesheet">
     <link href="css/messages.css" rel="stylesheet">
+    <link href="css/productPage.css" rel="stylesheet">
   </head>
   <body>
     <header>
