@@ -23,7 +23,7 @@
 ?>
    <div class="product-section">
       <h3 class="products-title">Produtos recomendados</h3>
-      <section class="article-grid">
+      <section class="article-grid" id="grid">
          <?php foreach($articles as $article){
             getSingleArticle($article['name'], $article['price'], $article['images'], $article['avatar']);
          } 
@@ -33,4 +33,3 @@
 <?php
    }
 ?>
-

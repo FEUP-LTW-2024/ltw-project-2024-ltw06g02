@@ -2,7 +2,7 @@
    function printFilterButton($filter){
 ?>
 
-   <button class="filter-btn"><?= $filter['name'] ?></button>
+   <button class="filter-btn" onclick="updateArticles('<?=$filter['name']?>')"><?= $filter['name'] ?></button>
 
 <?php
    }
@@ -26,3 +26,14 @@
 <?php
    }
 ?>
+
+<script>
+   function updateArticles(str){
+      const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+         document.getElementById("grid").innerHTML = this.responseText;
+      }
+      xhttp.open("GET", "../actions/filter.php?q="+ str);
+      xhttp.send();
+   }
+</script>
