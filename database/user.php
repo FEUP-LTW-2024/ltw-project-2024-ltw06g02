@@ -61,15 +61,22 @@
       return $userItems;
    }
 
-   function retrieveUser($username){
+   function retrieveUser($id){
       $db = getDatabaseConnection();
 
-      $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
-      $stmt->bindParam(1, $username);
+      $stmt = $db->prepare("SELECT * FROM users WHERE userID = ?");
+      $stmt->bindParam(1, $id);
       $stmt->execute();
 
       $user = $stmt->fetch();
 
       return $user;
+   }
+
+   function updateUser($username, $password, $email, $id){
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare("UPDATE users SET username = ?, email = ?, password = ? WHERE userID = ?");
+      $stmt->execute(array($username, $email, $password, $id));
    }
 ?> 

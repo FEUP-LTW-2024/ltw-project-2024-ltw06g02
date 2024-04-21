@@ -3,11 +3,11 @@
 class Session {
     private array $messages;
     private $userID;
-    private $username;
 
     public function __construct() {
         session_start();
-        
+        $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
+
         // $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
         //unset($_SESSION['messages']);
     }
@@ -28,14 +28,6 @@ class Session {
         return isset($_SESSION['username']) ? $_SESSION['username'] : null;
     }
 
-    public function getEmail() : ?string {
-        return isset($_SESSION['email']) ? $_SESSION['email'] : null;
-    }
-
-    public function getAvatar() : ?string {
-        return isset($_SESSION['avatar']) ? $_SESSION['avatar'] : null;
-    }
-
     public function setUserId() {
         $db = getDatabaseConnection();
         $stmt = $db->prepare(
@@ -50,16 +42,7 @@ class Session {
     }
 
     public function setUsername(string $username) {
-        $this->username = $username;
         $_SESSION['username'] = $username;
-    }
-
-    public function setEmail(string $email) {
-        $_SESSION['email'] = $email;
-    }
-
-    public function setAvatar(string $avatar) {
-        $_SESSION['avatar'] = $avatar;
     }
 
     public function addMessage(string $type, string $text) {

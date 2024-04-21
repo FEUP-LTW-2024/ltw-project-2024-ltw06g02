@@ -13,7 +13,7 @@
 
     $db = getDatabaseConnection();
     $articles = getUserArticles($db, $session->getUserId());
-    $user = retrieveUser($session->getUsername());
+    $user = retrieveUser($session->getUserId());
 
     printHeader('Bazinga!');
     printBioSection($user);

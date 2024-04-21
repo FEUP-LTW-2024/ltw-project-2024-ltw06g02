@@ -1,4 +1,4 @@
-#loginDialog {
+#loginDialog, #registerDialog, #editProfileDialog {
   width: 20em;
   height: 20em;
   padding: 1em;
@@ -6,25 +6,29 @@
   border-radius: 5px;
 }
 
-#loginDialog p,  #registerDialog p{
+#loginDialog p,  #registerDialog p, #editProfileDialog p{
   text-align: center;
   padding: 0.5em;
   margin-top: 1em;
 }
 
-#loginDialog #loginForm, #registerDialog #registerForm {
-  text-align: center;
+#loginForm, #registerForm, #editProfileForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#loginDialog #loginForm input::placeholder,
-#registerDialog #registerForm input::placeholder {
+#loginForm input::placeholder,
+#registerForm input::placeholder,
+#editProfileForm input::placeholder {
   color: #999;
 }
 
 
 
-#loginDialog #loginForm input,
-#registerDialog #registerForm input {
+#loginForm input,
+#registerForm input,
+#editProfileForm input {
     width: 80%;
     padding: 0.8em;
     margin-bottom: 1.5em;
@@ -35,8 +39,9 @@
     border-bottom: 2px solid #98C9A3;
 }
 
-#loginDialog #loginForm input:focus,
-#registerDialog #registerForm input:focus  {
+#loginForm input:focus,
+#registerForm input:focus,
+#editProfileForm input:focus  {
     border: 2px solid #98C9A3;
 }
 
@@ -63,15 +68,6 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-#registerDialog {
-  height: 20em;
-  width: 20em;
-  padding: 1em;
-  background-color: #fff;
-  border-radius: 5px;
-
 }
 
 #loginDialog a {

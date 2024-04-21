@@ -1,5 +1,7 @@
 <?php
+   require_once('forms.tl.php'); 
    function printBioSection($user){
+      buildEditProfile();
 ?>
    <div class="info">
       <div class="conjunction">
@@ -17,7 +19,7 @@
             </div>
          </section>
          <div>
-            <button class="nav-button">Edit Profile</button>
+            <button class="nav-button" id="editProfile">Edit Profile</button>
          </div>
       </div>
 
@@ -58,3 +60,19 @@
 <?php
    }
 ?>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+      const editProfileDialog = document.getElementById("editProfileDialog");
+      const editProfile =document.getElementById("editProfile");
+      const closeBtn = editProfileDialog.querySelector(".close-button");
+
+      editProfile.addEventListener("click", () => {
+         editProfileDialog.showModal();
+      })
+
+      closeBtn.addEventListener("click", () => {
+         editProfileDialog.close();
+      });
+   })
+</script>
