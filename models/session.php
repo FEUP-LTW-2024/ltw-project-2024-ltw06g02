@@ -7,9 +7,6 @@ class Session {
     public function __construct() {
         session_start();
         $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
-
-        // $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
-        //unset($_SESSION['messages']);
     }
 
     public function isLoggedIn() : bool {
@@ -42,6 +39,7 @@ class Session {
     }
 
     public function setUsername(string $username) {
+        $this->username = $username;
         $_SESSION['username'] = $username;
     }
 

@@ -73,7 +73,6 @@
 
       return $user;
    }
-
    function updateUser($username, $password, $email, $id){
       $db = getDatabaseConnection();
 

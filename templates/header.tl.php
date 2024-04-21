@@ -19,6 +19,11 @@
     <link href="css/productPage.css" rel="stylesheet">
     <link href="css/wishlist.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<<<<<<< HEAD
+=======
+    <link href="css/sell.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
+>>>>>>> c97c229 (Session changes)
   </head>
   <body>
     <header>
