@@ -1,6 +1,6 @@
 #loginDialog {
-  width: 20%;
-  height: 45%;
+  width: 20em;
+  height: 20em;
   padding: 1em;
   background-color: #fff;
   border-radius: 5px;
@@ -73,8 +73,8 @@
 }
 
 #registerDialog {
-  height: 40%;
-  width: 20%;
+  height: 20em;
+  width: 20em;
   padding: 1em;
   background-color: #fff;
   border-radius: 5px;
