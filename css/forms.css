@@ -16,19 +16,15 @@
   text-align: center;
 }
 
-#loginDialog #loginForm input[id=username]::placeholder, #loginDialog #loginForm input[type=password]::placeholder,
-#registerDialog #registerForm input[type=password]::placeholder, #registerDialog #registerForm input[type=email]::placeholder,
-#registerDialog #registerForm input[type=text]::placeholder {
+#loginDialog #loginForm input::placeholder,
+#registerDialog #registerForm input::placeholder {
   color: #999;
 }
 
 
 
-#loginDialog #loginForm input[id=username],
-#loginDialog #loginForm input[type=password],
-#registerDialog #registerForm input[type=password],
-#registerDialog #registerForm input[type=email],
-#registerDialog #registerForm input[type=text] {
+#loginDialog #loginForm input,
+#registerDialog #registerForm input {
     width: 80%;
     padding: 0.8em;
     margin-bottom: 1.5em;
@@ -39,11 +35,8 @@
     border-bottom: 2px solid #98C9A3;
 }
 
-#loginDialog #loginForm input[id=username]:focus,
-#loginDialog #loginForm input[type=password]:focus,
-#registerDialog #registerForm input[type=password]:focus,
-#registerDialog #registerForm input[type=email]:focus,
-#registerDialog #registerForm input[type=text]:focus  {
+#loginDialog #loginForm input:focus,
+#registerDialog #registerForm input:focus  {
     border: 2px solid #98C9A3;
 }
 
