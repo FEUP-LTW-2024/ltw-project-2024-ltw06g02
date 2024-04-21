@@ -77,3 +77,10 @@
   border: none;
   border-bottom: 1px solid #ccc;
 }
+
+.article-profile-grid {
+  display: flex;
+  overflow-x: auto;
+  white-space: wrap;
+  padding: 0 0 2em 0;
+}
