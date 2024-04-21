@@ -16,7 +16,7 @@
     $user = retrieveUser($session->getUsername());
 
     printHeader('Bazinga!');
-    printInfoSection($user);
+    printBioSection($user);
     printProfileArticleSection($articles);
     printFooter();
 ?>

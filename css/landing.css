@@ -10,7 +10,6 @@
 }
 
 .article {
-   flex: 0 0 auto;
    margin-right: 0.5em;
    border: 1px solid gray;
    border-radius: 3px;
