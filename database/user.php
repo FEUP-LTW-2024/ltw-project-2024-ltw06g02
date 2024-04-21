@@ -1,5 +1,7 @@
 <?php
    require_once('connection.php');
+   require_once(dirname(__DIR__) . '/models/user.php');
+
    function registerUser($user) : bool{
       $db = getDatabaseConnection();
 
@@ -57,5 +59,17 @@
       
       $userItems = $stmt->fetchAll();
       return $userItems;
+   }
+
+   function retrieveUser($username){
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
+      $stmt->bindParam(1, $username);
+      $stmt->execute();
+
+      $user = $stmt->fetch();
+
+      return $user;
    }
 ?> 

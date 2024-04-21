@@ -1,12 +1,13 @@
 <?php
-   function printInfoSection() {
+   require_once("article.tl.php");
+   function printInfoSection($user){
 ?>
    <div class="info">
       <section class="left-side">
-         <img src="../assets/goiana.jpg">
+         <img src="../assets/goiana.jpg" >
          <div class="bios">
             <div>
-               <h2>username</h2>
+               <h2><?= $user['username'] ?></h2>
                <h3>biografia</h3>
             </div>
             <div>
@@ -19,7 +20,7 @@
 <?php 
    }
 
-   function printArticleSection($articles) {
+   function printProfileArticleSection($articles) {
 ?>
 
 

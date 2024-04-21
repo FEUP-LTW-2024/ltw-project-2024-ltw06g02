@@ -16,6 +16,7 @@
       if(!loginUser($username, $password)) die(header('Location: ../#'));
       
       $session->setUsername($username);
+      $session->setUserId();
 
       header('Location: ../index.php');
       die(0);

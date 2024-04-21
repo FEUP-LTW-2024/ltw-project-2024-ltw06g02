@@ -28,9 +28,9 @@
 
   function getUserArticles($db, $userID){
      $stmt = $db->prepare(
-        "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.userID = :userID"
+        "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.userID = ?"
      );
-     $stmt->bindParam(':userID', $userID);
+     $stmt->bindParam(1, $userID);
      $stmt->execute();
      $userArticles = $stmt->fetchAll();
      return $userArticles;

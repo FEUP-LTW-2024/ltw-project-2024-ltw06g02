@@ -14,10 +14,11 @@
          die(header('Location: ../#'));
       }
 
-      $user = new User($username, $email, $password);
+      $user = new User($username, $email, $password, '');
       if(!registerUser($user)) die(header('Location: ../#'));
       
       $session->setUsername($username);
+      $session->setUserId();
 
       header('Location: ../index.php');   
    }

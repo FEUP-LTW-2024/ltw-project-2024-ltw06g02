@@ -2,12 +2,14 @@
 
 class Session {
     private array $messages;
+    private $userID;
+    private $username;
 
     public function __construct() {
         session_start();
-
-        $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
-        unset($_SESSION['messages']);
+        
+        // $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
+        //unset($_SESSION['messages']);
     }
 
     public function isLoggedIn() : bool {
@@ -34,11 +36,21 @@ class Session {
         return isset($_SESSION['avatar']) ? $_SESSION['avatar'] : null;
     }
 
-    public function setUserId(int $userID) {
-        $_SESSION['userID'] = $userID;
+    public function setUserId() {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare(
+            "SELECT userID FROM users WHERE username=?"
+        );
+        $stmt->bindParam(1, $_SESSION['username']);
+        $stmt->execute();
+        $id = $stmt->fetch();
+
+        $this->userID = $id['userID'];
+        $_SESSION['userID'] = $id['userID'];
     }
 
     public function setUsername(string $username) {
+        $this->username = $username;
         $_SESSION['username'] = $username;
     }
 

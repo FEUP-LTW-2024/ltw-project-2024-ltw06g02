@@ -14,6 +14,7 @@
     <link href="css/forms.css" rel="stylesheet">
     <link href="css/landing.css" rel="stylesheet">
     <link href="css/sell.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
   </head>
   <body>
     <header>

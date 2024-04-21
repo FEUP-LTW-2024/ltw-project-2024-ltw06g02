@@ -3,6 +3,7 @@
 
     require_once('database/connection.php');
     require_once('database/articles.php');
+    require_once('database/user.php');
     require_once('models/session.php');
     require_once('templates/header.tl.php');
     require_once('templates/footer.tl.php');
@@ -12,9 +13,10 @@
 
     $db = getDatabaseConnection();
     $articles = getUserArticles($db, $session->getUserId());
+    $user = retrieveUser($session->getUsername());
 
     printHeader('Bazinga!');
-    printInfoSection();
-    printArticleSection($articles);
+    printInfoSection($user);
+    printProfileArticleSection($articles);
     printFooter();
 ?>
