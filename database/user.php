@@ -48,4 +48,14 @@
       }
       return false;
    }
+
+   function displayUserItems($userId) {
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare("SELECT * FROM product WHERE userID = :userId");
+      $stmt->execute(['userId' => $userId]);
+      
+      $userItems = $stmt->fetchAll();
+      return $userItems;
+   }
 ?> 

@@ -11,7 +11,7 @@ class Session {
     }
 
     public function isLoggedIn() : bool {
-        return isset($_SESSION['userID']);    
+        return isset($_SESSION['username']);    
     }
 
     public function logout() {

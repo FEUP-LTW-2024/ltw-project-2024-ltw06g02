@@ -1,8 +1,9 @@
 <?php
-   session_start();
-
+   require_once("../models/session.php");
    require_once("../models/user.php");
    require_once("../database/user.php");
+
+   $session = new Session();
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $username = $_POST['username'];
@@ -16,7 +17,8 @@
       $user = new User($username, $email, $password);
       if(!registerUser($user)) die(header('Location: ../#'));
       
-      $_SESSION['username'] = $username;
+      $session->setUsername($username);
+
       header('Location: ../index.php');   
    }
 ?>
