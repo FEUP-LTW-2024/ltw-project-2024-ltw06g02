@@ -28,8 +28,17 @@
 
    function printProfileArticleSection($articles) {
 ?>
+      <div class="right-side">
+         <section class="article-profile-grid" id="grid">
+            <?php
+               foreach ($articles as $article) {
+                  getSingleProfileArticle($article['name'], $article['price'], $article['images'], $article['avatar']);
+               }
+            ?>
+         </section>
+      </div>
 
-      <section class="right-side">
+      <!-- <section class="right-side">
          <div class="article-profile-grid">
                <?php
                   foreach ($articles as $article) {
@@ -37,7 +46,7 @@
                   }
                ?>
          </div>
-      </section>
+      </section> -->
    </div>
    
 <?php
