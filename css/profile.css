@@ -4,6 +4,7 @@
   padding: 2em;
   align-items: flex-start;
   flex-direction: row;
+  gap: 2em;
 }
 
 .profile-article {
@@ -30,8 +31,6 @@
 }
 
 .info .left-side {
-  width: 30em;
-  height: 15em;
   display: flex;
   flex-direction: row;
 
@@ -60,6 +59,10 @@
 
   button {
     margin-left: 2em;
+  }
+
+  img {
+    width: 15em;
   }
 }
 
