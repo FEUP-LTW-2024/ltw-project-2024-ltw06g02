@@ -1,7 +1,6 @@
 .info {
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 2em;
+  row-gap: 2.5em;
   padding: 2em;
 }
 
@@ -67,7 +66,7 @@
 
 .info .right-side {
   height: auto;
-  max-width: 107em;
+  width: 107em;
   justify-self: center;
   padding: 0.5em 0.5em 0.5em 0.5em;
   background-color: whitesmoke;
