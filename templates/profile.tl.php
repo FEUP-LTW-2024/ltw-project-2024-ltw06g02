@@ -9,8 +9,9 @@
             <img src="../assets/goiana.jpg" >
             <div class="bios">
                <div>
-                  <h2><?= $user['username'] ?></h2>
-                  <h3>biografia</h3>
+                  <h1><?= $user['fullName'] ?></h1>
+                  <h3><?= $user['username'] ?></h2>
+                  <h4>biografia</h3>
                </div>
                <div>
                   <h4>followed by</h4>

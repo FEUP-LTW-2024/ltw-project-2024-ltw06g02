@@ -7,11 +7,12 @@
 
       if(!checkUserExists($user)){
          $stmt = $db->prepare(
-            "INSERT INTO users(username, email, password) VALUES(?,?,?)"
+            "INSERT INTO users(fullName, username, email, password) VALUES(?,?,?,?)"
          );
-         $stmt->bindParam(1, $user->username);
-         $stmt->bindParam(2, $user->email);
-         $stmt->bindParam(3, $user->password);
+         $stmt->bindParam(1, $user->fullName);
+         $stmt->bindParam(2, $user->username);
+         $stmt->bindParam(3, $user->email);
+         $stmt->bindParam(4, $user->password);
          $stmt->execute();
          return true;
       }
