@@ -1,14 +1,8 @@
 .info {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   row-gap: 2.5em;
   padding: 2em;
-}
-
-.profile-article {
-  border: none;
-  border-radius: 3px;
-  margin: 0.5em 1em 0 0;
-
 }
 
 .profile-article h3 {
@@ -65,10 +59,7 @@
 }
 
 .info .right-side {
-  height: auto;
-  width: 107em;
-  justify-self: center;
-  padding: 0.5em 0.5em 0.5em 0.5em;
+  padding: 0.5em;
   background-color: whitesmoke;
   border-radius: 5px;
 }
