@@ -8,6 +8,7 @@
       </button>
       <p>CRIA UMA CONTA COM O E-MAIL</p>
       <form id="registerForm" action="../actions/register.php" method="POST">
+         <input type="text" name="fullName" placeholder="Full Name" required>
          <input type="text" name="username" placeholder="Username" required>
          <input type="email" name="email" placeholder="Email" required>
          <input type="password" name="password" placeholder="Password" required>

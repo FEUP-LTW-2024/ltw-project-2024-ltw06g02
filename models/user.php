@@ -1,12 +1,14 @@
 <?php
 
    class User{
-      public function __construct($username, $email, $password, $avatar){
+      public function __construct($fullName, $username, $email, $password, $avatar){
+         $this->fullName = $fullName;
          $this->username = $username;
          $this->email = $email;
          $this->password = password_hash('bazinga'.$password.'bazinga', PASSWORD_DEFAULT);
          $this->avatar = $avatar;
       }
+      public $fullName;
       public $username;
       public $email;
       public $password;

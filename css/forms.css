@@ -1,6 +1,4 @@
 #loginDialog, #registerDialog, #editProfileDialog {
-  width: 20em;
-  height: 20em;
   padding: 1em;
   background-color: #fff;
   border-radius: 5px;
