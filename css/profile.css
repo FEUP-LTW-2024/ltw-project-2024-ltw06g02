@@ -44,15 +44,15 @@
   }
 }
 
-h2 {
-  font-weight: normal;
+h1 {
   margin-bottom: 0;
 }
 
 h3 {
-  font-weight: normal;
-  margin: 0;
-  padding: 0;
+  font-weight: lighter;
+  font-style: italic;
+  margin-top: 0.2em;
+  margin-bottom: 0;
 }
 
 h4 {

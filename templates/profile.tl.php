@@ -9,7 +9,8 @@
             <img src="../assets/goiana.jpg" >
             <div class="bios">
                <div>
-                  <h2><?= $user['username'] ?></h2>
+                  <h1><?= $user['fullName'] ?></h1>
+                  <h3><?= $user['username'] ?></h3>
                   <hr class="separatorName">
                   <img id="location" src="../assets/location.jpg" alt="pin location"> 
                   <h3>Portugal</h3>
