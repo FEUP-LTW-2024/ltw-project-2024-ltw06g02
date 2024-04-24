@@ -10,17 +10,19 @@
             <div class="bios">
                <div>
                   <h2><?= $user['username'] ?></h2>
-                  <h3>biografia</h3>
+                  <hr class="separatorName">
+                  <img id="location" src="../assets/location.jpg" alt="pin location"> 
+                  <h3>Portugal</h3>
                </div>
                <div>
                   <h4>followed by</h4>
                   <h4>liked by</h4>
                </div>
             </div>
+            <div>
+               <button class="nav-button" id="editProfile">Edit Profile</button>
+            </div>
          </section>
-         <div>
-            <button class="nav-button" id="editProfile">Edit Profile</button>
-         </div>
       </div>
 
 <?php 
@@ -29,6 +31,7 @@
    function printProfileArticleSection($articles) {
 ?>
       <div class="right-side">
+         <h3 class="products-title">Os meus produtos</h3>
          <section class="article-profile-grid" id="grid">
             <?php
                foreach ($articles as $article) {
@@ -37,16 +40,6 @@
             ?>
          </section>
       </div>
-
-      <!-- <section class="right-side">
-         <div class="article-profile-grid">
-               <?php
-                  foreach ($articles as $article) {
-                     getSingleProfileArticle($article['name'], $article['price'], $article['images'], $article['avatar']);
-                  }
-               ?>
-         </div>
-      </section> -->
    </div>
    
 <?php

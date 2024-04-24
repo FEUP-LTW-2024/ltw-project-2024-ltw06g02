@@ -31,41 +31,50 @@
 .info .left-side {
   display: flex;
   flex-direction: row;
-
-  h2 {
-    font-weight: normal;
-    margin-bottom: 0;
-  }
-
-  h3 {
-    font-weight: normal;
-    margin-top: 0.2em;
-  }
-
-  h4 {
-    margin-top: 0.2em;
-    margin-bottom: 0;
-    font-weight: normal;
-  }
+  margin-left: 1.5em;
 
   .bios{
     display: flex;
-    margin-left: 1em;
+    margin-left: 3em;
     flex-direction: column;
     justify-content: space-between;
-  }
-
-  button {
-    margin-left: 2em;
   }
 
   img {
     width: 15em;
   }
+
+  #location {
+    width: 3em;
+    height: 3em;
+  }
+}
+
+h2 {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+h3 {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+h4 {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+}
+
+#editProfile {
+  text-align: right;
+  margin-left: 70em;
+  margin-top: 5em;
 }
 
 .info .right-side {
-  height: auto;
+  height: 30em;
   width: 107em;
   justify-self: center;
   padding: 0.5em 0.5em 0.5em 0.5em;
@@ -84,4 +93,14 @@
   height: 20em;
   object-fit: cover;
   padding: 0.5em;
+}
+
+.products-title {
+  margin: 0.5em 0 0.5em 0.5em;
+}
+
+.separatorName {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
 }
