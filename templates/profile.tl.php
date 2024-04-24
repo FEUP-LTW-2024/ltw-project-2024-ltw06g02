@@ -33,10 +33,16 @@
 ?>
       <div class="right-side">
          <h3 class="products-title">Os meus produtos</h3>
-         <section class="article-profile-grid" id="grid">
+         <section class="article-profile-grid">
             <?php
-               foreach ($articles as $article) {
-                  getSingleProfileArticle($article['name'], $article['price'], $article['images'], $article['avatar']);
+               if (empty($articles)) {
+                  ?>
+                  <h5>Sell a product!</h5>
+                  <?php
+               } else {
+                  foreach ($articles as $article) {
+                     getSingleProfileArticle($article['name'], $article['price'], $article['images'], $article['avatar']);
+                  }
                }
             ?>
          </section>

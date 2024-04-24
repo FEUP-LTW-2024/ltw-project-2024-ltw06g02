@@ -61,9 +61,16 @@ h4 {
   font-weight: normal;
 }
 
+h5 {
+  font-size: 1.6em;
+  font-weight: lighter;
+  margin-left: 33em;
+  margin-top: 6em;
+}
+
 #editProfile {
   text-align: right;
-  margin-left: 70em;
+  margin-left: 60em;
   margin-top: 5em;
 }
 
