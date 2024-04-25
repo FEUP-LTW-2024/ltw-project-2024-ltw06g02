@@ -10,9 +10,20 @@
             <div class="bios">
                <div>
                   <h1><?= $user['fullName'] ?></h1>
+<<<<<<< HEAD
                   <h3><?= $user['username'] ?></h3>
                   <hr class="separatorName">
                   <h4>Portugal</h4>
+=======
+<<<<<<< HEAD
+                  <h3><?= $user['username'] ?></h2>
+                  <h4>biografia</h3>
+=======
+                  <h3><?= $user['username'] ?></h3>
+                  <hr class="separatorName">
+                  <h4>Portugal</h4>
+>>>>>>> f9db73c (Fixing CSS)
+>>>>>>> badb1dc (Fixing CSS)
                </div>
                <div>
                   <h4>followed by</h4>
