@@ -12,18 +12,15 @@
                   <h1><?= $user['fullName'] ?></h1>
                   <h3><?= $user['username'] ?></h3>
                   <hr class="separatorName">
-                  <img id="location" src="../assets/location.jpg" alt="pin location"> 
-                  <h3>Portugal</h3>
+                  <h4>Portugal</h4>
                </div>
                <div>
                   <h4>followed by</h4>
                   <h4>liked by</h4>
                </div>
             </div>
-            <div>
-               <button class="nav-button" id="editProfile">Edit Profile</button>
-            </div>
          </section>
+         <button class="nav-button" id="editProfile">Edit Profile</button>
       </div>
 
 <?php 
@@ -32,8 +29,7 @@
    function printProfileArticleSection($articles) {
 ?>
       <div class="right-side">
-         <h3 class="products-title">Os meus produtos</h3>
-         <section class="article-profile-grid">
+         <section class="article-grid">
             <?php
                if (empty($articles)) {
                   ?>
