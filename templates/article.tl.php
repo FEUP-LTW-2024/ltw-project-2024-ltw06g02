@@ -34,6 +34,23 @@
 ?>
 
 <?php
+   function printFavoriteArticleSection($db, $favoriteArticles){
+?>
+   <div class="product-section">
+      <h3 class="products-title">Artigos marcados como favoritos</h3>
+      <section class="article-grid">
+         <?php foreach($favoriteArticles as $favorite){
+            $article = getArticleById($db, $favorite['productID']);
+            getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar']);
+         } 
+         ?>
+      </section>
+   </div>
+<?php
+   }
+?>
+
+<?php
    function printArticleById($article, $userId, $id){
 ?>
   

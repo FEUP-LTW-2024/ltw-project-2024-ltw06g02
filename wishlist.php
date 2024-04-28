@@ -20,10 +20,8 @@
    $user = $stmt->fetch();
 
    $favoriteArcticles = getFavoriteArticlesByUserId($db, $user['userID']);
-   print_r($favoriteArcticles);
 
-   //printHeader('Bazinga!');
-   //print_r($favoriteArcticles);
-   //printArticleSection($articles);
-   //printFooter();
+   printHeader('Bazinga!');
+   printFavoriteArticleSection($db ,$favoriteArcticles);
+   printFooter();
 ?>
