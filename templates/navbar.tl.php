@@ -8,7 +8,10 @@
 <div class="navbar">
   <h1>Bazinga</h1>
       <?php if(isset($_SESSION['username'])){ ?>
-
+         <a href="../wishlist.php" class="favorite-btn">
+            <img src="../assets/coracao.png" alt="Coração">
+         </a>
+         
          <div class="dropdown">
             <button class="dropbtn"><?= $_SESSION['username'] ?></button>
             <div class="dropdown-content">

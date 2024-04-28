@@ -19,6 +19,14 @@ CREATE TABLE product (
    FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID)
 );
 
+CREATE TABLE favorites (
+   favoriteID INTEGER PRIMARY KEY,
+   userID INTEGER,
+   productID INTEGER,
+   FOREIGN KEY (userID) REFERENCES users(userID),
+   FOREIGN KEY (productID) REFERENCES product(productID)
+);
+
 CREATE TABLE productCategory (
    categoryID INTEGER PRIMARY KEY,
    name VARCHAR
@@ -84,3 +92,8 @@ INSERT INTO message (buyerID, sellerID, productID, messageText, messageDate) VAL
 (1, 2, 1, "Hi, I'm interested in buying your smartphone.", '2024-04-01 07:59:00'),
 (2, 3, 2, "Is this T-shirt available in other colors?", '2024-04-02 09:59:00'),
 (3, 1, 3, "Could you provide more details about the novel?", '2024-04-03 11:59:00');
+
+INSERT INTO favorites (userID, productID) VALUES
+(1, 2), 
+(1, 5),
+(2, 3);

@@ -72,3 +72,15 @@ body {
 .dropdown:hover .dropdown-content {
    display: block;
 }
+
+.favorite-btn {
+   background: none;
+   border: none;
+   cursor: pointer;
+   outline: none;
+}
+.favorite-btn img {
+   background-color: #98C9A3;
+   width: 30px; 
+   height: auto; 
+}

@@ -16,4 +16,14 @@
       $article = $stmt->fetch();
       return $article;
    }
+
+   function getFavoriteArticlesByUserId($db, $id){
+      $stmt = $db->prepare(
+         "SELECT * FROM favorites WHERE userID = ?"
+      );
+      $stmt->execute(array($id));
+
+      $favoriteArticles = $stmt->fetchAll();
+      return $favoriteArticles;
+   }
 ?>
