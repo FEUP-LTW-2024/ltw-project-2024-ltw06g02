@@ -20,6 +20,14 @@ CREATE TABLE product (
    FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID)
 );
 
+CREATE TABLE favorites (
+   favoriteID INTEGER PRIMARY KEY,
+   userID INTEGER,
+   productID INTEGER,
+   FOREIGN KEY (userID) REFERENCES users(userID),
+   FOREIGN KEY (productID) REFERENCES product(productID)
+);
+
 CREATE TABLE productCategory (
    categoryID INTEGER PRIMARY KEY,
    name VARCHAR
@@ -59,7 +67,3 @@ INSERT INTO productCategory (name) VALUES
 ('Electronics'),
 ('Clothing'),
 ('Books');
-
-INSERT INTO chat (receiverID, senderID, productID, lastAction) VALUES
-(1, 2, 1, 'última mensagem'),
-(2, 1, 1, 'última mensagem');

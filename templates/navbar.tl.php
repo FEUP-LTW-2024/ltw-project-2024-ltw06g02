@@ -8,7 +8,9 @@
 <div class="navbar">
   <a style="text-decoration:none" href="../index.php"><h1>Bazinga</h1></a>
       <?php if(isset($_SESSION['username'])){ ?>
-
+         <a href="../wishlist.php" class="favorite-btn">
+            <img src="../assets/coracao.png" alt="Coração">
+         </a>
          <div class="nav-buttons">
             <a class="nav-button" href="../sell.php">
                sell

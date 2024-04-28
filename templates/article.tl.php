@@ -34,7 +34,7 @@
 ?>
 
 <?php
-   function printArticleById($article){
+   function printArticleById($article, $userId, $id){
 ?>
   
    <div class="container">
@@ -49,10 +49,14 @@
          <button type="submit" id="buyBtn">Comprar agora</button>
          <button type="submit" id="proposalBtn">Propor outro preço</button>
          <button type="submit" id="sendBtn">Enviar mensagem</button>
-         <button type="submit" id="addBtn">Adicionar aos favoritos</button>
+         <form id="addToFavoritesForm" action="../actions/favorite.php" method="POST">
+            <input type="hidden" name="userId" value="<?=$userId?>">
+            <input type="hidden" name="articleId" value="<?=$id?>">
+            <button type="submit" id="addBtn">Adicionar aos favoritos</button>
+         </form>
+         <!-- <a href="../actions/favorite.php?userId=<?=$userId?>&articleId=<?=$id?>" id="addBtn">Adicionar aos favoritos</a> -->
       </aside>
    </div>
-   
 
 <?php
    }
