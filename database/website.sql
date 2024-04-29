@@ -67,3 +67,10 @@ INSERT INTO productCategory (name) VALUES
 ('Electronics'),
 ('Clothing'),
 ('Books');
+<<<<<<< HEAD
+=======
+
+INSERT INTO chat (receiverID, senderID, productID, lastAction) VALUES
+(1, 2, 1, 'última mensagem'),
+(1, 3, 1, 'teste amigo');
+>>>>>>> 2f6c39e (Starting message system)

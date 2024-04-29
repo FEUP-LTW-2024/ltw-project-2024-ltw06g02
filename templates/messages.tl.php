@@ -6,7 +6,11 @@
       <div class="chats-box">
          <?php foreach($chats as $chat) { ?>
 
+<<<<<<< HEAD
             <div class="chat" sender-id="<?= $chat['senderID'] ?>">
+=======
+            <div class="chat" chat-id="<?= $chat['chatID'] ?>">
+>>>>>>> 2f6c39e (Starting message system)
                <div class="chat-info">
                   <img src="../assets/goiana.jpg" alt=""/>
                   <h3><?= $chat['username']?></h3>
@@ -19,7 +23,11 @@
       <div class="vertical-bar">
       </div>
       <div class="message-box" id="message-box">
+<<<<<<< HEAD
          <h3>No messages here!</h3>
+=======
+         
+>>>>>>> 2f6c39e (Starting message system)
       </div>
    </section>
 
@@ -29,6 +37,7 @@
 
 <script>
    document.addEventListener("DOMContentLoaded", function() {
+<<<<<<< HEAD
 
       let currentSenderID = null;
       let lastMessage = document.querySelector('.chat-message');
@@ -37,10 +46,17 @@
       for (const chat of chats)
          chat.addEventListener('click', function() {
             currentSenderID = this.getAttribute('sender-id');
+=======
+      const chats = document.querySelectorAll(".chat");
+      for (const chat of chats)
+         chat.addEventListener('click', function() {
+            const chatID = this.getAttribute('chat-id');
+>>>>>>> 2f6c39e (Starting message system)
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
                document.getElementById("message-box").innerHTML = this.responseText;
             }
+<<<<<<< HEAD
             xhttp.open("GET", "../actions/chat.php?q=" + currentSenderID);
             xhttp.send();
          })
@@ -77,5 +93,11 @@
             xhttp.send(formData);
       }
    });
+=======
+            console.log(chatID);
+            xhttp.open("GET", "../actions/chat.php?q=" + chatID);
+            xhttp.send();
+         }) 
+>>>>>>> 2f6c39e (Starting message system)
    })
 </script>

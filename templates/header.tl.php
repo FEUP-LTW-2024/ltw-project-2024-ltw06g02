@@ -23,7 +23,11 @@
 =======
     <link href="css/sell.css" rel="stylesheet">
     <link href="css/profile.css" rel="stylesheet">
+<<<<<<< HEAD
 >>>>>>> c97c229 (Session changes)
+=======
+    <link href="css/messages.css" rel="stylesheet">
+>>>>>>> 2f6c39e (Starting message system)
   </head>
   <body>
     <header>
