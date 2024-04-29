@@ -8,8 +8,10 @@
 <div class="navbar">
   <a style="text-decoration:none" href="../index.php"><h1>Bazinga</h1></a>
       <?php if(isset($_SESSION['username'])){ ?>
-
          <div class="nav-buttons">
+            <a href="../wishlist.php" class="favorite-btn">
+              <i class="material-icons">favorite</i>
+            </a>
             <a class="nav-button" href="../sell.php">
                sell
             </a>

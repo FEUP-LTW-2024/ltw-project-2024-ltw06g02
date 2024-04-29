@@ -81,3 +81,14 @@ body {
 .dropdown:hover .dropdown-content {
    display: block;
 }
+
+.favorite-btn i {
+   color: transparent;
+   padding: 5px;
+   -webkit-text-stroke: 1px white;
+   margin-left: 1em;
+}
+
+a.favorite-btn:hover {
+   background-color: transparent;
+}
