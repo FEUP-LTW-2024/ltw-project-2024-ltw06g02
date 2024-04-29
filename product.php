@@ -20,6 +20,6 @@
     $userId = $stmt->fetchColumn();
 
     printHeader('Bazinga!');
-    printArticleById($article, $userId, $id);
+    printArticleById($db, $article, $userId, $id);
     printFooter();
 ?>

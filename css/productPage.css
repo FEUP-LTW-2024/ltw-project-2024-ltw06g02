@@ -33,7 +33,7 @@
     font-weight: normal;
 }
 
-#addBtn, #sendBtn, #proposalBtn, #buyBtn{
+#addBtn, #sendBtn, #proposalBtn, #buyBtn, #removeBtn{
     width: 18em;
     padding: 1em;
     margin: 0.4em 0 0.4em 0;
@@ -54,6 +54,11 @@
 }
 
 #addBtn {
+    color: rgb(145, 140, 140);
+    border: 1px solid rgb(145, 140, 140);
+}
+
+#removeBtn {
     color: rgb(145, 140, 140);
     border: 1px solid rgb(145, 140, 140);
 }

@@ -82,14 +82,13 @@ body {
    display: block;
 }
 
-.favorite-btn {
-   background: none;
-   border: none;
-   cursor: pointer;
-   outline: none;
+.favorite-btn i {
+   color: transparent;
+   padding: 5px;
+   -webkit-text-stroke: 1px white;
+   margin-left: 1em;
 }
-.favorite-btn img {
-   background-color: #98C9A3;
-   width: 30px; 
-   height: auto; 
+
+a.favorite-btn:hover {
+   background-color: transparent;
 }

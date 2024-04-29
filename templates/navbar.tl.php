@@ -9,7 +9,7 @@
   <a style="text-decoration:none" href="../index.php"><h1>Bazinga</h1></a>
       <?php if(isset($_SESSION['username'])){ ?>
          <a href="../wishlist.php" class="favorite-btn">
-            <img src="../assets/coracao.png" alt="Coração">
+            <i class="material-icons">favorite</i>
          </a>
          <div class="nav-buttons">
             <a class="nav-button" href="../sell.php">
