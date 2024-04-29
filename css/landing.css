@@ -38,8 +38,10 @@
 }
 
 .product-img {
-   width: 200px;
-   height: auto;
+   width: 12em;
+   height: 14em;
+   object-fit: cover;
+   padding: 0.5em;
 }
 
 .article h3 {

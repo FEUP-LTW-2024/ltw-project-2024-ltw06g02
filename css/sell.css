@@ -1,0 +1,67 @@
+.outer-rectangle {
+   width: 50em;
+   height: 10em;
+   background-color: whitesmoke;
+   padding: 2em;
+   margin: 2em auto auto auto;
+   border-radius: 5px;
+   display: flex;
+   flex-direction: column;
+   align-items: baseline;
+   justify-content: space-between;
+}
+ 
+.inner-rectangle {
+   display: flex;
+   width: 50em;
+   height: 5em;
+   background-color: whitesmoke;
+   border: 2px dotted #98C9A3;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   border-radius: 5px;
+}
+
+.outer-rectangle-info {
+   width: 50em;
+   height: 20em;
+   background-color: whitesmoke;
+   padding: 2em;
+   margin: 2em auto auto auto;
+   border-radius: 5px;
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+   justify-content: space-between;
+}
+
+.inner-rectangle form{
+   margin: 0;
+}
+
+.outer-rectangle h2, .outer-rectangle-info h2{
+   margin-top: 0;
+   font-weight: lighter;
+}
+
+.input-grp {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 100%;
+}
+
+.input-grp input,
+.input-grp select, .input-grp textarea {
+   border: none;
+   outline: none;
+   border-bottom: 1px solid #98C9A3;
+   padding: 5px;
+   background-color: whitesmoke;
+   resize: none;
+}
+
+.sell-button {
+   margin: 2em auto 2em auto;
+}
