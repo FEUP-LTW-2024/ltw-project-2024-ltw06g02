@@ -9,7 +9,7 @@
   <h1>Bazinga</h1>
       <?php if(isset($_SESSION['username'])){ ?>
          <a href="../wishlist.php" class="favorite-btn">
-            <img src="../assets/coracao.png" alt="Coração">
+            <i class="material-icons">favorite</i>
          </a>
          
          <div class="dropdown">

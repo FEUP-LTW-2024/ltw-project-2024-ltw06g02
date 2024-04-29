@@ -2,7 +2,7 @@
    session_start();
 
    require_once("../models/favorite.php");
-   require_once("../database/add_to_favorites.php");
+   require_once("../database/remove_from_favorites.php");
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $userId = $_POST['userId'];
@@ -12,10 +12,8 @@
          die(header('Location: ../#'));
       }
 
-      $favorite = new Favorite($userId, $articleId);
-
-      if(!addFavorite($favorite)) die(header('Location: ../#'));
+      if(!removeFavorite($userId, $articleId)) die(header('Location: ../#'));
       
-      header('Location: ../product.php?id=' . $articleId);  
+      header('Location: ../product.php?id=' . $articleId);   
    }
 ?>
