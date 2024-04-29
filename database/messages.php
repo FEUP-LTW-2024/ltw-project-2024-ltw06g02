@@ -20,4 +20,27 @@
       $chat = $stmt->fetch();
       return $chat;
    }
+
+   function joinMessages($senderID){
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare("SELECT chatID FROM chat WHERE (receiverID = ? AND senderID = ?) OR (senderID = ? AND receiverID = ?)");
+      $stmt->execute(array($_SESSION['userID'], $senderID, $_SESSION['userID'], $senderID,));
+      $chats = $stmt->fetchAll();
+
+      $stmt = $db->prepare("SELECT * FROM message WHERE chatID = ? or chatID = ?");
+      $stmt->execute(array($chats[0]['chatID'], $chats[1]['chatID']));
+      $messages = $stmt->fetchAll();
+      return $messages;
+   }
+
+   function getChatFromMessage($messageID){
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare("SELECT chatID FROM message WHERE messageID = ?");
+      $stmt->bindParam(1, $messageID);
+      $stmt->execute();
+      $chat = $stmt->fetch();
+
+      $chat = getSpecificChat($chat['chatID']);
+      return $chat['chatID'];
+   }
 ?>

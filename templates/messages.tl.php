@@ -6,7 +6,7 @@
       <div class="chats-box">
          <?php foreach($chats as $chat) { ?>
 
-            <div class="chat" chat-id="<?= $chat['chatID'] ?>">
+            <div class="chat" chat-id="<?= $chat['senderID'] ?>">
                <div class="chat-info">
                   <img src="../assets/goiana.jpg" alt=""/>
                   <h3><?= $chat['username']?></h3>
@@ -19,7 +19,7 @@
       <div class="vertical-bar">
       </div>
       <div class="message-box" id="message-box">
-         
+         <h3>No messages here!</h3>
       </div>
    </section>
 
@@ -32,13 +32,12 @@
       const chats = document.querySelectorAll(".chat");
       for (const chat of chats)
          chat.addEventListener('click', function() {
-            const chatID = this.getAttribute('chat-id');
+            const senderID = this.getAttribute('chat-id');
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
                document.getElementById("message-box").innerHTML = this.responseText;
             }
-            console.log(chatID);
-            xhttp.open("GET", "../actions/chat.php?q=" + chatID);
+            xhttp.open("GET", "../actions/chat.php?q=" + senderID);
             xhttp.send();
          }) 
    })

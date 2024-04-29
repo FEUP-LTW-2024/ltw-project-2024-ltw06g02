@@ -64,3 +64,18 @@
    margin-left: 1em;
    justify-content: space-between;
 }
+
+.messages {
+   display: flex;
+   flex-direction: column;
+   overflow-y: auto;
+   padding: 1.5em;
+
+   p {
+      margin: 0.5em 0;
+   }
+}
+
+.message-sent {
+   align-self: end;
+}
