@@ -84,9 +84,9 @@ body {
 
 .favorite-btn i {
    color: transparent;
-   padding: 5px;
    -webkit-text-stroke: 1px white;
-   margin-left: 1em;
+   margin-top: 0.4em;
+   margin-right: 0.3em;
 }
 
 a.favorite-btn:hover {
