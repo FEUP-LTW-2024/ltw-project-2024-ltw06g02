@@ -69,7 +69,7 @@
 <script>
    document.addEventListener("DOMContentLoaded", function() {
       const editProfileDialog = document.getElementById("editProfileDialog");
-      const editProfile =document.getElementById("editProfile");
+      const editProfile = document.getElementById("editProfile");
       const closeBtn = editProfileDialog.querySelector(".close-button");
 
       editProfile.addEventListener("click", () => {

@@ -17,6 +17,7 @@
                <button class="nav-button"><?= $_SESSION['username'] ?></button>
                <div class="dropdown-content">
                   <a href="../profile.php">Profile</a>
+                  <a href="../messages.php">Messages</a>
                   <a href="../actions/logout.php">Logout</a>
                </div>
             </div>

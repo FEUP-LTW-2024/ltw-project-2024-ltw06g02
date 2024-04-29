@@ -22,5 +22,5 @@
    } else {
       echo '<h4 style="font-weight: normal">Não existem produtos para o filtro aplicado</h4>';
    }
-  exit
+  exit;
 ?>
