@@ -56,19 +56,21 @@
 
             const messageText = inputForm.value;
 
-            formData.append('messageText', messageText);
+            formData.append('messageText', messageText.trim());
             formData.append('senderID', currentSenderID);
 
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
                const messagesDiv = document.querySelector('.messages');
 
-               messagesDiv.innerHTML += `<div class="message-sent">
-                                          <p>${messageText}</p>
-                                          </div>`;
-               messagesDiv.scrollTop = messagesDiv.scrollHeight;
-               inputForm.value = '';
-               lastMessage.innerHTML = messageText;
+               if(messageText.trim() != ''){
+                  messagesDiv.innerHTML += `<div class="message-sent">
+                                             <p>${messageText}</p>
+                                             </div>`;
+                  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                  inputForm.value = '';
+                  lastMessage.innerHTML = messageText;
+               }
             }
 
             xhttp.open("POST", "../actions/message.php", true);

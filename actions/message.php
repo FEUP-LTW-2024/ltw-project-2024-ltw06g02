@@ -6,7 +6,7 @@
    $session = new Session();
 
    if (isset($_POST['messageText']) && isset($_POST['senderID'])) {
-      insertMessage($_POST['messageText'], $_POST['senderID']);
+      if($_POST['messageText'] != '') insertMessage($_POST['messageText'], $_POST['senderID']);
       exit;
    }
    exit;
