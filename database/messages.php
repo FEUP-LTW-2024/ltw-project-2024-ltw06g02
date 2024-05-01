@@ -21,6 +21,14 @@
       return $chat;
    }
 
+   function getUserSenderChatID($senderID) {
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare("SELECT chatID FROM chat WHERE senderID = ? AND receiverID = ?");
+      $stmt->execute(array($_SESSION['userID'], $senderID));
+      $chat = $stmt->fetch();
+      return $chat['chatID'];
+   }
+
    function joinMessages($senderID){
       $db = getDatabaseConnection();
       $stmt = $db->prepare("SELECT chatID FROM chat WHERE (receiverID = ? AND senderID = ?) OR (senderID = ? AND receiverID = ?)");
@@ -42,5 +50,14 @@
 
       $chat = getSpecificChat($chat['chatID']);
       return $chat['chatID'];
+   }
+
+   function insertMessage($message, $senderID) {
+      $db = getDatabaseConnection();
+      $id = getUserSenderChatID($senderID);
+      $stmt = $db->prepare(
+         "INSERT INTO message(chatID, messageText) VALUES(?, ?)"
+      );
+      $stmt->execute(array($id, $message));
    }
 ?>

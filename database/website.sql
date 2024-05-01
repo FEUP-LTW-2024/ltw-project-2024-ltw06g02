@@ -63,17 +63,3 @@ INSERT INTO productCategory (name) VALUES
 INSERT INTO chat (receiverID, senderID, productID, lastAction) VALUES
 (1, 2, 1, 'última mensagem'),
 (2, 1, 1, 'última mensagem');
-
-INSERT INTO message(chatID, messageText) VALUES
-(1, 'olá'),
-(1, 'amigo'),
-(1, 'estás bem?'),
-(2, 'sim'),
-(2, 'e contigo?'),
-(2, 'e contigo?'),
-(2, 'e contigo?'),
-(2, 'e contigo?'),
-(2, 'e contigo?'),
-(2, 'e contigo?'),
-(2, 'e contigo?'),
-(2, 'e contigo?');

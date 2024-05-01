@@ -6,7 +6,7 @@
       <div class="chats-box">
          <?php foreach($chats as $chat) { ?>
 
-            <div class="chat" chat-id="<?= $chat['senderID'] ?>">
+            <div class="chat" sender-id="<?= $chat['senderID'] ?>">
                <div class="chat-info">
                   <img src="../assets/goiana.jpg" alt=""/>
                   <h3><?= $chat['username']?></h3>
@@ -29,16 +29,49 @@
 
 <script>
    document.addEventListener("DOMContentLoaded", function() {
+
+      let currentSenderID = null;
+
       const chats = document.querySelectorAll(".chat");
       for (const chat of chats)
          chat.addEventListener('click', function() {
-            const senderID = this.getAttribute('chat-id');
+            currentSenderID = this.getAttribute('sender-id');
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
                document.getElementById("message-box").innerHTML = this.responseText;
             }
-            xhttp.open("GET", "../actions/chat.php?q=" + senderID);
+            xhttp.open("GET", "../actions/chat.php?q=" + currentSenderID);
             xhttp.send();
-         }) 
+         })
+
+      document.addEventListener('submit', function(e) {
+
+         if(e.target.matches('.message-input')){
+            e.preventDefault();
+
+            const form = document.getElementById('message-form');
+            const formData = new FormData(form);
+            const inputForm = this.querySelector('.input-field');
+
+            const messageText = inputForm.value;
+
+            formData.append('messageText', messageText);
+            formData.append('senderID', currentSenderID);
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+               const messagesDiv = document.querySelector('.messages');
+
+               messagesDiv.innerHTML += `<div class="message-sent">
+                                          <p>${messageText}</p>
+                                          </div>`;
+               messagesDiv.scrollTop = messagesDiv.scrollHeight;
+               inputForm.value = '';
+            }
+
+            xhttp.open("POST", "../actions/message.php", true);
+            xhttp.send(formData);
+      }
+   });
    })
 </script>

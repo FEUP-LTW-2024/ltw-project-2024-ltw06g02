@@ -28,6 +28,8 @@
          }
 
    echo  '</div>
-         <input type="text"/>';
-   exit;
+         <form class="message-input" id="message-form">
+            <input type="text" class="input-field" placeholder="Type a message..."/>
+            <button type="submit" class="send-button">send</button>
+         </form>';
 ?>

@@ -79,3 +79,27 @@
 .message-sent {
    align-self: end;
 }
+
+.message-input {
+   display: flex;
+   flex-direction: row;
+   margin: 0;
+}
+
+.input-field {
+   flex-grow: 1;
+   border: none;
+   padding: 0.5em;
+   border-radius: 5px 0 0 5px;
+   border: 1px solid black;
+   outline: none;
+}
+
+.send-button {
+   background-color: #98C9A3;
+   color: white;
+   border: none;
+   padding: 0.5em;
+   border-radius: 0 5px 5px 0;
+   cursor: pointer;
+}
