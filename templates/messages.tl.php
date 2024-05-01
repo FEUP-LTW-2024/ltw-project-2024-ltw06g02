@@ -31,6 +31,7 @@
    document.addEventListener("DOMContentLoaded", function() {
 
       let currentSenderID = null;
+      let lastMessage = document.querySelector('.chat-message');
 
       const chats = document.querySelectorAll(".chat");
       for (const chat of chats)
@@ -67,6 +68,7 @@
                                           </div>`;
                messagesDiv.scrollTop = messagesDiv.scrollHeight;
                inputForm.value = '';
+               lastMessage.innerHTML = messageText;
             }
 
             xhttp.open("POST", "../actions/message.php", true);
