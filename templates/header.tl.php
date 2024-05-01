@@ -19,15 +19,6 @@
     <link href="css/productPage.css" rel="stylesheet">
     <link href="css/wishlist.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<<<<<<< HEAD
-=======
-    <link href="css/sell.css" rel="stylesheet">
-    <link href="css/profile.css" rel="stylesheet">
-<<<<<<< HEAD
->>>>>>> c97c229 (Session changes)
-=======
-    <link href="css/messages.css" rel="stylesheet">
->>>>>>> 2f6c39e (Starting message system)
   </head>
   <body>
     <header>

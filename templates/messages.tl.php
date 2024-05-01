@@ -5,10 +5,6 @@
    <section class="box">
       <div class="chats-box">
          <?php foreach($chats as $chat) { ?>
-<<<<<<< HEAD
-=======
-
->>>>>>> 117fb44 (messages working, waiting on a few perks)
             <div class="chat" sender-id="<?= $chat['senderID'] ?>">
                <div class="chat-info">
                   <img src="../assets/goiana.jpg" alt=""/>
@@ -32,13 +28,8 @@
 
 <script>
    document.addEventListener("DOMContentLoaded", function() {
-<<<<<<< HEAD
       let currentSenderID = null;
       let lastMessage = document.querySelector('.chat-message');
-=======
-
-      let currentSenderID = null;
->>>>>>> 117fb44 (messages working, waiting on a few perks)
 
       const chats = document.querySelectorAll(".chat");
       for (const chat of chats)
