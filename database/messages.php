@@ -59,6 +59,7 @@
       $chat = getSpecificChat($chat['chatID']);
       return $chat['chatID'];
    }
+
    function insertMessage($message, $senderID) {
       $db = getDatabaseConnection();
       $chatID_1 = getUserSenderChatID($senderID);
