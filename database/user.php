@@ -97,4 +97,23 @@
 
       return false;
    }
+
+   function getAllUsersLogged(){
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare(
+         "SELECT username, userID FROM users"
+      );
+      $stmt->execute();
+      $users = $stmt->fetchAll();
+      $usersLogged = array();
+
+      foreach($users as $user){
+         if(isset($_SESSION[$user['username']])){
+            $usersLogged[] = $user;
+         }
+      }
+
+      return $usersLogged;
+   }
 ?> 

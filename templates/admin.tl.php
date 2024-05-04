@@ -1,4 +1,5 @@
 <?php
+   require_once('database/user.php');
    function printAdminSection(){
 ?>
 
@@ -26,8 +27,13 @@
     </form>
 
     <h2 class="admin-subtitle">Oversee and Ensure Smooth Operation</h2>
-    <p>Here you can monitor system logs, user activities, and perform other administrative tasks.</p>
+    <h2 class="admin-subtitle">Users logged in</h2>
+    <?php
+        $usersLogged = getAllUsersLogged();
+        foreach($usersLogged as $user){
+            echo $user['userID'] . '-->' . $user['username'] . '<br>'; 
+        }
       
-<?php
+
    }
 ?>
