@@ -3,6 +3,7 @@ CREATE TABLE users (
    username VARCHAR unique,  
    password VARCHAR,              
    email VARCHAR,
+   fullName VARCHAR,
    paymentMethodPassword VARCHAR,
    avatar VARCHAR
 );
@@ -45,13 +46,20 @@ CREATE TABLE transactions (
 
 CREATE TABLE message (
    messageID INTEGER PRIMARY KEY,
-   buyerID INTEGER,
-   sellerID INTEGER,
-   productID INTEGER,
+   chatID INTEGER,
    messageText VARCHAR,
    messageDate DATETIME,
-   FOREIGN KEY (buyerID) REFERENCES users(userID),
-   FOREIGN KEY (sellerID) REFERENCES users(userID),
+   FOREIGN KEY (chatID) REFERENCES chat(chatID)
+);
+
+CREATE TABLE chat (
+   chatID INTEGER PRIMARY KEY,
+   receiverID INTEGER,
+   senderID INTEGER,
+   productID INTEGER,
+   lastAction VARCHAR,
+   FOREIGN KEY (receiverID) REFERENCES users(userID),
+   FOREIGN KEY (senderID) REFERENCES users(userID),
    FOREIGN KEY (productID) REFERENCES product(productID)
 );
 
@@ -59,29 +67,3 @@ INSERT INTO productCategory (name) VALUES
 ('Electronics'),
 ('Clothing'),
 ('Books');
-
--- Insert dummy products
-INSERT INTO product (name, description, price, categoryID, userID, images) VALUES
-('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
-('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
-('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
-('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
-('T-shirt', 'A comfortable cotton T-shirt', 19.99, 2, 2, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png');
-
--- Insert dummy transactions
-INSERT INTO transactions (buyerID, sellerID, productID, transactionDate) VALUES
-(1, 2, 1, '2024-04-01 08:00:00'),
-(2, 3, 2, '2024-04-02 10:00:00'),
-(3, 1, 3, '2024-04-03 12:00:00');
-
--- Insert dummy messages
-INSERT INTO message (buyerID, sellerID, productID, messageText, messageDate) VALUES
-(1, 2, 1, "Hi, I'm interested in buying your smartphone.", '2024-04-01 07:59:00'),
-(2, 3, 2, "Is this T-shirt available in other colors?", '2024-04-02 09:59:00'),
-(3, 1, 3, "Could you provide more details about the novel?", '2024-04-03 11:59:00');

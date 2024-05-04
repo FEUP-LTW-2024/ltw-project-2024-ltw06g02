@@ -8,6 +8,9 @@
 <div class="navbar">
   <a style="text-decoration:none" href="../index.php"><h1>Bazinga</h1></a>
       <?php if(isset($_SESSION['username'])){ ?>
+         <a href="../wishlist.php" class="favorite-btn">
+            <i class="material-icons">favorite</i>
+         </a>
          <div class="nav-buttons">
             <a href="../wishlist.php" class="favorite-btn">
               <i class="material-icons">favorite</i>
@@ -18,6 +21,8 @@
             <div class="dropdown">
                <button class="nav-button"><?= $_SESSION['username'] ?></button>
                <div class="dropdown-content">
+                  <a href="../profile.php">Profile</a>
+                  <a href="../messages.php">Messages</a>
                   <a href="../actions/logout.php">Logout</a>
                </div>
             </div>

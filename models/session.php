@@ -2,16 +2,15 @@
 
 class Session {
     private array $messages;
+    private $userID;
 
     public function __construct() {
         session_start();
-
-        $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
-        unset($_SESSION['messages']);
+        $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
     }
 
     public function isLoggedIn() : bool {
-        return isset($_SESSION['userID']);    
+        return isset($_SESSION['username']);    
     }
 
     public function logout() {
@@ -26,28 +25,22 @@ class Session {
         return isset($_SESSION['username']) ? $_SESSION['username'] : null;
     }
 
-    public function getEmail() : ?string {
-        return isset($_SESSION['email']) ? $_SESSION['email'] : null;
-    }
+    public function setUserId() {
+        $db = getDatabaseConnection();
+        $stmt = $db->prepare(
+            "SELECT userID FROM users WHERE username=?"
+        );
+        $stmt->bindParam(1, $_SESSION['username']);
+        $stmt->execute();
+        $id = $stmt->fetch();
 
-    public function getAvatar() : ?string {
-        return isset($_SESSION['avatar']) ? $_SESSION['avatar'] : null;
-    }
-
-    public function setUserId(int $userID) {
-        $_SESSION['userID'] = $userID;
+        $this->userID = $id['userID'];
+        $_SESSION['userID'] = $id['userID'];
     }
 
     public function setUsername(string $username) {
+        $this->username = $username;
         $_SESSION['username'] = $username;
-    }
-
-    public function setEmail(string $email) {
-        $_SESSION['email'] = $email;
-    }
-
-    public function setAvatar(string $avatar) {
-        $_SESSION['avatar'] = $avatar;
     }
 
     public function addMessage(string $type, string $text) {

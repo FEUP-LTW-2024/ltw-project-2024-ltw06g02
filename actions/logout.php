@@ -1,7 +1,10 @@
 <?php
-   session_start();
-   if(isset($_SESSION["username"])){
-      session_destroy();
+   require_once('../models/session.php');
+
+   $session = new Session();
+
+   if($session->isLoggedIn()){
+      $session->logout();
       header('Location: ../index.php');
    }
 ?>
