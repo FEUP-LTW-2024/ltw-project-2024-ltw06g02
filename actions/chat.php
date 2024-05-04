@@ -6,8 +6,6 @@
 
    $session = new Session();
 
-   $db = getDatabaseConnection();
-
    $messages = joinMessages($_GET['q']);
 
    $user = retrieveUser($_GET['q']);
@@ -19,7 +17,9 @@
          <div class="messages">';
 
          foreach($messages as $message){
-            $isSenderMessage = $_GET['q'] == getChatFromMessage($message['messageID']);
+            $chat = getSpecificChat($message['chatID']);
+
+            $isSenderMessage = $_GET['q'] != $chat['senderID'];
 
             $messageClass = $isSenderMessage ? 'message-sent' : 'message-received';
 

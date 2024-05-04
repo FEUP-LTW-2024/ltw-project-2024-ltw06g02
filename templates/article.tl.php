@@ -84,7 +84,7 @@
 
          <button type="submit" id="buyBtn">Comprar agora</button>
          <button type="submit" id="proposalBtn">Propor outro preço</button>
-         <button type="submit" id="sendBtn">Enviar mensagem</button>
+         <a href=<?= "../actions/initialize_chat.php?q=" . $id ?> ><button type="submit" id="sendBtn">Enviar mensagem</button></a>
 
          <?php
             $favoriteArticles = getFavoriteArticlesByUserId($db, $userId);
@@ -107,7 +107,7 @@
             }
             else{
                ?>
-               <form id="removeToFavoritesForm" action="../actions/removeFavorite.php" method="POST">
+               <form id="removeToFavoritesForm" action="../actions/remove_favorite.php" method="POST">
                   <input type="hidden" name="userId" value="<?=$userId?>">
                   <input type="hidden" name="articleId" value="<?=$id?>">
                   <button type="submit" id="removeBtn">Remover aos favoritos</button>

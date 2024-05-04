@@ -1,5 +1,6 @@
 <?php 
    require_once('connection.php');
+   require_once('articles.php');
 
    function getUserChats($db){
       $stmt = $db->prepare(
@@ -15,8 +16,7 @@
    function getSpecificChat($id){
       $db = getDatabaseConnection();
       $stmt = $db->prepare("SELECT * FROM chat LEFT JOIN users ON users.userID = chat.senderID WHERE chatID = ?");
-      $stmt->bindParam(1, $id);
-      $stmt->execute();
+      $stmt->execute(array($id));
       $chat = $stmt->fetch();
       return $chat;
    }
@@ -49,17 +49,6 @@
       return $messages;
    }
 
-   function getChatFromMessage($messageID){
-      $db = getDatabaseConnection();
-      $stmt = $db->prepare("SELECT chatID FROM message WHERE messageID = ?");
-      $stmt->bindParam(1, $messageID);
-      $stmt->execute();
-      $chat = $stmt->fetch();
-
-      $chat = getSpecificChat($chat['chatID']);
-      return $chat['chatID'];
-   }
-
    function insertMessage($message, $senderID) {
       $db = getDatabaseConnection();
       $chatID_1 = getUserSenderChatID($senderID);
@@ -73,5 +62,33 @@
          "UPDATE chat SET lastAction = ? WHERE (chatID = ? or chatID = ?)"
       );
       $stmt->execute(array($message, $chatID_1, $chatID_2));
+   }
+
+   function verifyChatExists($id){
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare(
+         "SELECT chatID from chat WHERE (senderID = ? and receiverID = ?)"
+      );
+      $stmt->execute(array($id, $_SESSION['userID']));
+      $chat = $stmt->fetch();
+      return $chat;
+   }
+
+   function createChat($productID){
+      $db = getDatabaseConnection();
+
+      $article = getArticleById($db, $productID);
+
+      if(empty(verifyChatExists($article['userID']))){
+         $stmt = $db->prepare(
+            "INSERT INTO chat(receiverID, senderID, productID) VALUES (?,?,?)"
+         );
+         $stmt->execute(array($_SESSION['userID'], $article['userID'], $productID));
+
+         $stmt = $db->prepare(
+            "INSERT INTO chat(receiverID, senderID, productID) VALUES (?,?,?)"
+         );
+         $stmt->execute(array($article['userID'], $_SESSION['userID'], $productID));
+      }
    }
 ?>

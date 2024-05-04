@@ -2,7 +2,7 @@
    session_start();
 
    require_once("../models/favorite.php");
-   require_once("../database/remove_from_favorites.php");
+   require_once("../database/favorites.php");
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $userId = $_POST['userId'];
