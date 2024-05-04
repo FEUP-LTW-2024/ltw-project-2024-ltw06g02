@@ -1,0 +1,66 @@
+.admin-title {
+    text-align: center;
+    margin-top: 1.5em;
+    color: #98C9A3;
+    font-weight: 200;
+}
+
+.admin-subtitle {
+    text-align: center;
+    margin-top: 2.5em;
+    color: #98C9A3;
+    font-weight: 200;
+}
+
+#elevateUserForm {
+    border: 1px solid #ccc;
+    padding: 1.5em;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    max-width: 25em;
+    margin: 3em auto;
+}
+
+#elevateUserForm label {
+    display: block;
+    margin-bottom: 0.8em;
+    font-size: 1.2em;
+}
+
+#elevateUserForm input[type="text"]{
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    font-size: 1em;
+}
+
+#elevateUserForm button, #addNewCategoryForm button,  #addNewSizeForm button, #addNewConditionForm button{
+    background-color: #98C9A3;
+    font-size: 1em;
+    color: white;
+    padding: 0.7em 1.2em;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#elevateUserForm button:hover, #addNewCategoryForm button:hover, #addNewSizeForm button:hover, #addNewConditionForm button:hover {
+    background-color: #7fc082;
+}
+
+#addNewCategoryForm, #addNewSizeForm, #addNewConditionForm {
+    margin: 3em auto;
+    max-width: 25em;
+}
+
+#addNewCategoryForm input[type="text"], #addNewSizeForm input[type="text"], #addNewConditionForm input[type="text"]{
+    padding: 0.8em;
+    margin: 0 1em 0 0;
+    border: 1px solid #98C9A3;
+    border-radius: 5px;
+    box-sizing: border-box;
+    float: left;
+}

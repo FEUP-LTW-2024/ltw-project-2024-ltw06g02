@@ -4,6 +4,7 @@ CREATE TABLE users (
    password VARCHAR,              
    email VARCHAR,
    paymentMethodPassword VARCHAR,
+   admim BOOLEAN,
    avatar VARCHAR
 );
 
@@ -13,10 +14,14 @@ CREATE TABLE product (
    description VARCHAR,
    price REAL,
    categoryID INTEGER,
+   sizeID INTEGER,
+   conditionID INTEGER,
    userID INTEGER,
    images VARCHAR,  -- check out later
    FOREIGN KEY (userID) REFERENCES users(userID),
-   FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID)
+   FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID),
+   FOREIGN KEY (sizeID) REFERENCES productSize(sizeID),
+   FOREIGN KEY (conditionID) REFERENCES productCondition(conditionID)
 );
 
 CREATE TABLE favorites (
@@ -29,6 +34,16 @@ CREATE TABLE favorites (
 
 CREATE TABLE productCategory (
    categoryID INTEGER PRIMARY KEY,
+   name VARCHAR
+);
+
+CREATE TABLE productSize (
+   sizeID INTEGER PRIMARY KEY,
+   name VARCHAR
+);
+
+CREATE TABLE productCondition (
+   conditionID INTEGER PRIMARY KEY,
    name VARCHAR
 );
 
@@ -60,19 +75,28 @@ INSERT INTO productCategory (name) VALUES
 ('Clothing'),
 ('Books');
 
+INSERT INTO productSize (name) VALUES
+('S'),
+('M'),
+('L');
+
+INSERT INTO productCondition (name) VALUES
+('Semi-used'),
+('Very used');
+
 -- Insert dummy products
-INSERT INTO product (name, description, price, categoryID, userID, images) VALUES
-('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
-('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
-('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
-('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, '../assets/placeholder.png'),
-('T-shirt', 'A comfortable cotton T-shirt', 19.99, 2, 2, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png'),
-('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, '../assets/placeholder.png');
+INSERT INTO product (name, description, price, categoryID, sizeID, conditionID, userID, images) VALUES
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, 1, 1, '../assets/placeholder.png'),
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, 1, 1, '../assets/placeholder.png'),
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, 1, 1, '../assets/placeholder.png'),
+('Smartphone', 'A powerful smartphone with advanced features', 599.99, 1, 1, 1, 1, '../assets/placeholder.png'),
+('T-shirt', 'A comfortable cotton T-shirt', 19.99, 2, 2, 2, 2, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, 2, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, 2, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, 2, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, 2, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, 2, 3, '../assets/placeholder.png'),
+('Novel', 'A captivating novel by a renowned author', 9.99, 3, 3, 2, 3, '../assets/placeholder.png');
 
 -- Insert dummy transactions
 INSERT INTO transactions (buyerID, sellerID, productID, transactionDate) VALUES
