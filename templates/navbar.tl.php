@@ -12,6 +12,9 @@
             <i class="material-icons">favorite</i>
          </a>
          <div class="nav-buttons">
+            <a href="../wishlist.php" class="favorite-btn">
+              <i class="material-icons">favorite</i>
+            </a>
             <a class="nav-button" href="../sell.php">
                sell
             </a>

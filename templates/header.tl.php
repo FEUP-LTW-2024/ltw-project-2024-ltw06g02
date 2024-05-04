@@ -13,6 +13,9 @@
     <link href="css/footer.css" rel="stylesheet">
     <link href="css/forms.css" rel="stylesheet">
     <link href="css/landing.css" rel="stylesheet">
+    <link href="css/productPage.css" rel="stylesheet">
+    <link href="css/wishlist.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="css/sell.css" rel="stylesheet">
     <link href="css/profile.css" rel="stylesheet">
     <link href="css/messages.css" rel="stylesheet">

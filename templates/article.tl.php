@@ -2,7 +2,6 @@
    function getSingleArticle($productID, $name, $price, $image, $avatar){
       $images = explode(",", $image);
 ?>
-
    <article class="article">
       <a href="product.php?id=<?=$productID?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
       <div class="article-details">
@@ -72,7 +71,6 @@
    function printArticleById($db, $article, $userId, $id){
       $images = explode(",", $article['images']);
 ?>
-  
    <div class="container">
       <img src="<?=$images[0]?>" alt="product">
       <aside class="product-column">
@@ -121,4 +119,3 @@
 <?php
    }
 ?>
-
