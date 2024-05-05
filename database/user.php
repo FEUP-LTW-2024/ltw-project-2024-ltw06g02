@@ -1,16 +1,19 @@
 <?php
    require_once('connection.php');
+   require_once(dirname(__DIR__) . '/models/user.php');
+
    function registerUser($user) : bool{
       $db = getDatabaseConnection();
 
       if(!checkUserExists($user)){
          $stmt = $db->prepare(
-            "INSERT INTO users(username, email, password, admim) VALUES(?,?,?,?)"
+            "INSERT INTO users(fullName, username, email, password, admim) VALUES(?,?,?,?,?)"
          );
-         $stmt->bindParam(1, $user->username);
-         $stmt->bindParam(2, $user->email);
-         $stmt->bindParam(3, $user->password);
-         $stmt->bindParam(4, $user->admin);
+         $stmt->bindParam(1, $user->fullName);
+         $stmt->bindParam(2, $user->username);
+         $stmt->bindParam(3, $user->email);
+         $stmt->bindParam(4, $user->password);
+         $stmt->bindParam(5, $user->admin);
          $stmt->execute();
          return true;
       }
@@ -108,5 +111,33 @@
       $users = $stmt->fetchAll();
 
       return $users;
+   }
+
+   function displayUserItems($userId) {
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare("SELECT * FROM product WHERE userID = :userId");
+      $stmt->execute(['userId' => $userId]);
+      
+      $userItems = $stmt->fetchAll();
+      return $userItems;
+   }
+
+   function retrieveUser($id){
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare("SELECT * FROM users WHERE userID = ?");
+      $stmt->bindParam(1, $id);
+      $stmt->execute();
+
+      $user = $stmt->fetch();
+
+      return $user;
+   }
+   function updateUser($username, $password, $email, $id){
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare("UPDATE users SET username = ?, email = ?, password = ? WHERE userID = ?");
+      $stmt->execute(array($username, $email, $password, $id));
    }
 ?> 

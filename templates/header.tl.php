@@ -18,6 +18,11 @@
     <link href="css/admin.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="css/sell.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
+    <link href="css/messages.css" rel="stylesheet">
+    <link href="css/productPage.css" rel="stylesheet">
+    <link href="css/wishlist.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
   <body>
     <header>

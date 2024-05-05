@@ -12,14 +12,7 @@
     $db = getDatabaseConnection();
     $article = getArticleById($db, $id);
 
-    $username = $_SESSION['username'];
-
-    $sql = "SELECT userID FROM users WHERE username = ?";
-    $stmt = $db->prepare($sql);
-    $stmt->execute([$username]);
-    $userId = $stmt->fetchColumn();
-
     printHeader('Bazinga!');
-    printArticleById($db, $article, $userId, $id);
+    printArticleById($db, $article, $_SESSION['userID'], $id);
     printFooter();
 ?>
