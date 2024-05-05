@@ -3,6 +3,7 @@ CREATE TABLE users (
    username VARCHAR unique,  
    password VARCHAR,              
    email VARCHAR,
+   fullName VARCHAR,
    paymentMethodPassword VARCHAR,
    admim BOOLEAN,
    avatar VARCHAR
