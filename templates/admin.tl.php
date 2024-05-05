@@ -26,14 +26,25 @@
         <button type="submit">Add Condition</button>
     </form>
 
-    <h2 class="admin-subtitle">Oversee and Ensure Smooth Operation</h2>
-    <h2 class="admin-subtitle">Users logged in</h2>
+    <h2 class="admin-subtitle">Users registered</h2>
+    <table>
+        <tr>
+            <th>UserID</th>
+            <th>Username</th>
+        </tr>
+        <?php
+            $usersRegistered = getAllUsersRegistered();
+            foreach($usersRegistered as $user){
+            ?>
+            <tr>
+                <td><?= $user['userID']; ?></th>
+                <td><?= $user['username']; ?></th>
+            </tr>
+            <?php
+            }
+        ?>
+    </table>
     <?php
-        $usersLogged = getAllUsersLogged();
-        foreach($usersLogged as $user){
-            echo $user['userID'] . '-->' . $user['username'] . '<br>'; 
-        }
       
-
    }
 ?>

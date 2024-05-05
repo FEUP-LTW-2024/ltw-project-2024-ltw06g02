@@ -64,3 +64,20 @@
     box-sizing: border-box;
     float: left;
 }
+
+table {
+    margin: 3em auto; 
+    border-collapse: collapse; 
+    width: 20%; 
+}
+  
+th, td {
+    border: 1px solid #98C9A3; 
+    padding: 8px; 
+    text-align: center; 
+}
+
+th {
+    background-color: #98C9A3;
+    color: white;
+}

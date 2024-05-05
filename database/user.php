@@ -98,22 +98,15 @@
       return false;
    }
 
-   function getAllUsersLogged(){
+   function getAllUsersRegistered(){
       $db = getDatabaseConnection();
 
       $stmt = $db->prepare(
-         "SELECT username, userID FROM users"
+         "SELECT username, userID FROM users ORDER BY userID"
       );
       $stmt->execute();
       $users = $stmt->fetchAll();
-      $usersLogged = array();
 
-      foreach($users as $user){
-         if(isset($_SESSION[$user['username']])){
-            $usersLogged[] = $user;
-         }
-      }
-
-      return $usersLogged;
+      return $users;
    }
 ?> 
