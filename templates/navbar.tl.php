@@ -9,9 +9,6 @@
 <div class="navbar">
   <a style="text-decoration:none" href="../index.php"><h1>Bazinga</h1></a>
       <?php if(isset($_SESSION['username'])){ ?>
-         <a href="../wishlist.php" class="favorite-btn">
-            <i class="material-icons">favorite</i>
-         </a>
          <div class="nav-buttons">
             <?php
             if(checkIfUserIsAdmin($_SESSION['username'])){
