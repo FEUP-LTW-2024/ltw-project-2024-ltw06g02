@@ -7,12 +7,13 @@
 
       if(!checkUserExists($user)){
          $stmt = $db->prepare(
-            "INSERT INTO users(fullName, username, email, password) VALUES(?,?,?,?)"
+            "INSERT INTO users(fullName, username, email, password, admim) VALUES(?,?,?,?,?)"
          );
          $stmt->bindParam(1, $user->fullName);
          $stmt->bindParam(2, $user->username);
          $stmt->bindParam(3, $user->email);
          $stmt->bindParam(4, $user->password);
+         $stmt->bindParam(5, $user->admin);
          $stmt->execute();
          return true;
       }
@@ -50,6 +51,66 @@
          return true;
       }
       return false;
+   }
+
+   function checkUserExistsByName($username) : bool{
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare(
+         "SELECT username FROM users WHERE username=?"
+      );
+      $stmt->bindParam(1, $username);
+      $stmt->execute();
+      $user = $stmt->fetch();
+
+      if($user){
+         return true;
+      }
+      return false;
+   }
+
+   function elevateUser($username) : bool {
+      $db = getDatabaseConnection();
+
+      if(checkUserExistsByName($username)){
+         $sql = "UPDATE users SET admim = TRUE WHERE username = ?";
+         $stmt = $db->prepare($sql);
+         $stmt->bindParam(1, $username);
+         $stmt->execute();
+
+         return true;
+      }
+      else{
+         return false;
+      }
+
+   }
+
+   function checkIfUserIsAdmin($username) : bool{
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare(
+         "SELECT username FROM users WHERE admim=TRUE"
+      );
+      $stmt->execute();
+      $users = $stmt->fetchAll();
+
+      foreach($users as $user){
+         if($user['username'] == $username) return true;
+      }
+
+      return false;
+   }
+
+   function getAllUsersRegistered(){
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare(
+         "SELECT username, userID FROM users ORDER BY userID"
+      );
+      $stmt->execute();
+      $users = $stmt->fetchAll();
+
+      return $users;
    }
 
    function displayUserItems($userId) {

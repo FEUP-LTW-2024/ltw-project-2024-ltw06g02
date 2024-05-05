@@ -92,3 +92,10 @@ body {
 a.favorite-btn:hover {
    background-color: transparent;
 }
+
+.admin-btn i {
+   color: transparent;
+   -webkit-text-stroke: 1px white;
+   margin-top: 0.4em;
+   margin-right: 1em;
+}

@@ -1,5 +1,6 @@
 <?php
    require_once('forms.tl.php');
+   require_once('database/user.php');
    function printNavBar(){
       buildLoginForm();
       buildRegisterForm();
@@ -12,6 +13,15 @@
             <i class="material-icons">favorite</i>
          </a>
          <div class="nav-buttons">
+            <?php
+            if(checkIfUserIsAdmin($_SESSION['username'])){
+            ?>   
+               <a href="../admin.php" class="admin-btn">
+               <i class="material-icons">settings</i>
+               </a>
+            <?php
+            }
+            ?>
             <a href="../wishlist.php" class="favorite-btn">
               <i class="material-icons">favorite</i>
             </a>
