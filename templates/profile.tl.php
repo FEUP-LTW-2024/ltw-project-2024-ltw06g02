@@ -25,7 +25,7 @@
 
 <?php 
    }
-
+   require_once('article.tl.php');
    function printProfileArticleSection($articles) {
 ?>
       <div class="right-side">
@@ -37,7 +37,7 @@
                   <?php
                } else {
                   foreach ($articles as $article) {
-                     getSingleProfileArticle($article['name'], $article['price'], $article['images'], $article['avatar']);
+                     getSingleProfileArticle($article['productID'] ,$article['name'], $article['price'], $article['images'], $article['avatar']);
                   }
                }
             ?>
@@ -47,12 +47,12 @@
    
 <?php
    }
-   function getSingleProfileArticle($name, $price, $image, $avatar){
+   function getSingleProfileArticle($productID ,$name, $price, $image, $avatar){
       $images = explode(",", $image);
 ?>
 
    <article class="profile-article">
-      <a href="#"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
+      <a href="product.php?id=<?=$productID?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
       <div class="article-details">
          <div>
             <h3><?= $name ?></h3>
