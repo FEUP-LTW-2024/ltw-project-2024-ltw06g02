@@ -13,7 +13,7 @@
 <?php
    }
 
-   function printInfoSection($filters){
+   function printInfoSection($categories){
 ?>
 
    <div class="outer-rectangle-info">
@@ -30,8 +30,8 @@
             <label>Categories</label>
             <select required name="category">
                <?php 
-                  foreach($filters as $filter){
-                     echo("<option>" . $filter['name']);
+                  foreach($categories as $c){
+                     echo("<option>" . $c['name']);
                   }
                ?>
             </select>

@@ -12,7 +12,7 @@
 
    $db = getDatabaseConnection();
    $articles = getAllArticles($db);
-   $filters = getAllFilters($db);
+   $filters = getAllCategories($db);
 
    printHeader('Bazinga!');
    printArticleSection($articles);

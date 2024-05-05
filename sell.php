@@ -9,10 +9,10 @@
    $session = new Session();
 
    $db = getDatabaseConnection();
-   $filters = getAllFilters($db);
+   $categories = getAllCategories($db);
 
    printHeader('Bazinga!');
    printUploadSection();
-   printInfoSection($filters);
+   printInfoSection($categories);
    printFooter();
 ?>

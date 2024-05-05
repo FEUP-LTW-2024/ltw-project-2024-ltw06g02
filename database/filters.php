@@ -1,10 +1,28 @@
 <?php 
-   function getAllFilters($db){
+   function getAllCategories($db){
       $stmt = $db->prepare(
          "SELECT * FROM productCategory"
       );
       $stmt->execute();
-      $articles = $stmt->fetchAll();
-      return $articles;
+      $categories = $stmt->fetchAll();
+      return $categories;
+   }
+
+   function getAllSizes($db){
+      $stmt = $db->prepare(
+         "SELECT * FROM productSize"
+      );
+      $stmt->execute();
+      $sizes = $stmt->fetchAll();
+      return $sizes;
+   }
+
+   function getAllConditions($db){
+      $stmt = $db->prepare(
+         "SELECT * FROM productCondition"
+      );
+      $stmt->execute();
+      $conditions = $stmt->fetchAll();
+      return $conditions;
    }
 ?>
