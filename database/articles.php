@@ -18,6 +18,16 @@
       return $article;
    }
 
+   function getArticlesByFilter($db, $filter){
+      $stmt = $db->prepare(
+         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.categoryID = ?"
+      );
+      $stmt->bindParam(1, $filter);
+      $stmt->execute();
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
+
    function getFavoriteArticlesByUserId($db, $id){
       $stmt = $db->prepare(
          "SELECT * FROM favorites WHERE userID = ?"
