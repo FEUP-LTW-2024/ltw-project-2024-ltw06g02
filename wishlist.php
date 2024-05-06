@@ -11,15 +11,9 @@
 
    $db = getDatabaseConnection();
 
-   $username = $_SESSION['username'];
+   if(!isset($_SESSION['userID'])) header('Location: index.php');
 
-   $stmt = $db->prepare(
-      "SELECT userID FROM users WHERE username = ?"
-   );
-   $stmt->execute(array($username));
-   $user = $stmt->fetch();
-
-   $favoriteArcticles = getFavoriteArticlesByUserId($db, $user['userID']);
+   $favoriteArcticles = getFavoriteArticlesByUserId($db, $_SESSION['userID']);
 
    printHeader('Bazinga!');
    printFavoriteArticleSection($db ,$favoriteArcticles);
