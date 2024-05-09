@@ -39,10 +39,37 @@
       $stmt->execute(array($_SESSION['username']));
       $userID = $stmt->fetch();
 
+      $stmt = $db->prepare("SELECT sizeID FROM productSize WHERE name=?");
+      $stmt->execute(array($article['size']));
+      $sizeID = $stmt->fetch();
+
+      $stmt = $db->prepare("SELECT conditionID FROM productCondition WHERE name=?");
+      $stmt->execute(array($article['condition']));
+      $conditionID = $stmt->fetch();
+
       $stmt = $db->prepare(
+         "INSERT INTO product(name, description, price, categoryID, userID, sizeID, conditionID, brand, model, images) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+     );
+
+      $brand = isset($article['brand']) ? $article['brand'] : null;
+      $model = isset($article['model']) ? $article['model'] : null;
+
+      /*$stmt = $db->prepare(
          "INSERT INTO product(name, description, price, categoryID, userID, images) VALUES(?, ?, ?, ?, ?, ?)"
       );
-      $stmt->execute(array($article['name'], $article['description'], $article['price'], $categoryID['categoryID'], $userID['userID'], $images));
+      $stmt->execute(array($article['name'], $article['description'], $article['price'], $categoryID['categoryID'], $userID['userID'], $images));*/
+      $stmt->execute(array(
+         $article['name'],
+         $article['description'],
+         $article['price'],
+         $categoryID['categoryID'],
+         $userID['userID'],
+         $sizeID['sizeID'],
+         $conditionID['conditionID'],
+         $brand,
+         $model,
+         $images
+     ));
    }
 
   function getUserArticles($db, $userID){

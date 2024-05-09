@@ -10,9 +10,11 @@
 
    $db = getDatabaseConnection();
    $categories = getAllCategories($db);
+   $sizes = getAllSizes($db);
+   $conditions = getAllConditions($db);
 
    printHeader('Bazinga!');
    printUploadSection();
-   printInfoSection($categories);
+   printInfoSection($categories, $sizes, $conditions);
    printFooter();
 ?>

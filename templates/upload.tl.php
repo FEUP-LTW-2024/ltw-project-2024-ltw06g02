@@ -13,7 +13,7 @@
 <?php
    }
 
-   function printInfoSection($categories){
+   function printInfoSection($categories, $sizes, $conditions){
 ?>
 
    <div class="outer-rectangle-info">
@@ -35,6 +35,36 @@
                   }
                ?>
             </select>
+         </div>
+         <div class="input-grp">
+            <label>Sizes</label>
+            <select name="size">
+               <option value="">None</option>
+               <?php 
+                  foreach($sizes as $s){
+                     echo("<option>" . $s['name']);
+                  }
+               ?>
+            </select>
+         </div>
+         <div class="input-grp">
+            <label>Conditions</label>
+            <select name="condition">
+               <option value="">None</option>
+               <?php 
+                  foreach($conditions as $condition){
+                     echo("<option>" . $condition['name']);
+                  }
+               ?>
+            </select>
+         </div>
+         <div class="input-grp">
+            <label>Brand</label>
+            <input type="text" name="brand">
+         </div>
+         <div class="input-grp">
+            <label>Model</label>
+            <input type="text" name="model">
          </div>
          <div class="input-grp">
             <label>Price</label>
