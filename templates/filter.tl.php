@@ -2,7 +2,7 @@
    function printFilterButton($filter){
 ?>
 
-   <button class="filter-btn" onclick="updateArticles('<?=$filter['name']?>')"><?= $filter['name'] ?></button>
+   <button class="filter-btn" onclick="updateArticles('<?=$filter['categoryID']?>')"><?= $filter['name'] ?></button>
 
 <?php
    }
