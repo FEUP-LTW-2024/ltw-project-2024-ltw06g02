@@ -37,7 +37,7 @@
             </select>
          </div>
          <div class="input-grp">
-            <label>Sizes</label>
+            <label>Size</label>
             <select name="size">
                <option value="">None</option>
                <?php 
@@ -48,7 +48,7 @@
             </select>
          </div>
          <div class="input-grp">
-            <label>Conditions</label>
+            <label>Condition</label>
             <select name="condition">
                <option value="">None</option>
                <?php 
