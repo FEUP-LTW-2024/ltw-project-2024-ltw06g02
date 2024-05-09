@@ -25,4 +25,34 @@
       $conditions = $stmt->fetchAll();
       return $conditions;
    }
+
+   function getCategoryByID($db, $id){
+      $stmt = $db->prepare(
+         "SELECT * FROM productCategory WHERE categoryID=?"
+      );
+      $stmt->bindParam(1, $id);
+      $stmt->execute();
+      $category = $stmt->fetch();
+      return $category;
+   }
+
+   function getSizeByID($db, $id){
+      $stmt = $db->prepare(
+         "SELECT * FROM productSize WHERE sizeID=?"
+      );
+      $stmt->bindParam(1, $id);
+      $stmt->execute();
+      $size = $stmt->fetch();
+      return $size;
+   }
+
+   function getConditionByID($db, $id){
+      $stmt = $db->prepare(
+         "SELECT * FROM productCondition WHERE conditionID=?"
+      );
+      $stmt->bindParam(1, $id);
+      $stmt->execute();
+      $condition = $stmt->fetch();
+      return $condition;
+   }
 ?>
