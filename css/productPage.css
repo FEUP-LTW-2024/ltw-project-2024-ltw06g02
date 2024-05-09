@@ -29,12 +29,21 @@
     margin: 0;
 }
 
-.name, .description {
-    margin-top: 0.7em;
+.name, .description, .category, .brand, .model, .size, .condition {
+    margin: 0;
 }
 
 .description {
+    margin-top: 1em;
+}
+
+.category, .brand, .model, .size, .condition {
+    margin-top: 0.5em;
+}
+
+.description, .category, .brand, .model, .size, .condition {
     font-weight: normal;
+    font-size: medium;
 }
 
 #addBtn, #sendBtn, #proposalBtn, #buyBtn, #removeBtn{

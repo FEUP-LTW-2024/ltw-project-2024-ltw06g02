@@ -68,6 +68,7 @@
 ?>
 
 <?php
+
    function printArticleById($db, $article, $userId, $id){
       $images = explode(",", $article['images']);
 ?>
@@ -77,7 +78,25 @@
          <h1 class="price"><?=$article['price']?> €</h1>
          <hr class="separator">
          <h2 class="name"><?=$article['name']?></h2>
-         <h2 class="description"><?=$article['description']?></h2>
+         <h2 class="description">Description: <?=$article['description']?></h2>
+         <?php 
+         $category = getCategoryByID($db, $article['categoryID']); 
+         ?>
+         <h2 class="category">Category: <?=$category['name']?></h2> 
+         <?php if($article['brand'] != null): ?>
+            <h2 class="brand">Brand: <?=$article['brand']?></j2>
+         <?php endif; ?>
+         <?php if($article['model'] != null): ?>
+            <h2 class="model">Model: <?=$article['model']?></h2>
+         <?php endif; ?>
+         <?php if($article['sizeID'] != null): 
+            $size = getSizeByID($db, $article['sizeID']); ?>
+            <h2 class="size">Size: <?=$size['name']?></h2>
+         <?php endif; ?>
+         <?php if($article['condition'] != null): 
+            $condition = getConditionByID($db, $article['conditionID']); ?>
+            <h2 class="condition">Condition: <?=$condition['name']?></h2>
+         <?php endif; ?>
          <hr class="separator">
 
          <button type="submit" id="buyBtn">Comprar agora</button>
