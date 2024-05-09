@@ -11,7 +11,7 @@
    $session = new Session();
 
    $db = getDatabaseConnection();
-   $articles = getAllArticles($db);
+   $articles = isset($_SESSION['userID']) ? getArticlesExcludingUser($db) : getAllArticles($db);
    $filters = getAllCategories($db);
 
    printHeader('Bazinga!');

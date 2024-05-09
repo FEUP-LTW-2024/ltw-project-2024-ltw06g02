@@ -9,6 +9,15 @@
       return $articles;
    }
 
+   function getArticlesExcludingUser($db) {
+      $stmt = $db->prepare(
+         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE users.userID != ?"
+      );
+      $stmt->execute(array($_SESSION['userID']));
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
+
    function getArticleById($db, $id){
       $stmt = $db->prepare(
          "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE productID = ?"
