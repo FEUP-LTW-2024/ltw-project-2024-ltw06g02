@@ -54,10 +54,6 @@
       $brand = isset($article['brand']) ? $article['brand'] : null;
       $model = isset($article['model']) ? $article['model'] : null;
 
-      /*$stmt = $db->prepare(
-         "INSERT INTO product(name, description, price, categoryID, userID, images) VALUES(?, ?, ?, ?, ?, ?)"
-      );
-      $stmt->execute(array($article['name'], $article['description'], $article['price'], $categoryID['categoryID'], $userID['userID'], $images));*/
       $stmt->execute(array(
          $article['name'],
          $article['description'],
