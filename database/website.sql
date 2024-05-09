@@ -18,6 +18,8 @@ CREATE TABLE product (
    sizeID INTEGER,
    conditionID INTEGER,
    userID INTEGER,
+   brand VARCHAR,
+   model VARCHAR,
    images VARCHAR,  -- check out later
    FOREIGN KEY (userID) REFERENCES users(userID),
    FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID),
