@@ -68,7 +68,6 @@
 ?>
 
 <?php
-   require_once('database/filters.php');
 
    function printArticleById($db, $article, $userId, $id){
       $images = explode(",", $article['images']);
