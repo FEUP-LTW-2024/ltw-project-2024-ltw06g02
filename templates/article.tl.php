@@ -172,12 +172,12 @@ function printCartArticleSection($db, $cartArticles, $userID){
    if (empty($cartArticles)) {
       ?>
       <div class="product-section-cart">
-         <h3 class="products-title-cart">Carrinho de compras</h3>
+         <h3 class="products-title-cart">Shopping Cart</h3>
          <section class="article-grid-cart">
             <div class="emptyBox">
-               <h3 class="emptyTitle">Adiciona ao carrinho</h3>
-               <h4 class="emptyParagrah">Adiciona artigos que queiras comprar e encontra-os aqui</h4>
-               <a href="../index.php" class="find">Procurar</a>
+               <h3 class="emptyTitle">Add to cart</h3>
+               <h4 class="emptyParagrah">Add items you want to buy and find them here</h4>
+               <a href="../index.php" class="find">Search</a>
             </div>
          </section>
       </div>
@@ -185,7 +185,7 @@ function printCartArticleSection($db, $cartArticles, $userID){
    } else {
       ?>
       <div class="product-section-carousel">
-         <h3 class="products-title-carousel">Carrinho de compras</h3>
+         <h3 class="products-title-carousel">Shopping Cart</h3>
          <div class="carousel-container">
             <?php
                foreach($cartArticles as $cart){
@@ -203,8 +203,8 @@ function printCartArticleSection($db, $cartArticles, $userID){
          </div>
          <section class="article-grid-cart">
             <div class="emptyBox">
-               <h4 class="emptyParagrah">Adiciona mais artigos e encontra-os aqui</h4>
-               <a href="../index.php" class="find">Procurar</a>
+               <h4 class="emptyParagrah">Add more articles and find them here</h4>
+               <a href="../index.php" class="find">Search</a>
             </div>
          </section>
          <form id="removeFromCartForm" action="../actions/buy.php" method="POST">
@@ -212,7 +212,7 @@ function printCartArticleSection($db, $cartArticles, $userID){
             <?php foreach ($cartArticles as $cart): ?>
                <input type="hidden" name="cartItems[]" value="<?= $cart['productID'] ?>">
             <?php endforeach; ?>
-            <button type="submit" id="buyCartBtn">Finalizar compra</button>
+            <button type="submit" id="buyCartBtn">Finalize purchase</button>
          </form>
       </div>
 
