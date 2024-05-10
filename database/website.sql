@@ -35,6 +35,14 @@ CREATE TABLE favorites (
    FOREIGN KEY (productID) REFERENCES product(productID)
 );
 
+CREATE TABLE cart (
+   cartID INTEGER PRIMARY KEY,
+   userID INTEGER,
+   productID INTEGER,
+   FOREIGN KEY (userID) REFERENCES users(userID),
+   FOREIGN KEY (productID) REFERENCES product(productID)
+);
+
 CREATE TABLE productCategory (
    categoryID INTEGER PRIMARY KEY,
    name VARCHAR

@@ -96,4 +96,25 @@
      $userArticles = $stmt->fetchAll();
      return $userArticles;
   }
+
+  function getCartArticlesByUserId($db, $id){
+      $stmt = $db->prepare(
+         "SELECT * FROM cart WHERE userID = ?"
+      );
+      $stmt->execute(array($id));
+
+      $cartArticles = $stmt->fetchAll();
+      return $cartArticles;
+   }
+
+   function removeArticle($db, $id) : bool{
+      $stmt = $db->prepare(
+         "DELETE FROM product WHERE productID = ?"
+      );
+      $stmt->bindParam(1, $id);
+
+      $stmt->execute();
+        
+      return true;
+   }
 ?>

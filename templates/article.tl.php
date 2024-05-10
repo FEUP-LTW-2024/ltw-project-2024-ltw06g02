@@ -18,6 +18,29 @@
 ?>
 
 <?php
+   function getSingleCartArticle($productID, $name, $price, $image, $userID){
+      $images = explode(",", $image);
+?>
+   <article class="article">
+      <form id="removeFromCartForm" action="../actions/remove_from_cart.php" method="POST">
+         <input type="hidden" name="userId" value="<?=$userID?>">
+         <input type="hidden" name="articleId" value="<?=$productID?>">
+         <button type="submit" id="removeFromCartBtn" class="material-icons">delete</button>
+      </form>
+      <img src=<?= $images[0] ?> alt="" class="product-img">
+      <div class="article-details">
+         <div>
+            <h3><?= $name ?></h3>
+            <p><?= $price ?>€</p>
+         </div>
+      </div>
+   </article>
+
+<?php
+   }
+?>
+
+<?php
    function printArticleSection($articles){
 ?>
    <div class="product-section">
@@ -99,7 +122,11 @@
          <?php endif; ?>
          <hr class="separator">
 
-         <button type="submit" id="buyBtn">Comprar agora</button>
+         <form id="addToCartForm" action="../actions/add_to_cart.php" method="POST">
+            <input type="hidden" name="userId" value="<?=$userId?>">
+            <input type="hidden" name="articleId" value="<?=$id?>">
+            <button type="submit" id="buyBtn">Comprar agora</button>
+         </form>
          <button type="submit" id="proposalBtn">Propor outro preço</button>
          <a href=<?= "../actions/initialize_chat.php?q=" . $id ?> ><button type="submit" id="sendBtn">Enviar mensagem</button></a>
 
@@ -137,4 +164,87 @@
 
 <?php
    }
+?>
+
+<?php
+function printCartArticleSection($db, $cartArticles, $userID){
+
+   if (empty($cartArticles)) {
+      ?>
+      <div class="product-section-cart">
+         <h3 class="products-title-cart">Carrinho de compras</h3>
+         <section class="article-grid-cart">
+            <div class="emptyBox">
+               <h3 class="emptyTitle">Adiciona ao carrinho</h3>
+               <h4 class="emptyParagrah">Adiciona artigos que queiras comprar e encontra-os aqui</h4>
+               <a href="../index.php" class="find">Procurar</a>
+            </div>
+         </section>
+      </div>
+      <?php
+   } else {
+      ?>
+      <div class="product-section-carousel">
+         <h3 class="products-title-carousel">Carrinho de compras</h3>
+         <div class="carousel-container">
+            <?php
+               foreach($cartArticles as $cart){
+                  $article = getArticleById($db, $cart['productID']);
+                  getSingleCartArticle($article['productID'], $article['name'], $article['price'], $article['images'], $userID);
+               }
+            ?>
+         </div>
+         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+         <a class="next" onclick="plusSlides(1)">&#10095;</a>
+         <div style="text-align:center">
+            <?php for($i = 0; $i < count($cartArticles); $i++): ?>
+               <span class="dot" onclick="currentSlide(<?php echo $i + 1; ?>)"></span>
+            <?php endfor; ?>
+         </div>
+         <section class="article-grid-cart">
+            <div class="emptyBox">
+               <h4 class="emptyParagrah">Adiciona mais artigos e encontra-os aqui</h4>
+               <a href="../index.php" class="find">Procurar</a>
+            </div>
+         </section>
+         <form id="removeFromCartForm" action="../actions/buy.php" method="POST">
+            <input type="hidden" name="userId" value="<?=$userID?>">
+            <?php foreach ($cartArticles as $cart): ?>
+               <input type="hidden" name="cartItems[]" value="<?= $cart['productID'] ?>">
+            <?php endforeach; ?>
+            <button type="submit" id="buyCartBtn">Finalizar compra</button>
+         </form>
+      </div>
+
+      <script>
+         let slideIndex = 1;
+         showSlides(slideIndex);
+
+         function plusSlides(n) {
+            showSlides(slideIndex += n);
+         }
+
+         function currentSlide(n) {
+            showSlides(slideIndex = n);
+         }
+
+         function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("article");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+               slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+               dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+         }
+      </script>
+      <?php
+   }
+}
 ?>

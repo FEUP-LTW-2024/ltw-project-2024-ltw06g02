@@ -19,6 +19,9 @@
             <?php
             }
             ?>
+            <a href="../shoppingCart.php" class="shopping-btn">
+               <i class="material-icons">shopping_cart</i>
+            </a>
             <a href="../wishlist.php" class="favorite-btn">
               <i class="material-icons">favorite</i>
             </a>

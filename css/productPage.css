@@ -11,7 +11,7 @@
 .product-column {
     display: flex;
     flex-direction: column;
-    width: 20em;
+    width: 22em;
     padding: 1em;
     margin: 1em;
     background-color: rgb(243, 242, 242);
@@ -74,6 +74,10 @@
 #removeBtn {
     color: rgb(145, 140, 140);
     border: 1px solid rgb(145, 140, 140);
+}
+
+form#addToCartForm {
+    margin: 0;
 }
 
 
