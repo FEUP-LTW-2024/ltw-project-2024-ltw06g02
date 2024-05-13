@@ -225,3 +225,22 @@
     }
   }
 }
+
+.like-container {
+  display: inline-block;
+}
+
+.profile-article .heart-icon {
+  color: transparent;
+  -webkit-text-stroke: 1px black;
+  font-size: medium;
+}
+
+.profile-article .number {
+  margin: 0 0 0.1em 0;
+}
+
+.profile-article .heart-icon, .profile-article .number {
+  display: inline-block;
+  vertical-align: middle;
+}
