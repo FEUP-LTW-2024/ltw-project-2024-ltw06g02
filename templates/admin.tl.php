@@ -37,8 +37,8 @@
             foreach($usersRegistered as $user){
             ?>
             <tr>
-                <td><?= $user['userID']; ?></th>
-                <td><?= $user['username']; ?></th>
+                <td><?= $user['userID']; ?></td>
+                <td><?= $user['username']; ?></td>
             </tr>
             <?php
             }

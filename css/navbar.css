@@ -99,3 +99,14 @@ a.favorite-btn:hover {
    margin-top: 0.4em;
    margin-right: 1em;
 }
+
+.shopping-btn i {
+   color: transparent;
+   -webkit-text-stroke: 1px white;
+   margin-top: 0.4em;
+   margin-right: 0.9em;
+}
+
+a.shopping-btn:hover {
+   background-color: transparent;
+}

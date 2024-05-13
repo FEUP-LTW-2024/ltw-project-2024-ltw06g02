@@ -19,6 +19,9 @@
             <?php
             }
             ?>
+            <a href="../shoppingCart.php" class="shopping-btn">
+               <i class="material-icons">shopping_cart</i>
+            </a>
             <a href="../wishlist.php" class="favorite-btn">
               <i class="material-icons">favorite</i>
             </a>
@@ -30,6 +33,7 @@
                <div class="dropdown-content">
                   <a href="../profile.php">Profile</a>
                   <a href="../messages.php">Messages</a>
+                  <a href="../historic.php">Historic</a>
                   <a href="../actions/logout.php">Logout</a>
                </div>
             </div>

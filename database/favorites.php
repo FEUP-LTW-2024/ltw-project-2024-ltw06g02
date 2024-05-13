@@ -22,4 +22,15 @@
         
         return true;
     }
+
+    function removeFavoriteFromUsers($articleId) : bool{
+        $db = getDatabaseConnection();
+    
+        $stmt = $db->prepare("DELETE FROM favorites WHERE productID = ?");
+        $stmt->bindParam(1, $articleId);
+        
+        $stmt->execute();
+        
+        return true;
+    }
 ?>
