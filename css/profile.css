@@ -92,8 +92,8 @@
 }
 
 .product-img {
-  width: 16em;
-  height: 20em;
+  width: 15em;
+  height: 15em;
   object-fit: cover;
   padding: 0.5em;
 }
