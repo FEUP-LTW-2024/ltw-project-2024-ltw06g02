@@ -14,7 +14,7 @@
 
       $favorite = new Favorite($userId, $articleId);
 
-      if(!addFavorite($favorite)) die(header('Location: ../#'));
+      if(!addFavorite($favorite, $articleId)) die(header('Location: ../#'));
       
       header('Location: ../product.php?id=' . $articleId);  
    }
