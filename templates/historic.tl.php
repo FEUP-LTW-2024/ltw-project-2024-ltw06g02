@@ -20,7 +20,7 @@
             foreach($purchases as $purchase) {
                 ?>
                 <tr>
-                    <td><?= $purchase['productDescription']; ?></td>
+                    <td><?= $purchase['productName']; ?></td>
                     <td><?= $purchase['notificationText']; ?></td>
                     <td><?= $purchase['notificationDate']; ?></td>
                 </tr>
@@ -58,7 +58,7 @@
                 foreach($sales as $sale){
                     ?>
                     <tr>
-                        <td><?= $sale['productDescription']; ?></td>
+                        <td><?= $sale['productName']; ?></td>
                         <td><?= $sale['notificationText']; ?></td>
                         <td><?= $sale['notificationDate']; ?></td>
                     </tr>

@@ -91,7 +91,7 @@ CREATE TABLE chat (
 CREATE TABLE purchase (
    purchaseID INTEGER PRIMARY KEY,
    userID INTEGER,
-   productDescription VARCHAR,
+   productName VARCHAR,
    notificationText VARCHAR,
    notificationDate DATETIME,
    FOREIGN KEY (userID) REFERENCES users(userID)
@@ -100,7 +100,7 @@ CREATE TABLE purchase (
 CREATE TABLE sale (
    saleID INTEGER PRIMARY KEY,
    userID INTEGER,
-   productDescription VARCHAR,
+   productName VARCHAR,
    notificationText VARCHAR,
    notificationDate DATETIME,
    FOREIGN KEY (userID) REFERENCES users(userID)
