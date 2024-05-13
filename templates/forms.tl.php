@@ -40,16 +40,35 @@
 ?>
 
 <dialog id="editProfileDialog">
-      <button class="close-button" aria-label="Close alert" type="button" data-close>
-         <span aria-hidden="true">&times;</span>
-      </button>
-      <p>Edit Profile</p>
-      <form id="editProfileForm" action="../actions/edit.php" method="POST">
-         <input type="text" name="username" id="" placeholder="New Username">
-         <input type="password" name="password" id="" placeholder="New Password">
-         <input type="email" name="email" id="" placeholder="New Email">
-         <button type="submit" id="loginBtn">Edit</button>
-      </form>
-   </dialog>      
+   <button class="close-button" aria-label="Close alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+   </button>
+   <p>Edit Profile</p>
+   <form id="editProfileForm" action="../actions/edit.php" method="POST">
+      <input type="text" name="username" id="" placeholder="New Username">
+      <input type="password" name="password" id="" placeholder="New Password">
+      <input type="email" name="email" id="" placeholder="New Email">
+      <button type="submit" id="loginBtn">Edit</button>
+   </form>
+</dialog>      
 
-<?php } ?>
+<?php 
+   } 
+
+   function buildUploadPhoto() {
+?>
+
+<dialog id="uploadPhotoDialog">
+   <button class="close-button" aria-label="Close alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+   </button>
+   <p>Upload new photo</p>
+   <form id="uploadPhotoForm" action="../actions/upload_avatar.php" method="post" enctype="multipart/form-data">
+      <input type="file" name="image" required>
+      <button type="submit" id="loginBtn">Upload</button>
+   </form>
+</dialog>  
+
+<?php
+   }
+?>

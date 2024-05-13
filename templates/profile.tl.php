@@ -2,11 +2,12 @@
    require_once('forms.tl.php'); 
    function printBioSection($user){
       buildEditProfile();
+      buildUploadPhoto();
 ?>
    <div class="info">
       <div class="conjunction">
          <section class="left-side">
-            <img src="../assets/goiana.jpg" >
+            <img src=<?= $user['avatar'] ?> >
             <div class="bios">
                <div>
                   <h1><?= $user['fullName'] ?></h1>
@@ -20,7 +21,10 @@
                </div>
             </div>
          </section>
-         <button class="nav-button" id="editProfile">Edit Profile</button>
+         <div class="buttons">
+            <button class="nav-button" id="editProfile">Edit Profile</button>
+            <button class="nav-button" id="editPhoto">Change Photo</button>
+         </div>
       </div>
 
 <?php 
@@ -72,12 +76,20 @@
       const editProfile = document.getElementById("editProfile");
       const closeBtn = editProfileDialog.querySelector(".close-button");
 
+      const uploadPhoto = document.getElementById("editPhoto");
+      const photoUploadDialog = document.getElementById("uploadPhotoDialog");
+
       editProfile.addEventListener("click", () => {
          editProfileDialog.showModal();
       })
 
       closeBtn.addEventListener("click", () => {
          editProfileDialog.close();
+         photoUploadDialog.close();
       });
+
+      uploadPhoto.addEventListener("click", () => {
+         photoUploadDialog.showModal();
+      })
    })
 </script>
