@@ -14,6 +14,6 @@
     $article = getArticleById($db, $id);
 
     printHeader('Bazinga!');
-    printArticleById($db, $article, $_SESSION['userID'], $id);
+    printArticleById($db, $article, isset($_SESSION['userID']) ? $_SESSION['userID'] : '', $id);
     printFooter();
 ?>
