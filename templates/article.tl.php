@@ -116,7 +116,7 @@
             $size = getSizeByID($db, $article['sizeID']); ?>
             <h2 class="size">Size: <?=$size['name']?></h2>
          <?php endif; ?>
-         <?php if($article['condition'] != null): 
+         <?php if($article['conditionID'] != null): 
             $condition = getConditionByID($db, $article['conditionID']); ?>
             <h2 class="condition">Condition: <?=$condition['name']?></h2>
          <?php endif; ?>
