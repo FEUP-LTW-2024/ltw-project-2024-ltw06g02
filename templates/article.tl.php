@@ -1,5 +1,5 @@
 <?php
-   function getSingleArticle($productID, $name, $price, $image, $avatar){
+   function getSingleArticle($productID, $name, $price, $image, $avatar, $likes){
       $images = explode(",", $image);
 ?>
    <article class="article">
@@ -8,6 +8,10 @@
          <div>
             <h3><?= $name ?></h3>
             <p><?= $price ?>€</p>
+         </div>
+         <div class="like-container">
+            <i class="material-icons heart-icon">favorite</i>
+            <p class="number"><?= $likes ?></p>
          </div>
          <img src=<?= $avatar ?>>
       </div>
@@ -50,7 +54,7 @@
             if(sizeof($articles) == 0) echo "Não tens produtos recomendados! Volta mais tarde"
          ?>
          <?php foreach($articles as $article){
-            getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar']);
+            getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
          } 
          ?>
       </section>
@@ -76,7 +80,7 @@
                   }
                   foreach($favoriteArticles as $favorite){
                      $article = getArticleById($db, $favorite['productID']);
-                     getSingleArticle($article['productID'], $article['name'], $article['price'], $article['images'], $article['avatar']);
+                     getSingleArticle($article['productID'], $article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
                   }
                ?>
             </section>

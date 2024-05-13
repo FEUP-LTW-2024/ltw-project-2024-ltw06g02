@@ -67,11 +67,12 @@
       $conditionID = $stmt->fetch();
 
       $stmt = $db->prepare(
-         "INSERT INTO product(name, description, price, categoryID, userID, sizeID, conditionID, brand, model, images) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+         "INSERT INTO product(name, description, price, categoryID, userID, sizeID, conditionID, brand, model, images, likes) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
      );
 
       $brand = isset($article['brand']) ? $article['brand'] : null;
       $model = isset($article['model']) ? $article['model'] : null;
+      $likes = 0;
 
       $stmt->execute(array(
          $article['name'],
@@ -83,7 +84,8 @@
          $conditionID['conditionID'],
          $brand,
          $model,
-         $images
+         $images,
+         $likes
      ));
    }
 

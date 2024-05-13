@@ -41,7 +41,7 @@
                   <?php
                } else {
                   foreach ($articles as $article) {
-                     getSingleProfileArticle($article['productID'] ,$article['name'], $article['price'], $article['images'], $article['avatar']);
+                     getSingleProfileArticle($article['productID'] ,$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
                   }
                }
             ?>
@@ -51,7 +51,7 @@
    
 <?php
    }
-   function getSingleProfileArticle($productID ,$name, $price, $image, $avatar){
+   function getSingleProfileArticle($productID ,$name, $price, $image, $avatar, $likes){
       $images = explode(",", $image);
 ?>
 
@@ -61,6 +61,10 @@
          <div>
             <h3><?= $name ?></h3>
             <p><?= $price ?>€</p>
+         </div>
+         <div class="like-container">
+            <i class="material-icons heart-icon">favorite</i>
+            <p class="number"><?= $likes ?></p>
          </div>
          <img src=<?= $avatar ?>>
       </div>
