@@ -61,26 +61,19 @@
 
 <?php
    function printFavoriteArticleSection($db, $favoriteArticles){
+?>
 
-      if (empty($favoriteArticles)) {
-         ?>
-         <div class="product-section-favorite">
-            <h3 class="products-title-favorite">Artigos marcados como favoritos</h3>
-            <section class="article-grid-favorite">
-               <div class="emptyBox">
-                  <h3 class="emptyTitle">Guarda os teus favoritos</h3>
-                  <h4 class="emptyParagrah">Marca alguns artigos como favoritos e encontra-os aqui</h4>
-                  <a href="../index.php" class="find">Procurar</a>
-               </div>
-            </section>
-         </div>
-         <?php
-      } else {
-         ?>
          <div class="product-section">
             <h3 class="products-title">Artigos marcados como favoritos</h3>
             <section class="article-grid">
+               <?php if(empty($favoriteArticles)){ ?>
+
+                  <div class="no-favorite-articles">
+                     <h2>Não tens artigos favoritos!</h2>
+                     <a href="index.php"></hre><button>Começa a procurar!</button></a>
+                  </div>
                <?php
+                  }
                   foreach($favoriteArticles as $favorite){
                      $article = getArticleById($db, $favorite['productID']);
                      getSingleArticle($article['productID'], $article['name'], $article['price'], $article['images'], $article['avatar']);
@@ -88,13 +81,9 @@
                ?>
             </section>
          </div>
-         <?php
-      }
-   }
-?>
 
 <?php
-
+   }
    function printArticleById($db, $article, $userId, $id){
       $images = explode(",", $article['images']);
 ?>

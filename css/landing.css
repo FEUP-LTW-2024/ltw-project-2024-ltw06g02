@@ -8,6 +8,30 @@
    row-gap: 1em;
 }
 
+.no-favorite-articles {
+   display: flex;
+   flex-direction: column;
+   margin: auto auto;
+
+   h2 {
+      font-weight: normal;
+   }
+
+   a {
+      margin: 0 auto;
+   }
+
+   button {
+      background-color: #98C9A3;
+      font-size: 1em;
+      color: white;
+      padding: 0.7em 1.2em;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+   }
+}
+
 .article {
    margin-right: 0.5em;
    border: 1px solid gray;
@@ -71,6 +95,10 @@
 
  .products-title {
       font-size: x-large;
+   }
+
+   .no-favorite-articles h2 {
+      font-size: large;
    }
 
 }
