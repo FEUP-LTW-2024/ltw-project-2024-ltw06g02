@@ -68,7 +68,7 @@
          </div>
          <div class="input-grp">
             <label>Price</label>
-            <input type="number" name="price" required>
+            <input type="number" name="price" required min=0>
          </div>
    </div>
 

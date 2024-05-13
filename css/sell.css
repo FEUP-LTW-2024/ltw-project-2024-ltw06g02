@@ -1,6 +1,6 @@
 .outer-rectangle {
    width: 50em;
-   height: 10em;
+   height: auto;
    background-color: whitesmoke;
    padding: 2em;
    margin: 2em auto auto auto;
@@ -10,7 +10,7 @@
    align-items: baseline;
    justify-content: space-between;
 }
- 
+
 .inner-rectangle {
    display: flex;
    width: 46em;
@@ -25,13 +25,14 @@
 
 .outer-rectangle-info {
    width: 50em;
-   height: 21em;
+   height: auto;
    background-color: whitesmoke;
    padding: 2em;
    margin: 2em auto auto auto;
    border-radius: 5px;
    display: flex;
    flex-direction: column;
+   row-gap: 1em;
    align-items: start;
    justify-content: space-between;
 }
@@ -40,7 +41,7 @@
    margin: 0;
 }
 
-.outer-rectangle h2, .outer-rectangle-info h2{
+.outer-rectangle h2,.outer-rectangle-info h2{
    margin-top: 0;
    font-weight: lighter;
 }
@@ -53,7 +54,7 @@
 }
 
 .input-grp input,
-.input-grp select, .input-grp textarea {
+.input-grp select,.input-grp textarea {
    border: none;
    outline: none;
    border-bottom: 1px solid #98C9A3;
@@ -64,4 +65,47 @@
 
 .sell-button {
    margin: 2em auto 2em auto;
+}
+
+@media (max-width: 850px) {
+  .outer-rectangle, .outer-rectangle-info {
+      width: 90%;
+      padding: 1em;
+      height: auto;
+      row-gap: 0.5em;
+   }
+
+  .inner-rectangle {
+      width: 100%;
+      height: auto;
+      padding: 1em;
+   }
+
+  .input-grp {
+      flex-direction: column;
+   }
+
+  .input-grp input,
+  .input-grp select,.input-grp textarea {
+      width: 100%;
+   }
+}
+
+@media (max-width: 480px) {
+  .outer-rectangle,.outer-rectangle-info {
+      width: 90%;
+      padding: 1em;
+      row-gap: 0.5em;
+      height: auto;
+   }
+
+  .inner-rectangle {
+      width: 100%;
+      padding: 1em;
+      height: auto;
+   }
+
+   .input-grp {
+      flex-direction: column;
+   }
 }

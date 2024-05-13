@@ -4,8 +4,8 @@
 
 .article-grid {
    display: flex;
-   overflow-x: auto;
-   white-space: nowrap;
+   flex-wrap: wrap;
+   row-gap: 1em;
 }
 
 .article {

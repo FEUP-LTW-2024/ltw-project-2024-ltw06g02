@@ -46,6 +46,9 @@
    <div class="product-section">
       <h3 class="products-title">Produtos recomendados</h3>
       <section class="article-grid" id="grid">
+         <?php 
+            if(sizeof($articles) == 0) echo "Não tens produtos recomendados! Volta mais tarde"
+         ?>
          <?php foreach($articles as $article){
             getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar']);
          } 
