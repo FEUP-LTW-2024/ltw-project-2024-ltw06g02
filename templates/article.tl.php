@@ -162,6 +162,7 @@
 ?>
 
 <?php
+
 function printCartArticleSection($db, $cartArticles, $userID){
 
    if (empty($cartArticles)) {
@@ -238,7 +239,7 @@ function printCartArticleSection($db, $cartArticles, $userID){
          }
       </script>
       <?php
-   }
+   } 
 }
 ?>
 
