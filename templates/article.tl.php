@@ -173,12 +173,11 @@ function printCartArticleSection($db, $cartArticles, $userID){
    if (empty($cartArticles)) {
       ?>
       <div class="product-section-cart">
-         <h3 class="products-title-cart">Shopping Cart</h3>
-         <section class="article-grid-cart">
-            <div class="emptyBox">
-               <h3 class="emptyTitle">Add to cart</h3>
-               <h4 class="emptyParagrah">Add items you want to buy and find them here</h4>
-               <a href="../index.php" class="find">Search</a>
+         <h3 class="products-title">Shopping Cart</h3>
+         <section class="article-grid">
+            <div class="no-favorite-articles">
+               <h2>Não tens artigos no carrinho!</h2>
+               <a href="index.php"></hre><button>Adiciona!</button></a>
             </div>
          </section>
       </div>

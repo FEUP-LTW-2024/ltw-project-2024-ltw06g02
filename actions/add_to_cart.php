@@ -16,6 +16,6 @@
 
       if(!addProductToCart($cart)) die(header('Location: ../#'));
       
-      header('Location: ../shoppingCart.php');  
+      header('Location: ../shopping_cart.php');  
    }
 ?>
