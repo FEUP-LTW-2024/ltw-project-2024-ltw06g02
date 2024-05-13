@@ -88,6 +88,24 @@ CREATE TABLE chat (
    FOREIGN KEY (productID) REFERENCES product(productID)
 );
 
+CREATE TABLE purchase (
+   purchaseID INTEGER PRIMARY KEY,
+   userID INTEGER,
+   productDescription VARCHAR,
+   notificationText VARCHAR,
+   notificationDate DATETIME,
+   FOREIGN KEY (userID) REFERENCES users(userID)
+);
+
+CREATE TABLE sale (
+   saleID INTEGER PRIMARY KEY,
+   userID INTEGER,
+   productDescription VARCHAR,
+   notificationText VARCHAR,
+   notificationDate DATETIME,
+   FOREIGN KEY (userID) REFERENCES users(userID)
+);
+
 INSERT INTO productCategory (name) VALUES
 ('Electronics'),
 ('Clothing'),

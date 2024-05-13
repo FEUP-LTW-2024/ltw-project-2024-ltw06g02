@@ -117,4 +117,17 @@
         
       return true;
    }
+
+   function getDescriptionOfProduct($productId){
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare(
+         "SELECT description FROM product WHERE productID=?"
+      );
+      $stmt->bindParam(1, $productId);
+      $stmt->execute();
+      $description = $stmt->fetchColumn();
+
+      return $description;
+   }
 ?>

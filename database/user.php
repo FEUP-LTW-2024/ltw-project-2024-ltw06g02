@@ -140,4 +140,17 @@
       $stmt = $db->prepare("UPDATE users SET username = ?, email = ?, password = ? WHERE userID = ?");
       $stmt->execute(array($username, $email, $password, $id));
    }
+
+   function getUserIdOfAProduct($productID){
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare(
+         "SELECT userID FROM product WHERE productID=?"
+      );
+      $stmt->bindParam(1, $productID);
+      $stmt->execute();
+      $user = $stmt->fetchColumn();
+
+      return $user;
+   }
 ?> 
