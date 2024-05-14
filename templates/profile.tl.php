@@ -1,5 +1,7 @@
 <?php
    require_once('forms.tl.php'); 
+   require_once('database/addFollow.php');
+   require_once('database/user.php');
    function printBioSection($user){
       buildEditProfile();
       buildUploadPhoto();
@@ -16,19 +18,58 @@
                   <h4>Portugal</h4>
                </div>
                <div>
-                  <h4>followed by</h4>
-                  <h4>liked by</h4>
+                  <h4>followed by <?= getUserFollowers($user['userID']);?></h4>
+                  <h4>total likes : <?= getUserTotalLikes($user['userID']);?></h4>
                </div>
             </div>
          </section>
-         <div class="buttons">
-            <button class="nav-button" id="editProfile">Edit Profile</button>
-            <button class="nav-button" id="editPhoto">Change Photo</button>
+         <div class="profileButtons-container">
+            <?php
+            if($user['userID'] == $_SESSION['userID']){?>
+               <button class="nav-button" id="editProfile">Edit Profile</button>
+               <button class="nav-button" id="editPhoto">Change Photo</button>
+            <?php
+            }
+            else{
+               if(!checkIfFollows($user['userID'], $_SESSION['userID'])){
+               ?>   
+               
+               <form action="../actions/follow.php" method="post">
+                  <input type="hidden" name="userId" value="<?=$user['userID']?>">
+                  <input type="hidden" name="requesterId" value="<?=$_SESSION['userID']?>">
+                  <button type="submit" name="follow" id="follow" class="<?php if(!isset($_SESSION['username'])) echo "disabled"?>">Follow</button>
+               </form>
+               <?php
+               }
+               else{
+               ?>
+               
+               <form action="../actions/remove_follow.php" method="post">
+                  <input type="hidden" name="userId" value="<?=$user['userID']?>">
+                  <input type="hidden" name="requesterId" value="<?=$_SESSION['userID']?>">
+                  <button type="submit" name="notFollow" id="notFollow" class="<?php if(!$user['userID']) echo "disabled"?>">Not follow</button>
+               </form>
+               <?php   
+               }
+            }   
+            ?>
          </div>
       </div>
-
+      <script>
+         document.querySelectorAll('button.disabled').forEach((button) =>
+            button.addEventListener('click', (e) => {
+               e.preventDefault()
+               loginDialog.showModal();
+            }
+         ))
+      </script>
 <?php 
    }
+?>
+
+
+
+<?php
    require_once('article.tl.php');
    function printProfileArticleSection($articles) {
 ?>
@@ -96,4 +137,11 @@
          photoUploadDialog.showModal();
       })
    })
+
+   document.querySelectorAll('button.disabled').foreach((button) =>
+      button.addEventListener('click', (e) => {
+         e.preventDefault()
+         loginDialog.showModal();
+      }
+   ))
 </script>

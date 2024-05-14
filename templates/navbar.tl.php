@@ -8,6 +8,10 @@
 
 <div class="navbar">
   <a style="text-decoration:none" href="../index.php"><h1>Bazinga</h1></a>
+  <form action="../actions/search.php" method="POST" class="search-form">
+    <input type="text" name="query" placeholder="Search a user...">
+    <button type="submit">Search</button>
+  </form>
       <?php if(isset($_SESSION['username'])){ ?>
          <div class="nav-buttons">
             <?php
