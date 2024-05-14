@@ -37,6 +37,15 @@
       return $articles;
    }
 
+   function getArticlesByFilterExcludingUser($db, $filter){
+      $stmt = $db->prepare(
+         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.categoryID = ? AND users.userID != ?"
+      );
+      $stmt->execute(array($filter, $_SESSION['userID']));
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
+
    function getFavoriteArticlesByUserId($db, $id){
       $stmt = $db->prepare(
          "SELECT * FROM favorites WHERE userID = ?"
