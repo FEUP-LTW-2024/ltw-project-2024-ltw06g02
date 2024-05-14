@@ -212,7 +212,6 @@ function printCartArticleSection($db, $cartArticles, $userID){
             </div>
          </section>
          <form id="removeFromCartForm" action="../actions/buy.php" method="POST">
-            <input type="hidden" name="userId" value="<?=$userID?>">
             <?php foreach ($cartArticles as $cart): ?>
                <input type="hidden" name="cartItems[]" value="<?= $cart['productID'] ?>">
             <?php endforeach; ?>
