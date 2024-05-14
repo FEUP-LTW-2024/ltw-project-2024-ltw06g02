@@ -1,10 +1,13 @@
 <?php 
    require_once('../database/connection.php');
    require_once('../templates/article.tl.php');
+   require_once('../models/session.php');
    require_once('../database/articles.php');
    $db = getDatabaseConnection();
 
-   $articles = getArticlesByFilter($db, $_GET['q']);
+   $session = new Session();
+
+   $articles = isset($_SESSION['userID']) ? getArticlesByFilterExcludingUser($db, $_GET['q']) : getArticlesByFilter($db, $_GET['q']);
 
    if(sizeof($articles) > 0) {
       foreach($articles as $article) {
