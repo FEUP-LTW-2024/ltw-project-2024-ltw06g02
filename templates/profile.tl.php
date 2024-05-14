@@ -1,6 +1,6 @@
 <?php
    require_once('forms.tl.php'); 
-   require_once('database/addFollow.php');
+   require_once('database/follow.php');
    require_once('database/user.php');
    function printBioSection($user){
       buildEditProfile();
