@@ -13,15 +13,14 @@
     
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["cartItems"])) {
         $cartItems = $_POST["cartItems"];
-        $userId = $_POST["userId"];
+        $userId = $_SESSION['userID'];
         
         if(!removeProductsFromCartByUserId($db,$userId)) die(header('Location: ../#'));
 
         foreach ($cartItems as $productId) {
-            $sellerID = getUserIdOfAProduct($productId);
-            $productDescription = getDescriptionOfProduct($productId);
-            if(!addPurchase($userId, $productDescription)) die(header('Location: ../#'));
-            if(!addSale($sellerID, $productDescription)) die(header('Location: ../#'));
+            $article = getArticleById($db, $productId);
+            if(!addPurchase($userId, $article['name'])) die(header('Location: ../#'));
+            if(!addSale($article['userID'], $article['name'])) die(header('Location: ../#'));
         }
       
         foreach ($cartItems as $productId) {
