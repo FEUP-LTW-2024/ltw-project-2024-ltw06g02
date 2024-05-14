@@ -1,7 +1,7 @@
 <?php
    session_start();
 
-   require_once("../database/removeFollow.php");
+   require_once("../database/follow.php");
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $userId = $_POST['userId'];
