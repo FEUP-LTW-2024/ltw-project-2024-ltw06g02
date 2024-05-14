@@ -1,10 +1,10 @@
 <?php
    function printFooter(){
 ?>
-
-   <footer>
-      <p>Bazinga!</p>
-    </footer>
+   </main>
+      <footer>
+         <p>Bazinga!</p>
+      </footer>
   </body>
 </html>
 
