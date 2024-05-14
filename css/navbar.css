@@ -82,31 +82,31 @@ body {
    display: block;
 }
 
-.favorite-btn i {
-   color: transparent;
-   -webkit-text-stroke: 1px white;
-   margin-top: 0.4em;
-   margin-right: 0.3em;
-}
-
-a.favorite-btn:hover {
-   background-color: transparent;
-}
-
-.admin-btn i {
+.nav-icon i {
    color: transparent;
    -webkit-text-stroke: 1px white;
    margin-top: 0.4em;
    margin-right: 1em;
 }
 
-.shopping-btn i {
+a.nav-icon:hover {
+   background-color: transparent;
+}
+
+.nav-icon i {
    color: transparent;
    -webkit-text-stroke: 1px white;
    margin-top: 0.4em;
-   margin-right: 0.9em;
+   margin-right: 1em;
 }
 
-a.shopping-btn:hover {
+.nav-icon i {
+   color: transparent;
+   -webkit-text-stroke: 1px white;
+   margin-top: 0.4em;
+   margin-right: 1em;
+}
+
+a.nav-icon:hover {
    background-color: transparent;
 }

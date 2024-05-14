@@ -13,16 +13,16 @@
             <?php
             if(checkIfUserIsAdmin($_SESSION['username'])){
             ?>   
-               <a href="../admin.php" class="admin-btn">
+               <a href="../admin.php" class="nav-icon">
                <i class="material-icons">settings</i>
                </a>
             <?php
             }
             ?>
-            <a href="../shopping_cart.php" class="shopping-btn">
+            <a href="../shopping_cart.php" class="nav-icon">
                <i class="material-icons">shopping_cart</i>
             </a>
-            <a href="../wishlist.php" class="favorite-btn">
+            <a href="../wishlist.php" class="nav-icon">
               <i class="material-icons">favorite</i>
             </a>
             <a class="nav-button" href="../sell.php">
