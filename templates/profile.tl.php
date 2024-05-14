@@ -37,7 +37,7 @@
             <?php
                if (empty($articles)) {
                   ?>
-                  <h5>Sell a product!</h5>
+                  <h5 style="margin: auto auto; font-weight: normal;">Não tens nenhum artigo à venda!</h5>
                   <?php
                } else {
                   foreach ($articles as $article) {

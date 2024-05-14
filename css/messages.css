@@ -1,6 +1,6 @@
 .box {
-   width: 50%;
-   height: 50%;
+   width: 60em;
+   height: 40em;
    background-color: whitesmoke;
    padding: 2em;
    margin: 2em auto;
@@ -22,7 +22,6 @@
    text-decoration: none;
    background-color: white;
    padding: 1em;
-   margin-right: 1em;
    border-radius: 5px;
    justify-content: center;
 
@@ -51,6 +50,7 @@
 
 .vertical-bar {
    padding: 0;
+   margin: 0 1em;
    border: 1px solid gray;
 }
 
@@ -61,7 +61,6 @@
    background-color: white;
    border-radius: 5px;
    padding: 1em;
-   margin-left: 1em;
    justify-content: space-between;
 }
 
@@ -103,4 +102,46 @@
    padding: 0.5em;
    border-radius: 0 5px 5px 0;
    cursor: pointer;
+}
+
+@media (max-width: 480px){
+   .box {
+      flex-direction: column;
+      width: 70%;
+   }
+
+   .message-box{
+      display: flex;
+      flex-grow: 1;
+   }
+
+   .vertical-bar {
+      margin: 1em 0;
+   }
+
+   .input-field{
+      width: 90%;
+   }
+}
+
+@media (max-width: 850px){
+   .box {
+      flex-direction: column;
+      width: 70%;
+   }
+
+   .chats-box{
+      height: auto;
+      overflow-y: auto;
+   }
+
+   .message-box{
+      display: flex;
+      flex-grow: 1;
+      height: 50%;
+   }
+
+   .vertical-bar {
+      margin: 1em 0;
+   }
 }
