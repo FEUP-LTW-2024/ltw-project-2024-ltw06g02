@@ -1,5 +1,6 @@
 <?php
    require_once('connection.php');
+   require_once('articles.php');
    require_once(dirname(__DIR__) . '/models/user.php');
 
    function registerUser($user) : bool{
@@ -7,13 +8,14 @@
 
       if(!checkUserExists($user)){
          $stmt = $db->prepare(
-            "INSERT INTO users(fullName, username, email, password, admim) VALUES(?,?,?,?,?)"
+            "INSERT INTO users(fullName, username, email, password, admim, followers) VALUES(?,?,?,?,?,?)"
          );
          $stmt->bindParam(1, $user->fullName);
          $stmt->bindParam(2, $user->username);
          $stmt->bindParam(3, $user->email);
          $stmt->bindParam(4, $user->password);
          $stmt->bindParam(5, $user->admin);
+         $stmt->bindParam(6, $user->followers);
          $stmt->execute();
          return true;
       }
@@ -152,5 +154,56 @@
       $user = $stmt->fetchColumn();
 
       return $user;
+   }
+
+   function getUserFollowers($userId){
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare(
+         "SELECT followers FROM users WHERE userID=?"
+      );
+      $stmt->bindParam(1, $userId);
+      $stmt->execute();
+      $followers = $stmt->fetchColumn();
+
+      return $followers;
+   }
+
+   function getUserTotalLikes($userId){
+      $db = getDatabaseConnection();
+
+      $articles = getUserArticles($db, $userId);
+
+      $totalLikes = 0;
+      foreach($articles as $article){
+         $totalLikes += $article['likes'];
+      }
+
+      return $totalLikes;
+   }
+
+   function checkNameExists($name) : bool{
+      $users = getAllUsersRegistered();
+
+      foreach($users as $user){
+         if($user['username'] == $name){
+            return true;
+         }
+      }
+      
+      return false;
+   }
+
+   function getUserIdByName($name){
+      $db = getDatabaseConnection();
+
+      $stmt = $db->prepare(
+         "SELECT userID FROM users WHERE username=?"
+      );
+      $stmt->bindParam(1, $name);
+      $stmt->execute();
+
+      $result = $stmt->fetchColumn();
+      return $result;
    }
 ?> 

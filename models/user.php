@@ -8,6 +8,7 @@
          $this->password = password_hash('bazinga'.$password.'bazinga', PASSWORD_DEFAULT);
          $this->admin = false;
          $this->avatar = $avatar;
+         $this->followers = 0;
       }
       public $fullName;
       public $username;
