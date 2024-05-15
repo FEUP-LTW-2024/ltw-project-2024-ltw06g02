@@ -24,17 +24,17 @@
          </section>
          <div class="profileButtons-container">
             <?php
-            if($user['userID'] == $_SESSION['userID']){?>
+            if(isset($_SESSION['userID']) && $user['userID'] == $_SESSION['userID']){?>
                <button class="nav-button" id="editProfile">Edit Profile</button>
             <?php
             }
             else{
-               if(!checkIfFollows($user['userID'], $_SESSION['userID'])){
+               if(!isset($_SESSION['userID']) || !checkIfFollows($user['userID'], $_SESSION['userID'])){
                ?>   
                
                <form action="../actions/follow.php" method="post">
                   <input type="hidden" name="userId" value="<?=$user['userID']?>">
-                  <input type="hidden" name="requesterId" value="<?=$_SESSION['userID']?>">
+                  <input type="hidden" name="requesterId" value="<?= isset($_SESSION['userID']) ? $_SESSION['userID'] : '' ?>">
                   <button type="submit" name="follow" id="follow" class="<?php if(!isset($_SESSION['username'])) echo "disabled"?>">Follow</button>
                </form>
                <?php

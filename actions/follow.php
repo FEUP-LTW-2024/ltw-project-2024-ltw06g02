@@ -7,6 +7,8 @@
       $userId = $_POST['userId'];
       $requesterId = $_POST['requesterId'];
 
+      echo "<script>console.log(" . $_POST['requesterId'] . ")</script>";
+
       if(empty($userId) || empty($requesterId)){
          die(header('Location: ../#'));
       }
