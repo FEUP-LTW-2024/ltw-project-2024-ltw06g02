@@ -50,6 +50,9 @@
    <div class="product-section">
       <h3 class="products-title">Produtos recomendados</h3>
       <section class="article-grid" id="grid">
+         <?php 
+            if(sizeof($articles) == 0) echo "Não tens produtos recomendados! Volta mais tarde"
+         ?>
          <?php foreach($articles as $article){
             getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
          } 
@@ -62,26 +65,19 @@
 
 <?php
    function printFavoriteArticleSection($db, $favoriteArticles){
+?>
 
-      if (empty($favoriteArticles)) {
-         ?>
-         <div class="product-section-favorite">
-            <h3 class="products-title-favorite">Artigos marcados como favoritos</h3>
-            <section class="article-grid-favorite">
-               <div class="emptyBox">
-                  <h3 class="emptyTitle">Guarda os teus favoritos</h3>
-                  <h4 class="emptyParagrah">Marca alguns artigos como favoritos e encontra-os aqui</h4>
-                  <a href="../index.php" class="find">Procurar</a>
-               </div>
-            </section>
-         </div>
-         <?php
-      } else {
-         ?>
          <div class="product-section">
             <h3 class="products-title">Artigos marcados como favoritos</h3>
             <section class="article-grid">
+               <?php if(empty($favoriteArticles)){ ?>
+
+                  <div class="no-favorite-articles">
+                     <h2>Não tens artigos favoritos!</h2>
+                     <a href="index.php"></hre><button>Começa a procurar!</button></a>
+                  </div>
                <?php
+                  }
                   foreach($favoriteArticles as $favorite){
                      $article = getArticleById($favorite['productID']);
                      getSingleArticle($article['productID'], $article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
@@ -89,13 +85,9 @@
                ?>
             </section>
          </div>
-         <?php
-      }
-   }
-?>
 
 <?php
-
+   }
    function printArticleById($db, $article, $userID){
       buildEditArticle($article['productID']);
 
@@ -170,17 +162,17 @@
 ?>
 
 <?php
+
 function printCartArticleSection($db, $cartArticles, $userID){
 
    if (empty($cartArticles)) {
       ?>
       <div class="product-section-cart">
-         <h3 class="products-title-cart">Shopping Cart</h3>
-         <section class="article-grid-cart">
-            <div class="emptyBox">
-               <h3 class="emptyTitle">Add to cart</h3>
-               <h4 class="emptyParagrah">Add items you want to buy and find them here</h4>
-               <a href="../index.php" class="find">Search</a>
+         <h3 class="products-title">Shopping Cart</h3>
+         <section class="article-grid">
+            <div class="no-favorite-articles">
+               <h2>Não tens artigos no carrinho!</h2>
+               <a href="index.php"></hre><button>Adiciona!</button></a>
             </div>
          </section>
       </div>
@@ -247,7 +239,7 @@ function printCartArticleSection($db, $cartArticles, $userID){
          }
       </script>
       <?php
-   }
+   } 
 }
 ?>
 

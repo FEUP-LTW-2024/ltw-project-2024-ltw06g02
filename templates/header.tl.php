@@ -25,9 +25,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
   <body>
-    <header>
-      <?php printNavBar() ?>  
-    </header>
+    <main>
+      <header>
+        <?php printNavBar() ?>  
+      </header>
 
 <?php
    }

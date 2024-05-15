@@ -92,8 +92,8 @@
 }
 
 .product-img {
-  width: 16em;
-  height: 20em;
+  width: 15em;
+  height: 15em;
   object-fit: cover;
   padding: 0.5em;
 }
@@ -109,6 +109,32 @@
   overflow-x: auto;
   white-space: wrap;
   padding: 0 0 2em 0;
+}
+
+@media (max-width: 480px){
+  .conjunction {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+
+    .buttons {
+      flex-direction: row;
+      column-gap: 1em;
+    }
+  }
+}
+
+@media (max-width: 850px){
+  .conjunction {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+
+    .buttons {
+      flex-direction: row;
+      column-gap: 1em;
+    }
+  }
 }
 
 .like-container {

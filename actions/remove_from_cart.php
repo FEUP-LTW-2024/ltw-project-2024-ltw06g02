@@ -16,6 +16,6 @@
 
       if(!removeProductFromCart($db, $userId, $articleId)) die(header('Location: ../#'));
       
-      header('Location: ../shoppingCart.php');   
+      header('Location: ../shopping_cart.php');   
    }
 ?>

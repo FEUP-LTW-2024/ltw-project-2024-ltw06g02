@@ -1,6 +1,7 @@
 <?php
    require_once('forms.tl.php'); 
    require_once('database/follow.php');
+
    require_once('database/user.php');
    function printBioSection($user){
       buildEditProfile();
@@ -80,7 +81,7 @@
             <?php
                if (empty($articles)) {
                   ?>
-                  <h5>Sell a product!</h5>
+                  <h5 style="margin: auto auto; font-weight: normal;">Não tens nenhum artigo à venda!</h5>
                   <?php
                } else {
                   foreach ($articles as $article) {

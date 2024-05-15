@@ -28,6 +28,6 @@
             if(!removeArticle($db, $productId)) die(header('Location: ../#'));
         }
 
-        header('Location: ../shoppingCart.php'); 
+        header('Location: ../shopping_cart.php'); 
     }
 ?>
