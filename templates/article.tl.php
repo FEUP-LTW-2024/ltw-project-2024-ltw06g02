@@ -45,10 +45,10 @@
 ?>
 
 <?php
-   function printArticleSection($articles){
+   function printArticleSection($articles, $title){
 ?>
    <div class="product-section">
-      <h3 class="products-title">Produtos recomendados</h3>
+      <h3 class="products-title playfair-display-font" style="font-size: 3em; text-align: center;"><?= $title ?></h3>
       <section class="article-grid" id="grid">
          <?php 
             if(sizeof($articles) == 0) echo "Não tens produtos recomendados! Volta mais tarde"

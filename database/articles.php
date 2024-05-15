@@ -9,6 +9,15 @@
       return $articles;
    }
 
+   function getFollowedArticles($db) {
+      $stmt = $db->prepare(
+         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE EXISTS (SELECT 1 FROM follow WHERE follow.requesterID = ? AND follow.userID = users.userID)"
+      );
+      $stmt->execute(array($_SESSION['userID']));
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
+
    function getArticlesExcludingUser($db) {
       $stmt = $db->prepare(
          "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE users.userID != ?"
@@ -34,6 +43,42 @@
       );
       $stmt->bindParam(1, $filter);
       $stmt->execute();
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
+
+   function getArticlesByPrice($db, $price){
+      $stmt = $db->prepare(
+         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ?"
+      );
+      $stmt->execute(array(intval($price)));
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
+
+   function getArticlesByPriceExcludingUser($db, $price){
+      $stmt = $db->prepare(
+         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ? AND users.userID != ?"
+      );
+      $stmt->execute(array(intval($price), $_SESSION['userID']));
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
+
+   function getArticlesByConditionExcludingUser($db, $condition){
+      $stmt = $db->prepare(
+         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.conditionID = ? AND users.userID != ?"
+      );
+      $stmt->execute(array($condition, $_SESSION['userID']));
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
+
+   function getArticlesByCondition($db, $condition){
+      $stmt = $db->prepare(
+         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.conditionID = ?"
+      );
+      $stmt->execute(array($condition));
       $articles = $stmt->fetchAll();
       return $articles;
    }

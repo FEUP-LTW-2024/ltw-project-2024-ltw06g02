@@ -67,6 +67,26 @@ main {
    padding: 1em 7em;
 }
 
+.filter-choose {
+   font-size: 0;
+   button {
+      margin: 0;
+      border: none;
+      background-color: white;
+      cursor: pointer;
+   }
+}
+
+.filter-choose .active {
+   border-bottom: 1px solid black;
+}
+
+.filter-section {
+   display: flex;
+   column-gap: 0.5em;
+   justify-content: center;
+}
+
 .products-title {
    font-size: xx-large;
    font-weight: normal;
@@ -103,12 +123,12 @@ main {
    vertical-align: middle;
 }
 
-.filter-btn {
+.filter-btn, .condition-btn {
    padding: 0.5em;
    font-size: 16px;
    color: #BFD8BD;
    border: 1px solid #98C9A3;
-   border-radius: 1px;
+   border-radius: 3px;
    background-color: white;
    margin-bottom: 0.5em;
 }

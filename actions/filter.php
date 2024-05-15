@@ -7,7 +7,15 @@
 
    $session = new Session();
 
-   $articles = isset($_SESSION['userID']) ? getArticlesByFilterExcludingUser($db, $_GET['q']) : getArticlesByFilter($db, $_GET['q']);
+   if($_GET['filter'] == 'category') {
+      $articles = isset($_SESSION['userID']) ? getArticlesByFilterExcludingUser($db, $_GET['q']) : getArticlesByFilter($db, $_GET['q']);
+   }
+   if($_GET['filter'] == 'price'){
+      $articles = isset($_SESSION['userID']) ? getArticlesByPriceExcludingUser($db, $_GET['q']) : getArticlesByPrice($db, $_GET['q']);
+   }
+   if($_GET['filter'] == 'condition'){
+      $articles = isset($_SESSION['userID']) ? getArticlesByConditionExcludingUser($db, $_GET['q']) : getArticlesByCondition($db, $_GET['q']);
+   }
 
    if(sizeof($articles) > 0) {
       foreach($articles as $article) {

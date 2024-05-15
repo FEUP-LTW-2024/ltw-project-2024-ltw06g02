@@ -11,6 +11,8 @@
 
     $session = new Session();
 
+    if(!isset($_SESSION['userID'])) header('Location: index.php');
+
     $db = getDatabaseConnection();
     $articles = getUserArticles($db, $session->getUserId());
     $user = retrieveUser($session->getUserId());

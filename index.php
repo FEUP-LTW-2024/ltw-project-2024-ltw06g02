@@ -11,11 +11,16 @@
    $session = new Session();
 
    $db = getDatabaseConnection();
-   $articles = isset($_SESSION['userID']) ? getArticlesExcludingUser($db) : getAllArticles($db);
+
+   $recommendedArticles = isset($_SESSION['userID']) ? getArticlesExcludingUser($db) : getAllArticles($db);
+   if(isset($_SESSION['userID'])) $followedArticles = getFollowedArticles($db);
+
    $filters = getAllCategories($db);
+   $conditions = getAllConditions($db);
 
    printHeader('Bazinga!');
-   printArticleSection($articles);
-   printFiltersSection($filters);
+   printArticleSection($recommendedArticles, 'explora produtos recomendados');
+   printFiltersSection($filters, $conditions);
+   if(isset($_SESSION['userID'])) printArticleSection($followedArticles, 'produtos a seguir');
    printFooter();
 ?>
