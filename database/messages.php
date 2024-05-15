@@ -64,6 +64,12 @@
       $stmt->execute(array($message, $chatID_1, $chatID_2));
    }
 
+   function removeChat($id){
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare("DELETE FROM chat WHERE productID = ?");
+      $stmt->execute(array($id));
+   }
+
    function verifyChatExists($id){
       $db = getDatabaseConnection();
       $stmt = $db->prepare(
