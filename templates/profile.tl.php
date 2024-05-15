@@ -1,7 +1,7 @@
 <?php
    require_once('forms.tl.php'); 
    require_once('database/follow.php');
-   
+
    require_once('database/user.php');
    function printBioSection($user){
       buildEditProfile();
@@ -27,8 +27,10 @@
          <div class="profileButtons-container">
             <?php
             if(isset($_SESSION['userID']) && $user['userID'] == $_SESSION['userID']){?>
+            <div class="buttons">
                <button class="nav-button" id="editProfile">Edit Profile</button>
                <button class="nav-button" id="editPhoto">Change Photo</button>
+            </div>
             <?php
             }
             else{
