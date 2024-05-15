@@ -77,7 +77,7 @@
    function createChat($productID){
       $db = getDatabaseConnection();
 
-      $article = getArticleById($db, $productID);
+      $article = getArticleById($productID);
 
       if(empty(verifyChatExists($article['userID']))){
          $stmt = $db->prepare(

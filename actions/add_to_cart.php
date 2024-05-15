@@ -4,15 +4,12 @@
    require_once("../models/cart.php");
    require_once("../database/addToCart.php");
 
-   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $userId = $_POST['userId'];
-      $articleId = $_POST['articleId'];
-
-      if(empty($userId) || empty($articleId)){
+   if(isset($_GET['userID']) && isset($_GET['articleID'])){
+      if(empty($_GET['userID']) || empty($_GET['articleID'])){
          die(header('Location: ../#'));
       }
 
-      $cart = new Cart($userId, $articleId);
+      $cart = new Cart($_GET['userID'], $_GET['articleID']);
 
       if(!addProductToCart($cart)) die(header('Location: ../#'));
       

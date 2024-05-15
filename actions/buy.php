@@ -18,7 +18,7 @@
         if(!removeProductsFromCartByUserId($db,$userId)) die(header('Location: ../#'));
 
         foreach ($cartItems as $productId) {
-            $article = getArticleById($db, $productId);
+            $article = getArticleById($productId);
             if(!addPurchase($userId, $article['name'])) die(header('Location: ../#'));
             if(!addSale($article['userID'], $article['name'])) die(header('Location: ../#'));
         }

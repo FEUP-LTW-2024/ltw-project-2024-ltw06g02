@@ -18,7 +18,8 @@
       return $articles;
    }
 
-   function getArticleById($db, $id){
+   function getArticleById($id){
+      $db = getDatabaseConnection();
       $stmt = $db->prepare(
          "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE productID = ?"
       );
