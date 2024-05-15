@@ -99,6 +99,7 @@
    function printArticleById($db, $article, $userId, $id){
       $images = explode(",", $article['images']);
 ?>
+
    <div class="container">
       <img src="<?=$images[0]?>" alt="product">
       <aside class="product-column">
@@ -120,7 +121,7 @@
             $size = getSizeByID($db, $article['sizeID']); ?>
             <h2 class="size">Size: <?=$size['name']?></h2>
          <?php endif; ?>
-         <?php if($article['condition'] != null): 
+         <?php if($article['conditionID'] != null): 
             $condition = getConditionByID($db, $article['conditionID']); ?>
             <h2 class="condition">Condition: <?=$condition['name']?></h2>
          <?php endif; ?>
@@ -129,10 +130,10 @@
          <form id="addToCartForm" action="../actions/add_to_cart.php" method="POST">
             <input type="hidden" name="userId" value="<?=$userId?>">
             <input type="hidden" name="articleId" value="<?=$id?>">
-            <button type="submit" id="buyBtn">Comprar agora</button>
+            <button type="submit" id="buyBtn" class="<?php if (!$userId) echo "disabled"?>">Comprar agora</button>
          </form>
-         <button type="submit" id="proposalBtn">Propor outro preço</button>
-         <a href=<?= "../actions/initialize_chat.php?q=" . $id ?> ><button type="submit" id="sendBtn">Enviar mensagem</button></a>
+         <button type="submit" id="proposalBtn" class="<?php if (!$userId) echo "disabled"?>">Propor outro preço</button>
+         <a href=<?= "../actions/initialize_chat.php?q=" . $id ?> ><button type="submit" id="sendBtn" class="<?php if (!$userId) echo "disabled"?>">Enviar mensagem</button></a>
 
          <?php
             $favoriteArticles = getFavoriteArticlesByUserId($db, $userId);
@@ -149,7 +150,7 @@
                <form id="addToFavoritesForm" action="../actions/favorite.php" method="POST">
                   <input type="hidden" name="userId" value="<?=$userId?>">
                   <input type="hidden" name="articleId" value="<?=$id?>">
-                  <button type="submit" id="addBtn">Adicionar aos favoritos</button>
+                  <button type="submit" id="addBtn" class="<?php if (!$userId) echo "disabled"?>">Adicionar aos favoritos</button>
                </form>
                <?php
             }
@@ -158,13 +159,21 @@
                <form id="removeToFavoritesForm" action="../actions/remove_favorite.php" method="POST">
                   <input type="hidden" name="userId" value="<?=$userId?>">
                   <input type="hidden" name="articleId" value="<?=$id?>">
-                  <button type="submit" id="removeBtn">Remover aos favoritos</button>
+                  <button type="submit" id="removeBtn" class="<?php if (!$userId) echo "disabled"?>">Remover aos favoritos</button>
                </form>
                <?php
             }
          ?>
       </aside>
    </div>
+   <script>
+      document.querySelectorAll('button.disabled').forEach((button) => 
+         button.addEventListener('click', (e) => {
+            e.preventDefault()
+            loginDialog.showModal();
+         }
+      ))
+   </script>
 
 <?php
    }

@@ -5,6 +5,9 @@
 
     img {
         width: 25em;
+        height: 30em;
+        object-fit: cover;
+        border-radius: 5%;
     }
 }
 

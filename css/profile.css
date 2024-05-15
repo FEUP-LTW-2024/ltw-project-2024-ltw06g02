@@ -28,6 +28,12 @@
   align-items: center;
 }
 
+.conjunction .buttons {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+}
+
 .info .left-side {
   display: flex;
   flex-direction: row;
@@ -58,6 +64,9 @@
 
   img {
     width: 15em;
+    height: 15em;
+    object-fit: cover;
+    border-radius: 5%;
   }
 
   h1 {

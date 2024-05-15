@@ -4,11 +4,12 @@
    require_once('database/user.php');
    function printBioSection($user){
       buildEditProfile();
+      buildUploadPhoto();
 ?>
    <div class="info">
       <div class="conjunction">
          <section class="left-side">
-            <img src="../assets/goiana.jpg" >
+            <img src=<?= isset($user['avatar']) ? $user['avatar'] : "../assets/user.jpg"?> >
             <div class="bios">
                <div>
                   <h1><?= $user['fullName'] ?></h1>
@@ -25,7 +26,10 @@
          <div class="profileButtons-container">
             <?php
             if(isset($_SESSION['userID']) && $user['userID'] == $_SESSION['userID']){?>
+            <div class="buttons">
                <button class="nav-button" id="editProfile">Edit Profile</button>
+               <button class="nav-button" id="editPhoto">Change Photo</button>
+            </div>
             <?php
             }
             else{
@@ -119,13 +123,21 @@
       const editProfile = document.getElementById("editProfile");
       const closeBtn = editProfileDialog.querySelector(".close-button");
 
+      const uploadPhoto = document.getElementById("editPhoto");
+      const photoUploadDialog = document.getElementById("uploadPhotoDialog");
+
       editProfile.addEventListener("click", () => {
          editProfileDialog.showModal();
       })
 
       closeBtn.addEventListener("click", () => {
          editProfileDialog.close();
+         photoUploadDialog.close();
       });
+
+      uploadPhoto.addEventListener("click", () => {
+         photoUploadDialog.showModal();
+      })
    })
 
    document.querySelectorAll('button.disabled').foreach((button) =>
