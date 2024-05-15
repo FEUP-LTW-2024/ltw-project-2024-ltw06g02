@@ -129,4 +129,10 @@
         
       return true;
    }
+
+   function updateArticle($id, $new_price, $new_name) {
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare("UPDATE product SET price = ?, name = ? WHERE productID = ?");
+      $stmt->execute(array($new_price, $new_name, $id));
+   }
 ?>

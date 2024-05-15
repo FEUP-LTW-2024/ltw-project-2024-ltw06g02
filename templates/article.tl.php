@@ -89,6 +89,8 @@
 <?php
    }
    function printArticleById($db, $article, $userID){
+      buildEditArticle($article['productID']);
+
       $images = explode(",", $article['images']);
       $category = getCategoryByID($db, $article['categoryID']);
       $size = getSizeByID($db, $article['sizeID']);
@@ -139,7 +141,7 @@
 
          <?php if(isset($userID) && $userID == $article['userID']){ ?>
             <div class="product-btn-row">
-               <a href=""><button class="product-btn">Editar artigo</button></a>
+               <a ><button class="product-btn" id="edit">Editar artigo</button></a>
                <a href=<?= "../actions/remove_article.php?articleID=" . $article['productID']?>><button class="product-btn rm-btn">Remover artigo</button></a>
             </div>
          <?php } ?>
@@ -181,7 +183,7 @@ function printCartArticleSection($db, $cartArticles, $userID){
          <div class="carousel-container">
             <?php
                foreach($cartArticles as $cart){
-                  $article = getArticleById($db, $cart['productID']);
+                  $article = getArticleById($cart['productID']);
                   getSingleCartArticle($article['productID'], $article['name'], $article['price'], $article['images'], $userID);
                }
             ?>
@@ -239,3 +241,19 @@ function printCartArticleSection($db, $cartArticles, $userID){
    }
 }
 ?>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+      const editDialog = document.getElementById("editArticleDialog");
+      const openEditBtn = document.getElementById("edit");
+      const closeEditBtn = editDialog.querySelector(".close-button");
+
+      openEditBtn.addEventListener("click", () => {
+         editDialog.showModal();
+      });
+
+      closeEditBtn.addEventListener("click", () => {
+         editDialog.close();
+      });
+   });
+</script>
