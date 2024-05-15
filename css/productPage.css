@@ -49,13 +49,29 @@
     font-size: medium;
 }
 
-#addBtn, #sendBtn, #proposalBtn, #buyBtn, #removeBtn{
-    width: 18em;
-    padding: 1em;
-    margin: 0.4em 0 0.4em 0;
+.product-btn{
+    width: 100%;
+    padding: 0.8em;
+    margin: 0.4em 0;
     font-size: 1.1em;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.product-btn-row{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+
+    button {
+        border: none;
+        padding: 0.5em;
+    }
+
+    .rm-btn {
+        border: 1px solid brown;
+        color: brown;
+    }
 }
 
 #buyBtn {
@@ -64,19 +80,14 @@
     border: none;
 }
 
-#proposalBtn, #sendBtn {
+#sendBtn {
     color: #98C9A3;
     border: 1px solid #98C9A3;
 }
 
-#addBtn {
-    color: rgb(145, 140, 140);
-    border: 1px solid rgb(145, 140, 140);
-}
-
-#removeBtn {
-    color: rgb(145, 140, 140);
-    border: 1px solid rgb(145, 140, 140);
+.fav-btn{
+    color: grey;
+    border: 1px solid grey;
 }
 
 form#addToCartForm {

@@ -4,7 +4,7 @@
    require_once("../database/removeFromCart.php");
    require_once('../database/connection.php');
 
-    $db = getDatabaseConnection();
+   $db = getDatabaseConnection();
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $userId = $_POST['userId'];

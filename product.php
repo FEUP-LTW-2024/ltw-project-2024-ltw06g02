@@ -11,9 +11,9 @@
     $id = $_GET['id'];
 
     $db = getDatabaseConnection();
-    $article = getArticleById($db, $id);
+    $article = getArticleById($id);
 
     printHeader('Bazinga!');
-    printArticleById($db, $article, isset($_SESSION['userID']) ? $_SESSION['userID'] : '', $id);
+    printArticleById($db, $article, isset($_SESSION['userID']) ? $_SESSION['userID'] : '');
     printFooter();
 ?>
