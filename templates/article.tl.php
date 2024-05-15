@@ -1,5 +1,5 @@
 <?php
-   function getSingleArticle($productID, $name, $price, $image, $avatar){
+   function getSingleArticle($productID, $name, $price, $image, $avatar, $likes){
       $images = explode(",", $image);
 ?>
    <article class="article">
@@ -8,6 +8,10 @@
          <div>
             <h3><?= $name ?></h3>
             <p><?= $price ?>€</p>
+         </div>
+         <div class="like-container">
+            <i class="material-icons heart-icon">favorite</i>
+            <p class="number"><?= $likes ?></p>
          </div>
          <img src=<?= $avatar ?>>
       </div>
@@ -47,7 +51,7 @@
       <h3 class="products-title">Produtos recomendados</h3>
       <section class="article-grid" id="grid">
          <?php foreach($articles as $article){
-            getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar']);
+            getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
          } 
          ?>
       </section>
@@ -80,7 +84,7 @@
                <?php
                   foreach($favoriteArticles as $favorite){
                      $article = getArticleById($db, $favorite['productID']);
-                     getSingleArticle($article['productID'], $article['name'], $article['price'], $article['images'], $article['avatar']);
+                     getSingleArticle($article['productID'], $article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
                   }
                ?>
             </section>
@@ -217,7 +221,6 @@ function printCartArticleSection($db, $cartArticles, $userID){
             </div>
          </section>
          <form id="removeFromCartForm" action="../actions/buy.php" method="POST">
-            <input type="hidden" name="userId" value="<?=$userID?>">
             <?php foreach ($cartArticles as $cart): ?>
                <input type="hidden" name="cartItems[]" value="<?= $cart['productID'] ?>">
             <?php endforeach; ?>

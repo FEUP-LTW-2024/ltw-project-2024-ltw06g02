@@ -6,7 +6,16 @@ CREATE TABLE users (
    fullName VARCHAR,
    paymentMethodPassword VARCHAR,
    admim BOOLEAN,
-   avatar VARCHAR
+   avatar VARCHAR,
+   followers INTEGER
+);
+
+CREATE TABLE follow (
+   followID INTEGER PRIMARY KEY,
+   userID INTEGER,
+   requesterID INTEGER,
+   FOREIGN KEY (userID) REFERENCES users(userID),
+   FOREIGN KEY (requesterID) REFERENCES users(userID)
 );
 
 CREATE TABLE product (
@@ -20,7 +29,8 @@ CREATE TABLE product (
    userID INTEGER,
    brand VARCHAR,
    model VARCHAR,
-   images VARCHAR,  -- check out later
+   images VARCHAR, -- check out later
+   likes INTEGER, 
    FOREIGN KEY (userID) REFERENCES users(userID),
    FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID),
    FOREIGN KEY (sizeID) REFERENCES productSize(sizeID),

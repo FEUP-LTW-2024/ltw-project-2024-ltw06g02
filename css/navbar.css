@@ -110,3 +110,35 @@ a.favorite-btn:hover {
 a.shopping-btn:hover {
    background-color: transparent;
 }
+
+.search-form {
+   display: flex;
+   align-items: center;
+   margin: 0;
+}
+
+.search-form input[type="text"] {
+   padding: 0.7em;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   margin-right: 0.4em;
+   margin-left: 5em;
+   width: 17em; 
+   height: 2.4em;
+}
+
+.search-form button {
+   padding: 0.4em 0.6em 0.4em 0.6em;
+   background-color: whitesmoke; 
+   color: #98C9A3; 
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: medium;
+}
+
+.search-form button:hover {
+   background-color: #ccc; 
+}
+ 
+ 
