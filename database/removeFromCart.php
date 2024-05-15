@@ -11,6 +11,11 @@
         return true;
     }
 
+    function removeProductFromAllCarts($db, $articleID){
+        $stmt = $db->prepare("DELETE FROM cart WHERE productID = ?");
+        $stmt->execute(array($articleID));
+    }
+
     function removeProductsFromCartByUserId($db, $id) : bool {
         $stmt = $db->prepare(
             "DELETE FROM cart WHERE userID = ?"

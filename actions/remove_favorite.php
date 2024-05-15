@@ -4,16 +4,13 @@
    require_once("../models/favorite.php");
    require_once("../database/favorites.php");
 
-   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $userId = $_POST['userId'];
-      $articleId = $_POST['articleId'];
-
-      if(empty($userId) || empty($articleId)){
+   if(isset($_GET['userID']) && isset($_GET['articleID'])){
+      if(empty($_GET['userID']) || empty($_GET['articleID'])){
          die(header('Location: ../#'));
       }
 
-      if(!removeFavorite($userId, $articleId)) die(header('Location: ../#'));
+      if(!removeFavorite($_GET['userID'], $_GET['articleID'])) die(header('Location: ../#'));
       
-      header('Location: ../product.php?id=' . $articleId);   
+      header('Location: ../product.php?id=' . $_GET['articleID']);   
    }
 ?>
