@@ -12,15 +12,15 @@
 
    $db = getDatabaseConnection();
 
-   $recommendedArticles = isset($_SESSION['userID']) ? getArticlesExcludingUser($db) : getAllArticles($db);
+   $recommendedArticles = getAllArticles($db);
    if(isset($_SESSION['userID'])) $followedArticles = getFollowedArticles($db);
 
    $filters = getAllCategories($db);
    $conditions = getAllConditions($db);
 
    printHeader('Bazinga!');
-   printArticleSection($recommendedArticles, 'explora produtos recomendados');
+   printArticleSection($recommendedArticles, 'explore. love. buy.');
    printFiltersSection($filters, $conditions);
-   if(isset($_SESSION['userID'])) printArticleSection($followedArticles, 'produtos a seguir');
+   if(isset($_SESSION['userID'])) printArticleSection($followedArticles, 'following.');
    printFooter();
 ?>

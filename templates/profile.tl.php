@@ -106,11 +106,13 @@
             <h3><?= $name ?></h3>
             <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $price * 1.09 . '$' : $price . '€'; ?></p>
          </div>
-         <div class="like-container">
-            <i class="material-icons heart-icon">favorite</i>
-            <p class="number"><?= $likes ?></p>
+         <div style="display: flex; flex-direction: row; align-items: center; column-gap: 0.5em;">
+            <div class="like-container">
+               <i class="material-icons heart-icon">favorite</i>
+               <p class="number" style="color: #c1121f;"><?= $likes ?></p>
+            </div>
+            <img src=<?= $avatar ?>>
          </div>
-         <img src=<?= $avatar ?>>
       </div>
    </article>
 

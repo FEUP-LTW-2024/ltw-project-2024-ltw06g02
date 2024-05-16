@@ -18,15 +18,6 @@
       return $articles;
    }
 
-   function getArticlesExcludingUser($db) {
-      $stmt = $db->prepare(
-         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE users.userID != ?"
-      );
-      $stmt->execute(array($_SESSION['userID']));
-      $articles = $stmt->fetchAll();
-      return $articles;
-   }
-
    function getArticleById($id){
       $db = getDatabaseConnection();
       $stmt = $db->prepare(
@@ -56,38 +47,11 @@
       return $articles;
    }
 
-   function getArticlesByPriceExcludingUser($db, $price){
-      $stmt = $db->prepare(
-         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ? AND users.userID != ?"
-      );
-      $stmt->execute(array(intval($price), $_SESSION['userID']));
-      $articles = $stmt->fetchAll();
-      return $articles;
-   }
-
-   function getArticlesByConditionExcludingUser($db, $condition){
-      $stmt = $db->prepare(
-         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.conditionID = ? AND users.userID != ?"
-      );
-      $stmt->execute(array($condition, $_SESSION['userID']));
-      $articles = $stmt->fetchAll();
-      return $articles;
-   }
-
    function getArticlesByCondition($db, $condition){
       $stmt = $db->prepare(
          "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.conditionID = ?"
       );
       $stmt->execute(array($condition));
-      $articles = $stmt->fetchAll();
-      return $articles;
-   }
-
-   function getArticlesByFilterExcludingUser($db, $filter){
-      $stmt = $db->prepare(
-         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.categoryID = ? AND users.userID != ?"
-      );
-      $stmt->execute(array($filter, $_SESSION['userID']));
       $articles = $stmt->fetchAll();
       return $articles;
    }
@@ -179,5 +143,13 @@
       $db = getDatabaseConnection();
       $stmt = $db->prepare("UPDATE product SET price = ?, name = ? WHERE productID = ?");
       $stmt->execute(array($new_price, $new_name, $id));
+   }
+
+   function getArticlesByName($name){
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare("SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.name LIKE ?");
+      $stmt->execute(array($name . '%'));
+      $articles = $stmt->fetchAll();
+      return $articles;
    }
 ?>

@@ -2,7 +2,7 @@ body {
    margin: 0;
 }
 
-.playfair-display-font {
+* {
   font-family: "Playfair Display", serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -10,7 +10,7 @@ body {
 }
  
 .navbar {
-   background-color: #98C9A3;
+   background-color: #3a5a40;
    overflow: hidden;
    padding: 15px 20px;
    display: flex;
@@ -27,12 +27,12 @@ body {
 }
 
 .nav-button:hover{
-   background-color: #75A07A;
+   background-color: #344e41;
 }
 
 .nav-button{
    display: block;
-   background-color: #98C9A3;
+   background-color: #3a5a40;
    color: #fff;
    text-align: center;
    font-size: 16px;
@@ -93,26 +93,13 @@ body {
 .nav-icon i {
    color: transparent;
    -webkit-text-stroke: 1px white;
-   margin-top: 0.4em;
    margin-right: 1em;
 }
 
-a.nav-icon:hover {
-   background-color: transparent;
-}
-
-.nav-icon i {
-   color: transparent;
-   -webkit-text-stroke: 1px white;
-   margin-top: 0.4em;
-   margin-right: 1em;
-}
-
-.nav-icon i {
-   color: transparent;
-   -webkit-text-stroke: 1px white;
-   margin-top: 0.4em;
-   margin-right: 1em;
+.nav-icon{
+   display: flex;
+   text-decoration: none;
+   align-items: center;
 }
 
 a.nav-icon:hover {
@@ -138,7 +125,7 @@ a.nav-icon:hover {
 .search-form button {
    padding: 0.4em 0.6em 0.4em 0.6em;
    background-color: whitesmoke; 
-   color: #98C9A3; 
+   color: #3a5a40; 
    border: none;
    border-radius: 5px;
    cursor: pointer;

@@ -12,7 +12,7 @@
                <div class="chat-info">
                   <img src="../assets/goiana.jpg" alt=""/>
                   <h3><?= $chat['username']?></h3>
-                  <h3 style="color: #98C9A3;"><?= "(" . $product['name'] . ")" ?></h3>
+                  <h3 style="color: #344e41"><?= "(" . $product['name'] . ")" ?></h3>
                </div>
                <h4 class="chat-message"><?= $chat['lastAction']?></h4>
             </div>

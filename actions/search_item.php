@@ -1,21 +1,13 @@
 <?php 
-   require_once('../database/connection.php');
-   require_once('../templates/article.tl.php');
    require_once('../models/session.php');
    require_once('../database/articles.php');
+   require_once('../templates/article.tl.php');
+
    $db = getDatabaseConnection();
 
    $session = new Session();
 
-   if($_GET['filter'] == 'category') {
-      $articles = getArticlesByFilter($db, $_GET['q']);
-   }
-   if($_GET['filter'] == 'price'){
-      $articles = getArticlesByPrice($db, $_GET['q']);
-   }
-   if($_GET['filter'] == 'condition'){
-      $articles = getArticlesByCondition($db, $_GET['q']);
-   }
+   $articles = getArticlesByName($_GET['q']);
 
    if(sizeof($articles) > 0) {
       foreach($articles as $article) {
@@ -31,5 +23,4 @@
          </div>
       ";
    }
-  exit;
 ?>

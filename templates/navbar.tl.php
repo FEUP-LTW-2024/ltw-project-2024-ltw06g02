@@ -7,9 +7,9 @@
 ?>
 
 <div class="navbar">
-  <a style="text-decoration:none" href="../index.php"><h1 class="playfair-display-font">Bazinga</h1></a>
+  <a style="text-decoration:none" href="../index.php"><h1 class="playfair-display-font">bazinga</h1></a>
   <form action="../actions/search.php" method="POST" class="search-form">
-    <input type="text" name="query" placeholder="Search a user...">
+    <input type="text" name="query" style="outline:none;" placeholder="search a user...">
     <button type="submit">Search</button>
   </form>
   <div class="dropdown">

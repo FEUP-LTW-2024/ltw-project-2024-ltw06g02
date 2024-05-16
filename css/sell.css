@@ -16,7 +16,7 @@
    width: 46em;
    height: 5em;
    background-color: whitesmoke;
-   border: 2px dotted #98C9A3;
+   border: 2px dotted #344e41;
    flex-direction: column;
    align-items: center;
    justify-content: center;
@@ -57,7 +57,7 @@
 .input-grp select,.input-grp textarea {
    border: none;
    outline: none;
-   border-bottom: 1px solid #98C9A3;
+   border-bottom: 1px solid #344e41;
    padding: 5px;
    background-color: whitesmoke;
    resize: none;

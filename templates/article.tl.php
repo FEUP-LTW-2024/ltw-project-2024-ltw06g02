@@ -2,6 +2,7 @@
    function getSingleArticle($productID, $name, $price, $image, $avatar, $likes){
       $images = explode(",", $image);
 ?>
+   
    <article class="article">
       <a href="product.php?id=<?=$productID?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
       <div class="article-details">
@@ -9,11 +10,13 @@
             <h3><?= $name ?></h3>
             <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $price * 1.09 . '$' : $price . '€'; ?></p>
          </div>
-         <div class="like-container">
-            <i class="material-icons heart-icon">favorite</i>
-            <p class="number"><?= $likes ?></p>
+         <div style="display: flex; flex-direction: row; align-items: center; column-gap: 0.5em;">
+            <div class="like-container">
+               <i class="material-icons heart-icon">favorite</i>
+               <p class="number" style="color: #c1121f;"><?= $likes ?></p>
+            </div>
+            <img src=<?= $avatar ?>>
          </div>
-         <img src=<?= $avatar ?>>
       </div>
    </article>
 
@@ -48,17 +51,47 @@
    function printArticleSection($articles, $title){
 ?>
    <div class="product-section">
-      <h3 class="products-title playfair-display-font" style="font-size: 3em; text-align: center;"><?= $title ?></h3>
+      <h3 class="products-title playfair-display-font" style="font-size: 3em; text-align: center; margin-top: 0; margin-bottom: 0;"><?php echo $title == 'explore. love. buy.' ? 'explore. <span class="playfair-display-font" style="color: #c1121f;">love.</span> buy.' : $title ?></h3>
+      <?php if($title != 'following.') { ?> 
+         <div class="search-bar-wrapper">
+            <i class="material-icons" style="margin-left: 0.5em">search</i>
+            <input class="search-bar" id="search-bar" type="text" placeholder="e.g blue hoodie...">
+         </div> 
+      <?php } ?>
       <section class="article-grid" id="grid">
          <?php 
-            if(sizeof($articles) == 0) echo "Não tens produtos recomendados! Volta mais tarde"
+            if(sizeof($articles) == 0) echo "
+            <div class='no-product-section'>
+               <img class='no-product-img' style='margin-top: 1em;' src='../assets/no_items.svg'>
+               <h3 class='playfair-display-font' style='margin-top: 2em;'>não foram encontrados artigos.</h3>
+            </div>
+            "
          ?>
-         <?php foreach($articles as $article){
-            getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
-         } 
+         <?php 
+            foreach($articles as $article){
+               if(!isset($_SESSION['userID']) || (isset($_SESSION['userID']) && ($article['userID'] != $_SESSION['userID']))) {
+                  getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
+               } 
+            }
          ?>
       </section>
    </div>
+   <script>
+
+      document.getElementById('search-bar').addEventListener('input', function() {
+         searchItems(this.value);
+      })
+      
+
+      function searchItems(str) {
+         const xhttp = new XMLHttpRequest();
+         xhttp.onload = function() {
+            document.getElementById("grid").innerHTML = this.responseText;
+         }
+         xhttp.open("GET", "../actions/search_item.php?q="+ str);
+         xhttp.send();
+      }
+   </script>
 <?php
    }
 ?>
@@ -95,12 +128,13 @@
       $category = getCategoryByID($db, $article['categoryID']);
       $size = getSizeByID($db, $article['sizeID']);
       $condition = getConditionByID($db, $article['conditionID']);
+      $username = retrieveUser($article['userID'])['username'];
 ?>
 
    <div class="container">
       <img src="<?=$images[0]?>" alt="product">
       <aside class="product-column">
-         <h1 class="price"><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $article['price'] * 1.09 . '$' : $article['price'] . '€'; ?></h1>
+         <h1 class="price"><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $article['price'] * 1.09 . '$' : $article['price'] . '€'; ?> <span style="font-size: 0.7em; color: #344e41;">by <?= $username ?></span></h1>
          <hr class="separator">
          <h2 class="name"><?=$article['name']?></h2>
          <h2 class="description">Description: <?=$article['description']?></h2>

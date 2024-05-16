@@ -11,7 +11,7 @@
 }
 
 #loginDialog a {
-  color: #98C9A3;
+  color: #344e41;
   text-decoration: none;
   cursor: pointer;
 }
@@ -34,11 +34,11 @@
     border-radius: 5px;
     box-sizing: border-box;
     outline: none;
-    border-bottom: 2px solid #98C9A3;
+    border-bottom: 2px solid #344e41;
 }
 
 .form input:focus {
-    border: 2px solid #98C9A3;
+    border: 2px solid #344e41;
 }
 
 .close-button {
@@ -58,7 +58,7 @@
 
 .form-button {
   padding: 1em 1em;
-  background-color: #98C9A3;
+  background-color: #344e41;
   color: #fff;
   font-weight: bold;
   border: none;

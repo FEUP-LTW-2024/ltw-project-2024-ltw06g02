@@ -1,6 +1,6 @@
 .admin-title,.admin-subtitle {
     text-align: center;
-    color: #98C9A3;
+    color: #344e41;
     font-weight: 200;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .admin-btn {
-    background-color: #98C9A3;
+    background-color: #344e41;
     font-size: 1em;
     color: white;
     padding: 0.7em 1.2em;
@@ -59,13 +59,13 @@ table {
 }
   
 th, td {
-    border: 1px solid #98C9A3; 
+    border: 1px solid #344e41; 
     padding: 8px; 
     text-align: center; 
 }
 
 th {
-    background-color: #98C9A3;
+    background-color: #344e41;
     color: white;
 }
 
@@ -78,7 +78,7 @@ th {
 }
 
 .metric {
-    background-color: #98C9A3;
+    background-color: #344e41;
     min-width: 10em;
     width: auto;
     height: 8em;

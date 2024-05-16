@@ -1,7 +1,3 @@
-* {
-   font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
 body {
    min-height: 100svh;
    margin: 0;
@@ -13,10 +9,32 @@ main {
    flex: 1;
 }
 
+.search-bar-wrapper{
+   background-color: whitesmoke;
+   border-radius: 5px;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   padding: 0.5em;
+   align-items: center;
+   width: 25em;
+   margin: 1.5em auto 2em auto;
+   height: 2em;
+}
+
+.search-bar {
+   border: none;
+   outline: none;
+   background-color: whitesmoke;
+   width: 25em;
+   height: 2em;
+}
+
 .article-grid {
    display: flex;
    flex-wrap: wrap;
    row-gap: 1em;
+   column-gap: 0.4em;
 }
 
 .no-favorite-articles {
@@ -33,7 +51,7 @@ main {
    }
 
    button {
-      background-color: #98C9A3;
+      background-color: #344e41;
       font-size: 1em;
       color: white;
       padding: 0.7em 1.2em;
@@ -47,7 +65,6 @@ main {
    margin-right: 0.5em;
    border: 1px solid gray;
    border-radius: 3px;
-   
 }
 
 .article-details {
@@ -65,7 +82,7 @@ main {
 }
 
 .product-section {
-   padding: 1em 7em;
+   padding: 1em 6em;
 }
 
 .filter-choose {
@@ -73,6 +90,7 @@ main {
    button {
       margin: 0;
       border: none;
+      padding: 1em;
       background-color: white;
       cursor: pointer;
    }
@@ -93,6 +111,17 @@ main {
    font-weight: normal;
 }
 
+.no-product-section {
+   display: flex;
+   flex-direction: column;
+   margin: 0 auto;
+   align-items: center;
+}
+
+.no-product-img {
+   width: 15em;
+}
+
 .article h3 {
    margin: 0 0 0.5em 0.5em;
    font-size: small;
@@ -101,12 +130,15 @@ main {
 .article p { 
    margin: 0 0 0.5em 0.5em;
    font-size: small;
-   color: #98C9A3;
+   color: #344e41;
    font-weight: bold;
 }
 
 .like-container {
-   display: inline-block;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   column-gap: 0.2em;
 }
 
 .article .heart-icon {
@@ -127,8 +159,8 @@ main {
 .filter-btn, .condition-btn {
    padding: 0.5em;
    font-size: 16px;
-   color: #BFD8BD;
-   border: 1px solid #98C9A3;
+   color: #344e41;
+   border: 1px solid #344e41;
    border-radius: 3px;
    background-color: white;
    margin-bottom: 0.5em;
