@@ -152,4 +152,16 @@
       $articles = $stmt->fetchAll();
       return $articles;
    }
+
+   function getArticlesByPreference(){
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare("SELECT * FROM preferences WHERE userID = ?");
+      $stmt->execute(array($_SESSION['userID']));
+      $preference = $stmt->fetch();
+
+      $stmt = $db->prepare("SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.conditionID = ? AND product.sizeID = ? AND product.categoryID = ?");
+      $stmt->execute(array($preference['conditionID'], $preference['sizeID'], $preference['categoryID']));
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
 ?>

@@ -17,16 +17,22 @@
       $articles = getArticlesByCondition($db, $_GET['q']);
    }
 
-   if(sizeof($articles) > 0) {
+   $check = 0;
+
+   foreach($articles as $article){
+      if($article['userID'] == $_SESSION['userID']) $check += 1;
+   }
+
+   if(sizeof($articles) > 0 && $check < sizeof($articles)) {
       foreach($articles as $article) {
-         if($article['userID'] != $_SESSION['userID']) {
+         if(!isset($_SESSION['userID']) || (isset($_SESSION['userID']) && ($article['userID'] != $_SESSION['userID']))) {
             getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
          }
       }
    } else {
       echo "
          <div class='no-product-section'>
-            <img class='no-product-img' src='../assets/no_items.svg'>
+            <img class='no-product-img' style='margin-top: 1em;' src='../assets/no_items.svg'>
             <h3 class='playfair-display-font' style='margin-top: 2em;'>não foram encontrados artigos.</h3>
          </div>
       ";

@@ -9,6 +9,31 @@ main {
    flex: 1;
 }
 
+.search-conjunction {
+   display: flex;
+   flex-direction: column;
+   row-gap: 1em;
+   margin-bottom: 2em
+}
+
+.preference-icon{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   margin: 0 auto;
+   cursor: pointer;
+   padding: 0.5em;
+
+   i {
+      font-size: 1em;
+   }
+}
+
+.preference-icon:hover{
+   background-color: whitesmoke;
+   border-radius: 5px;
+}
+
 .search-bar-wrapper{
    background-color: whitesmoke;
    border-radius: 5px;
@@ -18,7 +43,7 @@ main {
    padding: 0.5em;
    align-items: center;
    width: 25em;
-   margin: 1.5em auto 2em auto;
+   margin: 1.5em auto 0 auto;
    height: 2em;
 }
 

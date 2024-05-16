@@ -1,17 +1,21 @@
 <?php 
    require_once('../models/session.php');
    require_once('../database/articles.php');
-   require_once('../templates/article.tl.php');
-
-   $db = getDatabaseConnection();
+   require_once(dirname(__DIR__) . '/templates/article.tl.php');
 
    $session = new Session();
 
-   $articles = getArticlesByName($_GET['q']);
+   $articles = getArticlesByPreference();
 
-   if(sizeof($articles) > 0) {
+   $check = 0;
+
+   foreach($articles as $article){
+      if($article['userID'] == $_SESSION['userID']) $check += 1;
+   }
+
+   if(sizeof($articles) > 0 && $check < sizeof($articles)) {
       foreach($articles as $article) {
-         if(!isset($_SESSION['userID']) || (isset($_SESSION['userID']) && ($article['userID'] != $_SESSION['userID']))) {
+         if($article['userID'] != $_SESSION['userID']) {
             getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
          }
       }
@@ -23,4 +27,5 @@
          </div>
       ";
    }
+  exit;
 ?>

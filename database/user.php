@@ -8,7 +8,7 @@
 
       if(!checkUserExists($user)){
          $stmt = $db->prepare(
-            "INSERT INTO users(fullName, username, email, password, admim, followers) VALUES(?,?,?,?,?,?)"
+            "INSERT INTO users(fullName, username, email, password, admin, followers, preferencesID) VALUES(?,?,?,?,?,?,?)"
          );
          $stmt->bindParam(1, $user->fullName);
          $stmt->bindParam(2, $user->username);
@@ -16,6 +16,7 @@
          $stmt->bindParam(4, $user->password);
          $stmt->bindParam(5, $user->admin);
          $stmt->bindParam(6, $user->followers);
+         $stmt->bindParam(7, $user->preferences);
          $stmt->execute();
          return true;
       }
@@ -74,7 +75,7 @@
       $db = getDatabaseConnection();
 
       if(checkUserExistsByName($username)){
-         $sql = "UPDATE users SET admim = TRUE WHERE username = ?";
+         $sql = "UPDATE users SET admin = TRUE WHERE username = ?";
          $stmt = $db->prepare($sql);
          $stmt->bindParam(1, $username);
          $stmt->execute();
@@ -91,7 +92,7 @@
       $db = getDatabaseConnection();
 
       $stmt = $db->prepare(
-         "SELECT username FROM users WHERE admim=TRUE"
+         "SELECT username FROM users WHERE admin=TRUE"
       );
       $stmt->execute();
       $users = $stmt->fetchAll();

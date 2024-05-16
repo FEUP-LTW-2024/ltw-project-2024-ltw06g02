@@ -1,6 +1,7 @@
 .dialog {
   padding: 1em;
   background-color: #fff;
+  border: 3px solid #344e41;
   border-radius: 5px;
 
   p {
@@ -14,6 +15,13 @@
   color: #344e41;
   text-decoration: none;
   cursor: pointer;
+}
+
+.preferences-select {
+  background-color: transparent;
+  border: none;
+  font-size: 0.8em;
+  margin-bottom: 1.5em;
 }
 
 .form {

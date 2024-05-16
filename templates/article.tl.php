@@ -52,15 +52,28 @@
 ?>
    <div class="product-section">
       <h3 class="products-title playfair-display-font" style="font-size: 3em; text-align: center; margin-top: 0; margin-bottom: 0;"><?php echo $title == 'explore. love. buy.' ? 'explore. <span class="playfair-display-font" style="color: #c1121f;">love.</span> buy.' : $title ?></h3>
-      <?php if($title != 'following.') { ?> 
-         <div class="search-bar-wrapper">
-            <i class="material-icons" style="margin-left: 0.5em">search</i>
-            <input class="search-bar" id="search-bar" type="text" placeholder="e.g blue hoodie...">
-         </div> 
-      <?php } ?>
+         <?php if($title != 'following.') { ?> 
+            <div class="search-conjunction">
+               <div class="search-bar-wrapper">
+                  <i class="material-icons" style="margin-left: 0.5em">search</i>
+                  <input class="search-bar" id="search-bar" type="text" placeholder="e.g blue hoodie...">
+               </div> 
+               <?php if(isset($_SESSION['userID']) && isset(retrieveUser($_SESSION['userID'])['preferencesID'])) {?>
+                  <div class="preference-icon" id="filter-preference"><i class="material-icons">add</i> apply preferences</div>
+               <?php } ?>
+            </div>
+         <?php } ?>
+      
       <section class="article-grid" id="grid">
          <?php 
-            if(sizeof($articles) == 0) echo "
+
+         $check = 0;
+
+         foreach($articles as $article){
+            if(isset($_SESSION['userID']) && $article['userID'] == $_SESSION['userID']) $check += 1;
+         }
+
+         if(sizeof($articles) == 0 || $check == sizeof($articles)) echo "
             <div class='no-product-section'>
                <img class='no-product-img' style='margin-top: 1em;' src='../assets/no_items.svg'>
                <h3 class='playfair-display-font' style='margin-top: 2em;'>não foram encontrados artigos.</h3>
@@ -81,7 +94,19 @@
       document.getElementById('search-bar').addEventListener('input', function() {
          searchItems(this.value);
       })
+
+      document.getElementById('filter-preference').addEventListener('click', function() {
+         applyPreference();
+      })
       
+      function applyPreference(){
+         const xhttp = new XMLHttpRequest();
+         xhttp.onload = function() {
+            document.getElementById("grid").innerHTML = this.responseText;
+         }
+         xhttp.open("GET", "../actions/apply_preference.php");
+         xhttp.send();
+      }
 
       function searchItems(str) {
          const xhttp = new XMLHttpRequest();

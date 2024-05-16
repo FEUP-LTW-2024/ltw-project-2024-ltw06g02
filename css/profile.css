@@ -21,6 +21,31 @@
   }
 }
 
+.preferences-tag {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1em;
+  align-items: center;
+
+  i {
+    cursor: pointer;
+  }
+}
+
+.preference {
+  border-radius: 13px;
+  padding: 0.5em;
+  text-transform: lowercase;
+  color: white;
+  font-size: 0.8em
+}
+
+.preferences-section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+}
+
 .conjunction {
   display: flex;
   justify-content: space-between;

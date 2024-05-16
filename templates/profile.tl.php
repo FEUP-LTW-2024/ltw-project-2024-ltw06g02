@@ -1,11 +1,14 @@
 <?php
    require_once('forms.tl.php'); 
    require_once('database/follow.php');
-
+   require_once('database/filters.php');
    require_once('database/user.php');
+   require_once('database/connection.php');
    function printBioSection($user){
+      $db = getDatabaseConnection();
       buildEditProfile();
       buildUploadPhoto();
+      buildPreferencesDialog(retrievePreferences($db, $user['preferencesID']));
 ?>
    <div class="info">
       <div class="conjunction">
@@ -17,6 +20,18 @@
                   <h3><?= $user['username'] ?></h3>
                   <hr class="separatorName">
                   <h4>Portugal</h4>
+               </div>
+               <div class="preferences-section">
+                  <div class="preferences-tag">
+                     <?php if(isset($_SESSION['userID']) && isset($user['preferencesID']) && $_SESSION['userID'] == $user['userID']) { ?>
+                        <div class="preference" style="background-color: #ae2012"><?php echo getConditionByID($db, retrievePreferences($db, $user['preferencesID'])['conditionID'])['name'] ?></div>
+                        <div class="preference" style="background-color: #ffb703; text-transform: none;"><?php echo getSizeByID($db, retrievePreferences($db, $user['preferencesID'])['sizeID'])['name'] ?></div>
+                        <div class="preference" style="background-color: #457b9d;"><?php echo getCategoryByID($db, retrievePreferences($db, $user['preferencesID'])['categoryID'])['name'] ?></div>
+                        <i class="material-icons heart-icon" id="editPreferences" style="color: grey; font-size: 1em;">edit</i>
+                     <?php } else { ?>
+                        <div class="preference-icon" id="addPreferences"><i class="material-icons">add</i> add preferences</div>
+                     <?php } ?>
+                  </div>
                </div>
                <div>
                   <h4>followed by <?= getUserFollowers($user['userID']);?></h4>
@@ -124,22 +139,43 @@
    document.addEventListener("DOMContentLoaded", function() {
       const editProfileDialog = document.getElementById("editProfileDialog");
       const editProfile = document.getElementById("editProfile");
-      const closeBtn = editProfileDialog.querySelector(".close-button");
+      const closeEditBtn = editProfileDialog.querySelector(".close-button");
 
       const uploadPhoto = document.getElementById("editPhoto");
       const photoUploadDialog = document.getElementById("uploadPhotoDialog");
+      const closeUploadBtn = photoUploadDialog.querySelector(".close-button");
+
+      const editPreferences = document.getElementById("editPreferences");
+      const addPreferences = document.getElementById("addPreferences");
+      const preferencesEditDialog = document.getElementById("editPreferencesDialog");
+      const closePreferencesBtn = preferencesEditDialog.querySelector(".close-button");
 
       editProfile.addEventListener("click", () => {
          editProfileDialog.showModal();
       })
 
-      closeBtn.addEventListener("click", () => {
+      closeEditBtn.addEventListener("click", () => {
          editProfileDialog.close();
-         photoUploadDialog.close();
       });
 
       uploadPhoto.addEventListener("click", () => {
          photoUploadDialog.showModal();
+      })
+
+      closeUploadBtn.addEventListener("click", () => {
+         photoUploadDialog.close();
+      })
+
+      addPreferences.addEventListener("click", () => {
+         preferencesEditDialog.showModal();
+      })
+
+      editPreferences.addEventListener("click", () => {
+         preferencesEditDialog.showModal();
+      })
+
+      closePreferencesBtn.addEventListener("click", () => {
+         preferencesEditDialog.close();
       })
    })
 
