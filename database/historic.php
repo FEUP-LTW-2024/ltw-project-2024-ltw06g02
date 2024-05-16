@@ -1,35 +1,37 @@
 <?php
    require_once('connection.php');
 
-   function addPurchase($userID, $productName) : bool {
+   function addPurchase($userID, $article) : bool {
       $db = getDatabaseConnection();
 
       $notificationText = "Compra efetuada com sucesso";
       $notificationDate = date('Y-m-d H:i:s');
 
-      $sql = "INSERT INTO purchase (userID, productName, notificationText, notificationDate) VALUES (?, ?, ?, ?)";
+      $sql = "INSERT INTO purchase (userID, productName, productPrice, notificationText, notificationDate) VALUES (?, ?, ?, ?, ?)";
       $stmt = $db->prepare($sql);
       $stmt->bindParam(1, $userID);
-      $stmt->bindParam(2, $productName);
-      $stmt->bindParam(3, $notificationText);
-      $stmt->bindParam(4, $notificationDate);
+      $stmt->bindParam(2, $article['name']);
+      $stmt->bindParam(3, $article['price']);
+      $stmt->bindParam(4, $notificationText);
+      $stmt->bindParam(5, $notificationDate);
       $stmt->execute();
 
       return true;
    }
 
-   function addSale($userID, $productName) : bool {
+   function addSale($article) : bool {
     $db = getDatabaseConnection();
 
     $notificationText = "Venda efetuada com sucesso";
     $notificationDate = date('Y-m-d H:i:s');
 
-    $sql = "INSERT INTO sale (userID, productName, notificationText, notificationDate) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO sale (userID, productName, productPrice, notificationText, notificationDate) VALUES (?, ?, ?, ?, ?)";
     $stmt = $db->prepare($sql);
-    $stmt->bindParam(1, $userID);
-    $stmt->bindParam(2, $productName);
-    $stmt->bindParam(3, $notificationText);
-    $stmt->bindParam(4, $notificationDate);
+    $stmt->bindParam(1, $article['userID']);
+    $stmt->bindParam(2, $article['name']);
+    $stmt->bindParam(3, $article['price']);
+    $stmt->bindParam(4, $notificationText);
+    $stmt->bindParam(5, $notificationDate);
     $stmt->execute();
 
     return true;

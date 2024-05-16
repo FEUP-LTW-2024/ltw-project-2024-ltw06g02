@@ -15,5 +15,6 @@
    printHeader('Bazinga!');
    printPurchasesSection($purchases);
    printSalesSection($sales);
+   printMetrics($sales);
    printFooter();
 ?>

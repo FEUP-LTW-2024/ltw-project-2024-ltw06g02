@@ -19,8 +19,8 @@
 
         foreach ($cartItems as $productId) {
             $article = getArticleById($productId);
-            if(!addPurchase($userId, $article['name'])) die(header('Location: ../#'));
-            if(!addSale($article['userID'], $article['name'])) die(header('Location: ../#'));
+            if(!addPurchase($userId, $article)) die(header('Location: ../#'));
+            if(!addSale($article)) die(header('Location: ../#'));
         }
       
         foreach ($cartItems as $productId) {

@@ -102,6 +102,7 @@ CREATE TABLE purchase (
    purchaseID INTEGER PRIMARY KEY,
    userID INTEGER,
    productName VARCHAR,
+   productPrice REAL,
    notificationText VARCHAR,
    notificationDate DATETIME,
    FOREIGN KEY (userID) REFERENCES users(userID)
@@ -111,6 +112,7 @@ CREATE TABLE sale (
    saleID INTEGER PRIMARY KEY,
    userID INTEGER,
    productName VARCHAR,
+   productPrice REAL,
    notificationText VARCHAR,
    notificationDate DATETIME,
    FOREIGN KEY (userID) REFERENCES users(userID)

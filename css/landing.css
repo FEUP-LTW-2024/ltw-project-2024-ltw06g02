@@ -60,6 +60,7 @@ main {
 
 .article-details img {
    width: 1.5em;
+   height: 1.5em;
    object-fit: cover;
 }
 
@@ -133,7 +134,7 @@ main {
    margin-bottom: 0.5em;
 }
 
-.filter-btn:hover {
+.filter-btn:hover, .condition-btn:hover {
    background-color: whitesmoke;
    cursor: pointer;
 }

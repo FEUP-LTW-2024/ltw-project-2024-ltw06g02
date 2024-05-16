@@ -70,4 +70,26 @@
 
 <?php
    }
+
+   function printMetrics($sales){
+    $price = 0;
+
+    foreach($sales as $sale) {
+        $price += $sale['productPrice'];
+    }
+
 ?>
+
+    <h1 class="admin-subtitle">Stats</h1>
+    <section class="metrics-section">
+        <div class="metric">
+            <div style="font-size: 3em"><?= sizeof($sales) ?></div>
+            <div>sales</div>
+        </div>
+        <div class="metric">
+            <div style="font-size: 3em"><?= $price . '€'?></div>
+            <div>total gains</div>
+        </div>
+    </section>
+
+<?php } ?>
