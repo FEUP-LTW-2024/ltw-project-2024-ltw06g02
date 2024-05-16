@@ -79,7 +79,8 @@ th {
 
 .metric {
     background-color: #98C9A3;
-    width: 9em;
+    min-width: 10em;
+    width: auto;
     height: 8em;
     padding: 1em;
     border-radius: 5px;

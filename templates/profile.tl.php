@@ -104,7 +104,7 @@
       <div class="article-details">
          <div>
             <h3><?= $name ?></h3>
-            <p><?= $price ?>€</p>
+            <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $price * 1.09 . '$' : $price . '€'; ?></p>
          </div>
          <div class="like-container">
             <i class="material-icons heart-icon">favorite</i>

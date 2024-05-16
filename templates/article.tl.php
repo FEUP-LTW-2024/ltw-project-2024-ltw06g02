@@ -7,7 +7,7 @@
       <div class="article-details">
          <div>
             <h3><?= $name ?></h3>
-            <p><?= $price ?>€</p>
+            <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $price * 1.09 . '$' : $price . '€'; ?></p>
          </div>
          <div class="like-container">
             <i class="material-icons heart-icon">favorite</i>
@@ -35,7 +35,7 @@
       <div class="article-details">
          <div>
             <h3><?= $name ?></h3>
-            <p><?= $price ?>€</p>
+            <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $price * 1.09 . '$' : $price . '€'; ?></p>
          </div>
       </div>
    </article>
@@ -100,7 +100,7 @@
    <div class="container">
       <img src="<?=$images[0]?>" alt="product">
       <aside class="product-column">
-         <h1 class="price"><?=$article['price']?> €</h1>
+         <h1 class="price"><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $article['price'] * 1.09 . '$' : $article['price'] . '€'; ?></h1>
          <hr class="separator">
          <h2 class="name"><?=$article['name']?></h2>
          <h2 class="description">Description: <?=$article['description']?></h2>

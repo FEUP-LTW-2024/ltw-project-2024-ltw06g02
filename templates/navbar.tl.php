@@ -12,6 +12,15 @@
     <input type="text" name="query" placeholder="Search a user...">
     <button type="submit">Search</button>
   </form>
+  <div class="dropdown">
+      <button class="nav-button"><?php echo(isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? 'dol' : 'eur') ?></button>
+      <div class="dropdown-content">
+         <?php 
+            $currency = isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? 'eur' : 'dol';
+         ?>
+         <a href=<?= "../actions/change_currency.php?q=" . $currency?> ><?=$currency?></a>
+      </div>
+  </div>
       <?php if(isset($_SESSION['username'])){ ?>
          <div class="nav-buttons">
             <?php

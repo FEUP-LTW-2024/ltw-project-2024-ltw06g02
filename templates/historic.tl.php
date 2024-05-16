@@ -87,7 +87,7 @@
             <div>sales</div>
         </div>
         <div class="metric">
-            <div style="font-size: 3em"><?= $price . '€'?></div>
+            <div style="font-size: 3em"><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $price * 1.09 . '$' : $price . '€'; ?></div>
             <div>total gains</div>
         </div>
     </section>
