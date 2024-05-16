@@ -20,7 +20,7 @@
    $check = 0;
 
    foreach($articles as $article){
-      if($article['userID'] == $_SESSION['userID']) $check += 1;
+      if(isset($_SESSION['userID']) && $article['userID'] == $_SESSION['userID']) $check += 1;
    }
 
    if(sizeof($articles) > 0 && $check < sizeof($articles)) {
