@@ -129,4 +129,67 @@
     font-size: 1.4em;
     border: none;
 }
+
+#calculateValueBtn {
+    position: relative;
+    margin-left: 35.5em;
+    margin-bottom: 2em;
+    background-color: #98C9A3;
+    border-radius: 5px;
+    padding: 0.5em;
+    text-decoration: none;
+    color: white;
+    font-size: 1.4em;
+    border: none;
+}
+
+#loadingModal, #costModal {
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: #00000080; 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 27em 0 0 45em;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 25em;
+    text-align: center;
+}
+
+.modal-content-shipping {
+    background-color: #fefefe;
+    margin: 36em 0 0 47em;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20em;
+    text-align: center;
+}
+
+.modal-content-shipping p {
+    font-size: larger;
+    color: #98C9A3;
+}
+
+.spinner {
+    border: 4px solid #00000080; 
+    border-left-color: #98C9A3;
+    border-radius: 50%;
+    width: 2.5em; 
+    height: 2.5em; 
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1.25em auto; 
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
  

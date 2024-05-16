@@ -1,7 +1,7 @@
 <?php
    session_start();
 
-   require_once("../database/add_condition.php");
+   require_once("../database/filters.php");
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $condition = $_POST['condition'];

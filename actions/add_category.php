@@ -1,7 +1,7 @@
 <?php
    session_start();
 
-   require_once("../database/add_category.php");
+   require_once("../database/filters.php");
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $category = $_POST['category'];

@@ -10,24 +10,21 @@
 
     $db = getDatabaseConnection();
 
+    $userId = $_SESSION['userID'];
+    $cartItems = getCartArticlesByUserId($db, $userId);
     
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["cartItems"])) {
-        $cartItems = $_POST["cartItems"];
-        $userId = $_SESSION['userID'];
-        
-        if(!removeProductsFromCartByUserId($db,$userId)) die(header('Location: ../#'));
+    if(!removeProductsFromCartByUserId($db,$userId)) die(header('Location: ../#'));
 
-        foreach ($cartItems as $productId) {
-            $article = getArticleById($db, $productId);
-            if(!addPurchase($userId, $article['name'])) die(header('Location: ../#'));
-            if(!addSale($article['userID'], $article['name'])) die(header('Location: ../#'));
-        }
-      
-        foreach ($cartItems as $productId) {
-            if(!removeFavoriteFromUsers($productId)) die(header('Location: ../#'));
-            if(!removeArticle($db, $productId)) die(header('Location: ../#'));
-        }
-
-        header('Location: ../shoppingCart.php'); 
+    foreach ($cartItems as $cart) {
+        $article = getArticleById($db, $cart['productID']);
+        if(!addPurchase($userId, $article['name'])) die(header('Location: ../#'));
+        if(!addSale($article['userID'], $article['name'])) die(header('Location: ../#'));
     }
+    
+    foreach ($cartItems as $cart) {
+        if(!removeFavoriteFromUsers($cart['productID'])) die(header('Location: ../#'));
+        if(!removeArticle($db, $cart['productID'])) die(header('Location: ../#'));
+    }
+
+    header('Location: ../shoppingCart.php');
 ?>

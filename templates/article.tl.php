@@ -180,6 +180,27 @@
 ?>
 
 <?php
+function loadingModal(){
+?>
+   <div id="loadingModal" class="modal">
+      <div class="modal-content">
+         <div class="spinner"></div>
+         <p>Aguarde enquanto o pedido está sendo processado...</p>
+      </div>
+   </div>
+<?php
+}
+
+function shippingModal(){
+?>
+    <div id="costModal" class="modal">
+      <div class="modal-content-shipping">
+         <p id="modalMessage"></p>
+      </div>
+   </div>  
+<?php
+}
+
 function printCartArticleSection($db, $cartArticles, $userID){
 
    if (empty($cartArticles)) {
@@ -220,13 +241,13 @@ function printCartArticleSection($db, $cartArticles, $userID){
                <a href="../index.php" class="find">Search</a>
             </div>
          </section>
-         <form id="removeFromCartForm" action="../actions/buy.php" method="POST">
-            <?php foreach ($cartArticles as $cart): ?>
-               <input type="hidden" name="cartItems[]" value="<?= $cart['productID'] ?>">
-            <?php endforeach; ?>
-            <button type="submit" id="buyCartBtn">Finalize purchase</button>
-         </form>
+         <button type="button" id="calculateValueBtn">Obtain shipping costs</button>
+         <button type="button" id="buyCartBtn">Finalize purchase</button>
       </div>
+
+      <?php loadingModal(); ?>
+
+      <?php shippingModal(); ?>
 
       <script>
          let slideIndex = 1;
@@ -255,6 +276,51 @@ function printCartArticleSection($db, $cartArticles, $userID){
             slides[slideIndex-1].style.display = "block";
             dots[slideIndex-1].className += " active";
          }
+
+         document.getElementById("buyCartBtn").addEventListener("click", function() {
+            document.getElementById("loadingModal").style.display = "block";
+
+            setTimeout(function() {
+               window.location.href = "../actions/buy.php";
+            }, 4000);
+         });
+
+         document.getElementById("calculateValueBtn").addEventListener("click", function() {
+            // Verifica se o navegador suporta geolocalização
+            if ("geolocation" in navigator) {
+               // Solicita a localização do usuário
+               navigator.geolocation.getCurrentPosition(function(position) {
+                     const latitude = position.coords.latitude;
+                     const longitude = position.coords.longitude;
+
+                     // Verifica se as coordenadas estão dentro dos limites de Portugal
+                     if (latitude >= 36.8383 && latitude <= 42.1541 && longitude >= -9.5266 && longitude <= -6.3896) {
+                        // Se estiverem dentro dos limites de Portugal, o custo é 5.43 euros
+                        showModal("Shipping costs are 5.43€");
+                     } else {
+                        // Se não estiverem dentro dos limites de Portugal, o custo é 12.83 euros
+                        showModal("Shipping costs are 12.83€");
+                     }
+               }, function(error) {
+                     // Em caso de erro ao obter a localização
+                     console.error("Error getting location:", error);
+                     showModal("Error getting location. Check if GPS is enabled and try again.");
+               });
+            } else {
+               // Se o navegador não suportar geolocalização
+               showModal("Your browser does not support geolocation.");
+            }
+         });
+
+         function showModal(message) {
+            document.getElementById("modalMessage").innerText = message;
+            document.getElementById("costModal").style.display = "block";
+
+            setTimeout(function() {
+               document.getElementById("costModal").style.display = "none";
+            }, 2000);
+         }
+
       </script>
       <?php
    }
