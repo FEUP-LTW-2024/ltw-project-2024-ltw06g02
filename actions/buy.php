@@ -7,6 +7,7 @@
     require_once('../database/user.php');
     require_once('../database/historic.php');
     require_once('../database/connection.php');
+    require_once('../database/messages.php');
 
     $db = getDatabaseConnection();
 
@@ -26,6 +27,7 @@
         foreach ($cartItems as $productId) {
             if(!removeFavoriteFromUsers($productId)) die(header('Location: ../#'));
             if(!removeArticle($db, $productId)) die(header('Location: ../#'));
+            if(!removeChat($productId)) die(header('Location: ../#'));
         }
 
         header('Location: ../shopping_cart.php'); 

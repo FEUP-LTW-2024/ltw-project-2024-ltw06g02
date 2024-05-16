@@ -24,7 +24,7 @@
          </div>
          <div class="input-grp">
             <label>Description</label>
-            <textarea name="description"></textarea>
+            <textarea name="description" required></textarea>
          </div>
          <div class="input-grp">
             <label>Categories</label>
