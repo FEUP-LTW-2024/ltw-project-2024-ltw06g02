@@ -1,6 +1,4 @@
 <?php
-   session_start();
-
    require_once('templates/footer.tl.php');
    require_once('templates/header.tl.php');
    require_once('templates/article.tl.php');
@@ -8,6 +6,9 @@
    require_once('database/connection.php');
    require_once('database/articles.php');
    require_once('database/filters.php');
+   require_once('models/session.php');
+
+   $session = new Session();
 
    $db = getDatabaseConnection();
 
@@ -15,7 +16,7 @@
 
    $favoriteArcticles = getFavoriteArticlesByUserId($db, $_SESSION['userID']);
 
-   printHeader('Bazinga!');
+   printHeader('Bazinga!', $session);
    printFavoriteArticleSection($db ,$favoriteArcticles);
    printFooter();
 ?>

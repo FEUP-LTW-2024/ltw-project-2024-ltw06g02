@@ -31,7 +31,7 @@
       $stmt = $db->prepare("UPDATE users SET followers = followers - 1 WHERE userID = ?");
       $stmt->bindParam(1, $userId);
       $stmt->execute();
-
+      
       return true;
    }
 

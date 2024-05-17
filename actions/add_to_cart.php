@@ -1,18 +1,27 @@
 <?php
-   session_start();
-
    require_once("../models/cart.php");
    require_once("../database/addToCart.php");
+   require_once("../models/session.php");
+
+   $session = new Session();
 
    if(isset($_GET['userID']) && isset($_GET['articleID'])){
       if(empty($_GET['userID']) || empty($_GET['articleID'])){
-         die(header('Location: ../#'));
+         $session->addMessage('error', 'Error occurred');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
       }
 
       $cart = new Cart($_GET['userID'], $_GET['articleID']);
 
-      if(!addProductToCart($cart)) die(header('Location: ../#'));
+      if(!addProductToCart($cart)){
+         $session->addMessage('error', 'Product already in the cart');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
+      };
       
-      header('Location: ../shopping_cart.php');  
+      $session->addMessage('success', 'Product added to the cart');
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      exit(); 
    }
 ?>

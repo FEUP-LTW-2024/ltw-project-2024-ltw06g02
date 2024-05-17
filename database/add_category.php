@@ -12,10 +12,7 @@
 
          return true;
       }
-      else{
-         return false;
-      }
-
+      return false;
    }
 
    function checkIfCategoryExists($category) : bool{
@@ -28,7 +25,7 @@
       $categories = $stmt->fetchAll();
 
       foreach($categories as $cat){
-         if($cat['name'] == $category) return true;
+         if(strtolower($cat['name']) == strtolower($category)) return true;
       }
 
       return false;

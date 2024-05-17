@@ -64,7 +64,7 @@
                
                <form action="../actions/remove_follow.php" method="post">
                   <input type="hidden" name="userId" value="<?=$user['userID']?>">
-                  <input type="hidden" name="requesterId" value="<?=$_SESSION['userID']?>">
+                  <input type="hidden" name="requesterId" value="<?=isset($_SESSION['userID']) ? $_SESSION['userID'] : ''?>">
                   <button type="submit" name="notFollow" id="notFollow" class="<?php if(!$user['userID']) echo "disabled"?>">Not follow</button>
                </form>
                <?php   

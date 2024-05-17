@@ -17,7 +17,7 @@
     $articles = getUserArticles($db, $session->getUserId());
     $user = retrieveUser($session->getUserId());
 
-    printHeader('Bazinga!');
+    printHeader('Bazinga!', $session);
     printBioSection($user);
     printProfileArticleSection($articles);
     printFooter();

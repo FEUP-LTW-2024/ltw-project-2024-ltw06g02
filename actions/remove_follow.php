@@ -1,18 +1,27 @@
 <?php
-   session_start();
-
    require_once("../database/follow.php");
+   require_once("../models/session.php");
+
+   $session = new Session();
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $userId = $_POST['userId'];
+      $userID = $_POST['userId'];
       $requesterId = $_POST['requesterId'];
 
-      if(empty($userId) || empty($requesterId)){
-         die(header('Location: ../#'));
+      if(empty($userID) || empty($requesterId)){
+         $session->addMessage('error', 'Error occurred');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
       }
 
-      if(!removeFollow($userId, $requesterId)) die(header('Location: ../#'));
+      if(!removeFollow($userID, $requesterId)){
+         $session->addMessage('error', 'Error occurred');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
+      }
       
-      header('Location: ../profile_user.php?id=' . $userId); 
+      $session->addMessage('success', 'User unfollowed');
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      exit();
    }
 ?>

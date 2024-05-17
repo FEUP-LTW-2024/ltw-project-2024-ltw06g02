@@ -11,16 +11,17 @@
       $email = $_POST['email'];
       $password = $_POST['password'];
 
-      if(empty($username) || empty($email) || empty($password) || empty($fullName)){
-         die(header('Location: ../#'));
-      }
-
       $user = new User($fullName, $username, $email, $password, '');
-      if(!registerUser($user)) die(header('Location: ../#'));
+      if(!registerUser($user)){
+         $session->addMessage('error', 'Already existent information');
+         header('Location: ../#');
+         exit();
+      }
       
       $session->setUsername($username);
       $session->setUserId();
 
-      header('Location: ../index.php');   
+      header('Location: ../index.php'); 
+      exit();  
    }
 ?>

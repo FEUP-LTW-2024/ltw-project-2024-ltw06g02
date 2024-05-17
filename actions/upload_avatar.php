@@ -1,7 +1,8 @@
 <?php
-   session_start();
-
    require_once("../database/user.php");
+   require_once('../models/session.php');
+
+   $session = new Session();
 
    if($_SERVER["REQUEST_METHOD"] == "POST"){
       if (isset($_FILES['image'])) {
@@ -15,11 +16,16 @@
 
          $success = move_uploaded_file($tmp, $filepath);
          if(!$success) {
-            echo("Error");
+            $session->addMessage('error', 'Error occurred');
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit();
          }
 
          changePhoto($filepath, $_SESSION['userID']);
-         die(header("Location: ../profile.php"));
+         
+         $session->addMessage('success', 'Avatar changed');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
       }
    }
 ?>

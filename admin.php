@@ -9,7 +9,7 @@
 
     $session = new Session();
 
-    printHeader('Bazinga!');
+    printHeader('Bazinga!', $session);
     printAdminSection();
     printFooter();
 ?>

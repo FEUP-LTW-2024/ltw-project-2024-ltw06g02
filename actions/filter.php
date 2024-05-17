@@ -3,6 +3,7 @@
    require_once('../templates/article.tl.php');
    require_once('../models/session.php');
    require_once('../database/articles.php');
+   
    $db = getDatabaseConnection();
 
    $session = new Session();

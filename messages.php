@@ -11,7 +11,7 @@
    $db = getDatabaseConnection();
    $chats = getUserChats($db);
 
-   printHeader('Bazinga!');
+   printHeader('Bazinga!', $session);
    printMessagesBlock($chats);
    printFooter();
 ?>

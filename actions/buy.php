@@ -1,6 +1,4 @@
 <?php
-    session_start();
-
     require_once('../database/articles.php');
     require_once('../database/removeFromCart.php');
     require_once('../database/favorites.php');
@@ -8,19 +6,26 @@
     require_once('../database/historic.php');
     require_once('../database/connection.php');
     require_once('../database/messages.php');
+    require_once(dirname(__DIR__) . '/templates/article.tl.php');
+
+    $session = new Session();
 
     $db = getDatabaseConnection();
 
     
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["cartItems"])) {
         $cartItems = $_POST["cartItems"];
-        $userId = $_SESSION['userID'];
+        $userID = $session->getUserId();
         
-        if(!removeProductsFromCartByUserId($db,$userId)) die(header('Location: ../#'));
+        if(!removeProductsFromCartByUserID($db,$userID)){
+            $session->addMessage('error', 'Error occurred');
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
 
         foreach ($cartItems as $productId) {
             $article = getArticleById($productId);
-            if(!addPurchase($userId, $article)) die(header('Location: ../#'));
+            if(!addPurchase($userID, $article)) die(header('Location: ../#'));
             if(!addSale($article)) die(header('Location: ../#'));
         }
       

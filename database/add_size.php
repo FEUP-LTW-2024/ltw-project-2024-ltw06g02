@@ -12,10 +12,7 @@
 
          return true;
       }
-      else{
-         return false;
-      }
-
+      return false;
    }
 
    function checkIfSizeExists($size) : bool{
@@ -28,7 +25,7 @@
       $sizes = $stmt->fetchAll();
 
       foreach($sizes as $s){
-         if($s['name'] == $size) return true;
+         if(strtolower($s['name']) == strtolower($size)) return true;
       }
 
       return false;

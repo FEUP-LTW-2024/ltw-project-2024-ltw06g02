@@ -82,10 +82,7 @@
 
          return true;
       }
-      else{
-         return false;
-      }
-
+      return false;
    }
 
    function checkIfUserIsAdmin($username) : bool{

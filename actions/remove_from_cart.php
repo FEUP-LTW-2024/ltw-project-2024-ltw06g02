@@ -1,8 +1,9 @@
 <?php
-   session_start();
-
    require_once("../database/removeFromCart.php");
    require_once('../database/connection.php');
+   require_once("../models/session.php");
+
+   $session = new Session();
 
    $db = getDatabaseConnection();
 
@@ -11,11 +12,19 @@
       $articleId = $_POST['articleId'];
 
       if(empty($userId) || empty($articleId)){
-         die(header('Location: ../#'));
+         $session->addMessage('error', 'Error occurred');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
       }
 
-      if(!removeProductFromCart($db, $userId, $articleId)) die(header('Location: ../#'));
+      if(!removeProductFromCart($db, $userId, $articleId)){
+         $session->addMessage('error', 'Error occurred');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
+      };
       
-      header('Location: ../shopping_cart.php');   
+      $session->addMessage('success', 'Product removed');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();   
    }
 ?>

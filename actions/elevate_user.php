@@ -1,17 +1,20 @@
 <?php
-   session_start();
-
    require_once("../database/user.php");
+   require_once("../models/session.php");
+
+   $session = new Session();
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $username = $_POST['username'];
 
-      if(empty($username)){
-         die(header('Location: ../#'));
+      if(!elevateUser($username)){
+         $session->addMessage('error', 'User does not exist');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
       }
-
-      if(!elevateUser($username)) die(header('Location: ../#'));
       
-      header('Location: ../admin.php');   
+      $session->addMessage('success', 'User elevated to admin');
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      exit();  
    }
 ?>

@@ -13,7 +13,7 @@
    $sizes = getAllSizes($db);
    $conditions = getAllConditions($db);
 
-   printHeader('Bazinga!');
+   printHeader('Bazinga!', $session);
    printUploadSection();
    printInfoSection($categories, $sizes, $conditions);
    printFooter();

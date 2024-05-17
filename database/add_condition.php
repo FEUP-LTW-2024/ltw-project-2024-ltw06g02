@@ -12,10 +12,7 @@
 
          return true;
       }
-      else{
-         return false;
-      }
-
+      return false;
    }
 
    function checkIfConditionExists($condition) : bool{
@@ -28,7 +25,7 @@
       $conditions = $stmt->fetchAll();
 
       foreach($conditions as $c){
-         if($c['name'] == $condition) return true;
+         if(strtolower($c['name']) == strtolower($condition)) return true;
       }
 
       return false;

@@ -1,7 +1,8 @@
 <?php
-   session_start();
-
    require_once("../database/articles.php");
+   require_once('../models/session.php');
+
+   $session = new Session();
 
    if($_SERVER["REQUEST_METHOD"] == "POST"){
       if (isset($_FILES['files'])) {
@@ -22,7 +23,10 @@
          }
 
          addArticle($_POST, $paths);
-         die(header("Location: ../index.php"));
+
+         $session->addMessage('success', 'Article added');
+         header('Location: ../index.php');
+         exit();
       }
    }
 ?>

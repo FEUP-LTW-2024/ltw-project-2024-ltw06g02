@@ -221,3 +221,29 @@ main {
       font-size: large;
    }
 }
+
+#messages article {
+   display: flex;
+   width: 30%;
+   margin: 1em auto;
+   border-radius: 5px;
+   padding: 1em;
+   color: white;
+   justify-content: center;
+ }
+ 
+ #messages article.success {
+   background-color: #DFF2BF;
+ }
+ 
+ #messages article.warning {
+   background-color: #FEEFB3;
+ }
+ 
+ #messages article.error {
+   background-color: #FFD2D2;
+ }
+ 
+ #messages article.info {
+   background-color: #BDE5F8;
+ }

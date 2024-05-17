@@ -66,7 +66,7 @@
       return $preferences;
    }
 
-   function updatePreferences($db, $categoryID, $sizeID, $conditionID){
+   function updatePreferences($db, $categoryID, $sizeID, $conditionID) : bool{
 
       if(!isset(retrieveUser($_SESSION['userID'])['preferencesID'])){
          createPreferences($db, $categoryID, $sizeID, $conditionID);
@@ -76,9 +76,11 @@
          "UPDATE preferences SET categoryID = ?, sizeID = ?, conditionID = ? WHERE userID = ?"
       );
       $stmt->execute(array($categoryID, $sizeID, $conditionID, $_SESSION['userID']));
+
+      return true;
    }
 
-   function createPreferences($db, $categoryID, $sizeID, $conditionID){
+   function createPreferences($db, $categoryID, $sizeID, $conditionID) : bool{
       $stmt = $db->prepare(
          "INSERT INTO preferences (categoryID, sizeID, conditionID, userID) VALUES(?, ?, ?, ?)"
       );
@@ -95,5 +97,7 @@
       );
 
       $stmt->execute(array($id['preferencesID'], $_SESSION['userID']));
+      
+      return true;
    }
 ?>

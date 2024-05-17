@@ -8,6 +8,8 @@
    require_once('database/filters.php');
    require_once('models/session.php');
 
+   $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
    $session = new Session();
 
    $db = getDatabaseConnection();
@@ -18,7 +20,7 @@
    $filters = getAllCategories($db);
    $conditions = getAllConditions($db);
 
-   printHeader('Bazinga!');
+   printHeader('Bazinga!', $session);
    printArticleSection($recommendedArticles, 'explore. love. buy.');
    printFiltersSection($filters, $conditions);
    if(isset($_SESSION['userID'])) printArticleSection($followedArticles, 'following.');

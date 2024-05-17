@@ -7,6 +7,8 @@ class Session {
     public function __construct() {
         session_start();
         $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
+        $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
+        unset($_SESSION['messages']);
     }
 
     public function isLoggedIn() : bool {
@@ -49,11 +51,6 @@ class Session {
 
     public function getMessages() {
         return $this->messages;
-    }
-
-    public function isSellerOfProduct(int $productUserID) : bool {
-        // Verifica se o usuário logado é o vendedor do produto
-        return $this->isLoggedIn() && $this->getUserId() === $productUserID;
     }
 }
 

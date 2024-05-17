@@ -1,6 +1,7 @@
 <?php 
   require_once('templates/navbar.tl.php');
-  function printHeader($title){
+  
+  function printHeader($title, $session){
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +31,14 @@
   <body>
     <main>
       <header>
-        <?php printNavBar() ?>  
+        <?php printNavBar() ?>
+        <section id="messages">
+          <?php foreach ($session->getMessages() as $messsage) { ?>
+            <article class="<?=$messsage['type']?>">
+              <?=$messsage['text']?>
+            </article>
+        <?php } ?>
+    </section>  
       </header>
 
 <?php

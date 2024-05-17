@@ -95,6 +95,10 @@
             "INSERT INTO chat(receiverID, senderID, productID) VALUES (?,?,?)"
          );
          $stmt->execute(array($article['userID'], $_SESSION['userID'], $productID));
+
+         return true;
       }
+
+      return false;
    }
 ?>
