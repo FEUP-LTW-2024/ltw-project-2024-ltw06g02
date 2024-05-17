@@ -6,6 +6,7 @@
     require_once('../database/historic.php');
     require_once('../database/connection.php');
     require_once('../database/messages.php');
+    require_once('../models/session.php');
     require_once(dirname(__DIR__) . '/templates/article.tl.php');
 
     $session = new Session();
