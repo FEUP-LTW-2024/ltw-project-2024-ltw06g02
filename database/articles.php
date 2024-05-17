@@ -128,13 +128,15 @@
       return $cartArticles;
    }
 
-   function removeArticle($db, $id){
+   function removeArticle($db, $id) : bool{
       $stmt = $db->prepare(
          "DELETE FROM product WHERE productID = ?"
       );
       $stmt->bindParam(1, $id);
 
       $stmt->execute();
+
+      return true;
    }
 
    function updateArticle($id, $new_price, $new_name) {
