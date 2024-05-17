@@ -111,35 +111,30 @@
 }
 
 #removeFromCartBtn {
-    position: absolute;
+    position: relative;
     color: transparent;
     -webkit-text-stroke: 1px #98C9A3;
-    margin-left: 20em;
-    margin-top: 7em;
 }
 
 #buyCartBtn {
-    position: relative;
-    margin-left: 36.5em;
+    margin-top: 1em;
     background-color: #98C9A3;
     border-radius: 5px;
     padding: 0.5em;
     text-decoration: none;
+    font-size: x-large;
     color: white;
-    font-size: 1.4em;
     border: none;
 }
 
 #calculateValueBtn {
-    position: relative;
-    margin-left: 35.5em;
-    margin-bottom: 2em;
+    margin-top: 2.5em;
     background-color: #98C9A3;
     border-radius: 5px;
     padding: 0.5em;
     text-decoration: none;
+    font-size: x-large;
     color: white;
-    font-size: 1.4em;
     border: none;
 }
 
@@ -165,8 +160,10 @@
 }
 
 .modal-content-shipping {
+    position: relative;
+    justify-items: center;
     background-color: #fefefe;
-    margin: 36em 0 0 47em;
+    margin: 27em 0 0 47em;
     padding: 20px;
     border: 1px solid #888;
     width: 20em;
@@ -191,5 +188,21 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+    .article-grid-cart {
+        padding: 0 0 2em 0;
+    }
+
+    .product-section-cart {
+        padding: 1em; 
+    }
+
+    .carousel-container {
+        max-width: 100%;
+        padding: 0;
+    }
+    
 }
  

@@ -240,14 +240,14 @@ function printCartArticleSection($db, $cartArticles, $userID){
                <h4 class="emptyParagrah">Add more articles and find them here</h4>
                <a href="../index.php" class="find">Search</a>
             </div>
+            <button type="button" id="calculateValueBtn">Obtain shipping costs</button>
+            <button type="button" id="buyCartBtn">Finalize purchase</button>
          </section>
-         <button type="button" id="calculateValueBtn">Obtain shipping costs</button>
-         <button type="button" id="buyCartBtn">Finalize purchase</button>
+
+         <?php loadingModal(); ?>
+
+         <?php shippingModal(); ?>
       </div>
-
-      <?php loadingModal(); ?>
-
-      <?php shippingModal(); ?>
 
       <script>
          let slideIndex = 1;
