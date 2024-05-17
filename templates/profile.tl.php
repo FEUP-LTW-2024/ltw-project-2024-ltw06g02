@@ -13,7 +13,7 @@
    <div class="info">
       <div class="conjunction">
          <section class="left-side">
-            <img src=<?= isset($user['avatar']) ? $user['avatar'] : "../assets/user.jpg"?> >
+            <img src=<?= $user['avatar']?> >
             <div class="bios">
                <div>
                   <h1><?= $user['fullName'] ?></h1>

@@ -1,5 +1,6 @@
 <?php 
    require_once(dirname(__DIR__) . '/database/articles.php');
+   require_once(dirname(__DIR__) . '/database/user.php');
    function printMessagesBlock($chats) {
 ?>
 
@@ -7,10 +8,11 @@
       <div class="chats-box">
          <?php foreach($chats as $chat) { 
                $product = getArticleById($chat['productID']);
+               $user = retrieveUser($chat['senderID']);
             ?>
             <div class="chat" sender-id="<?= $chat['senderID'] ?>">
                <div class="chat-info">
-                  <img src="../assets/goiana.jpg" alt=""/>
+                  <img src=<?= $user['avatar'] ?> alt=""/>
                   <h3><?= $chat['username']?></h3>
                   <h3 style="color: #344e41"><?= "(" . $product['name'] . ")" ?></h3>
                </div>

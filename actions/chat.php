@@ -11,7 +11,7 @@
    $user = retrieveUser($_GET['q']);
 
    echo '<div class="chat-info">
-            <img src="../assets/goiana.jpg" alt=""/>
+            <img src=' . $user['avatar'] .  ' alt=""/>
             <h3>' . $user['username'] . '</h3>
          </div>
          <div class="messages">';

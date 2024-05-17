@@ -8,7 +8,7 @@
 
       if(!checkUserExists($user)){
          $stmt = $db->prepare(
-            "INSERT INTO users(fullName, username, email, password, admin, followers, preferencesID) VALUES(?,?,?,?,?,?,?)"
+            "INSERT INTO users(fullName, username, email, password, admin, followers, preferencesID, avatar) VALUES(?,?,?,?,?,?,?,?)"
          );
          $stmt->bindParam(1, $user->fullName);
          $stmt->bindParam(2, $user->username);
@@ -17,6 +17,7 @@
          $stmt->bindParam(5, $user->admin);
          $stmt->bindParam(6, $user->followers);
          $stmt->bindParam(7, $user->preferences);
+         $stmt->bindParam(8, $user->avatar);
          $stmt->execute();
          return true;
       }
