@@ -4,8 +4,9 @@
    require_once('database/filters.php');
    require_once('database/user.php');
    require_once('database/connection.php');
-   function printBioSection($user){
+   function printBioSection($userID){
       $db = getDatabaseConnection();
+      $user = retrieveUser($userID);
       buildEditProfile();
       buildUploadPhoto();
       buildPreferencesDialog(retrievePreferences($db, $user['preferencesID']));
@@ -108,14 +109,15 @@
 
 <?php
    require_once('article.tl.php');
-   function printProfileArticleSection($articles) {
+   function printProfileArticleSection($userID) {
+      $articles = getUserArticles($userID);
 ?>
       <div class="right-side">
          <section class="article-grid">
             <?php
                if (empty($articles)) {
                   ?>
-                  <h5 style="margin: auto auto; font-weight: normal;">Não tens nenhum artigo à venda!</h5>
+                  <h5 style="margin: auto auto; font-weight: normal;"><?= $userID == $_SESSION['userID'] ? 'Não tens nenhum artigo à venda!' : 'Sem artigos para venda!' ?></h5>
                   <?php
                } else {
                   foreach ($articles as $article) {

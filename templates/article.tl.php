@@ -172,7 +172,7 @@
          <h1 class="price">
             <?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>'); ?>
             <?php if($article['promotion']) {?><span style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></span><?php } ?>
-            <span style="font-size: 0.7em; color: #344e41;">by <?= $username ?></span>
+            <span style="font-size: 0.7em; color: #344e41;">by <a style="color: #344e41;" href=<?= '../profile_user.php?id=' . $article['userID']?>> <?= $username ?> </a></span>
          </h1>
          <hr class="separator">
          <h2 class="name"><?=$article['name']?></h2>

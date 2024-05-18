@@ -10,14 +10,8 @@
 
     $session = new Session();
 
-    $id = $_GET['id'];
-
-    $db = getDatabaseConnection();
-    $articles = getUserArticles($db, $id);
-    $user = retrieveUser($id);
-
     printHeader('Bazinga!', $session);
-    printBioSection($user);
-    printProfileArticleSection($articles);
+    printBioSection($_GET['id']);
+    printProfileArticleSection($_GET['id']);
     printFooter();
 ?>

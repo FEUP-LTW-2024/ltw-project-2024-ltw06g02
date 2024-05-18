@@ -165,7 +165,7 @@
    function getUserTotalLikes($userId){
       $db = getDatabaseConnection();
 
-      $articles = getUserArticles($db, $userId);
+      $articles = getUserArticles($userId);
 
       $totalLikes = 0;
       foreach($articles as $article){
