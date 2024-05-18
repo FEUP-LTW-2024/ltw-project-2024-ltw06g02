@@ -11,7 +11,8 @@
       $stmt = $db->prepare($sql);
       $stmt->bindParam(1, $userID);
       $stmt->bindParam(2, $article['name']);
-      $stmt->bindParam(3, $article['price']);
+      $price = $article['promotion'] ? $article['price'] * $article['promotion'] : $article['price'];
+      $stmt->bindParam(3, $price);
       $stmt->bindParam(4, $notificationText);
       $stmt->bindParam(5, $notificationDate);
       $stmt->execute();
@@ -29,7 +30,8 @@
     $stmt = $db->prepare($sql);
     $stmt->bindParam(1, $article['userID']);
     $stmt->bindParam(2, $article['name']);
-    $stmt->bindParam(3, $article['price']);
+    $price = $article['promotion'] ? $article['price'] * $article['promotion'] : $article['price'];
+    $stmt->bindParam(3, $price);
     $stmt->bindParam(4, $notificationText);
     $stmt->bindParam(5, $notificationDate);
     $stmt->execute();

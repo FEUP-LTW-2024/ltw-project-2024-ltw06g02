@@ -36,7 +36,7 @@
 ?>
    <article class="article">
       <form id="removeFromCartForm" action="../actions/remove_from_cart.php" method="POST">
-         <input type="hidden" name="userId" value="<?=$article['userID']?>">
+         <input type="hidden" name="userId" value="<?=$_SESSION['userID']?>">
          <input type="hidden" name="articleId" value="<?=$article['productID']?>">
          <button type="submit" id="removeFromCartBtn" class="material-icons">delete</button>
       </form>
