@@ -23,16 +23,35 @@
                </div>
                <div class="preferences-section">
                   <div class="preferences-tag">
-                     <?php if(isset($_SESSION['userID']) && isset($user['preferencesID']) && $_SESSION['userID'] == $user['userID']) { ?>
-                        <div class="preference" style="background-color: #ae2012"><?php echo getConditionByID($db, retrievePreferences($db, $user['preferencesID'])['conditionID'])['name'] ?></div>
-                        <div class="preference" style="background-color: #ffb703; text-transform: none;"><?php echo getSizeByID($db, retrievePreferences($db, $user['preferencesID'])['sizeID'])['name'] ?></div>
-                        <div class="preference" style="background-color: #457b9d;"><?php echo getCategoryByID($db, retrievePreferences($db, $user['preferencesID'])['categoryID'])['name'] ?></div>
-                        <i class="material-icons heart-icon" id="editPreferences" style="color: grey; font-size: 1em;">edit</i>
-                     <?php } else { ?>
+                     <?php 
+                     if (isset($_SESSION['userID']) && isset($user['preferencesID']) && $_SESSION['userID'] == $user['userID']) {
+                        $preferences = retrievePreferences($db, $user['preferencesID']);
+                        
+                        $condition = getConditionByID($db, $preferences['conditionID']) ?? null;
+                        $size = getSizeByID($db, $preferences['sizeID']) ?? null;
+                        $category = getCategoryByID($db, $preferences['categoryID']) ?? null;
+                        
+                        if ($condition || $size || $category) { // Verifica se pelo menos uma das preferências não é null
+                           if ($condition) { ?>
+                              <div class="preference" style="background-color: #ae2012"><?php echo $condition['name']; ?></div>
+                           <?php }
+                           if ($size) { ?>
+                              <div class="preference" style="background-color: #ffb703; text-transform: none;"><?php echo $size['name']; ?></div>
+                           <?php }
+                           if ($category) { ?>
+                              <div class="preference" style="background-color: #457b9d;"><?php echo $category['name']; ?></div>
+                           <?php } ?>
+                           <i class="material-icons heart-icon" id="editPreferences" style="color: grey; font-size: 1em;">edit</i>
+                        <?php } else { ?>
+                           <div class="preference-icon" id="addPreferences"><i class="material-icons">add</i> add preferences</div>
+                        <?php }
+                     } else { ?>
                         <div class="preference-icon" id="addPreferences"><i class="material-icons">add</i> add preferences</div>
                      <?php } ?>
                   </div>
                </div>
+
+               
                <div>
                   <h4>followed by <?= getUserFollowers($user['userID']);?></h4>
                   <h4>total likes : <?= getUserTotalLikes($user['userID']);?></h4>

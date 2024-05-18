@@ -107,12 +107,15 @@
    <p>edit preferences.</p>
    <form class="form" action="../actions/save_preferences.php" method="POST">
       <select class="preferences-select" name="category">
+         <option value="">None</option>
          <?php foreach($categories as $category) echo "<option value=" . $category['categoryID'] . (((isset($preferences)) && $preferences['categoryID'] == $category['categoryID']) ? ' selected>' : '>') . $category['name']. "</option>"?>
       </select>
       <select class="preferences-select" name="size">
+         <option value="">None</option>
          <?php foreach($sizes as $size) echo "<option value=" . $size['sizeID'] . (((isset($preferences)) && $preferences['sizeID'] == $size['sizeID']) ? ' selected>' : '>') . $size['name']. "</option>"?>
       </select>
       <select class="preferences-select" name="condition">
+         <option value="">None</option>
          <?php foreach($conditions as $condition) echo "<option value=" . $condition['conditionID'] . (((isset($preferences)) && $preferences['conditionID'] == $condition['conditionID']) ? ' selected>' : '>') . $condition['name']. "</option>"?>
       </select>
       <button type="submit" class="form-button">save</button>
