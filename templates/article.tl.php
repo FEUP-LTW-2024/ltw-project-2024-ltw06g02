@@ -167,7 +167,14 @@
 ?>
 
    <div class="container">
-      <img src="<?=$images[0]?>" alt="product">
+      <div style="display: flex; flex-direction: column; row-gap: 1em; max-width: 25em">
+         <img src=<?=$images[0]?> alt="product" class="product-image">
+         <div style="display: flex; column-gap: 1em;">
+            <?php for($i = 1; $i < sizeof($images) - 1; $i++) { ?>
+               <img src=<?=$images[$i]?> class="product-image" style="height: 10em; flex: 1; min-width: 0; max-width: 8em">
+            <?php } ?>
+         </div>
+      </div>
       <aside class="product-column">
          <h1 class="price">
             <?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>'); ?>

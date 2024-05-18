@@ -5,10 +5,19 @@
    $session = new Session();
 
    if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+
       if (isset($_FILES['files'])) {
          $files = $_FILES['files'];
          $file_count = count($files['name']);
          $paths = "";
+
+         if($file_count > 4) {
+            $session->addMessage('error', 'Select a maximum of 4 photos');
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit();
+         }
+
          for($i = 0; $i < $file_count; $i++){
             $filename = $files['name'][$i];
             $tmp = $files['tmp_name'][$i];

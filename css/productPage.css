@@ -14,13 +14,13 @@ input::-webkit-inner-spin-button {
     align-items: center;
     justify-content: center;
     margin-top: 1em;
+}
 
-    img {
-        width: 25em;
-        height: 24em;
-        object-fit: cover;
-        border-radius: 5%;
-    }
+.product-image {
+    width: 25em;
+    height: 24em;
+    object-fit: cover;
+    border-radius: 5%;
 }
 
 .custom-promotion {
