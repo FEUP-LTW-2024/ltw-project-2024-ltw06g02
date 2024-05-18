@@ -38,8 +38,8 @@
       return $articles;
    }
 
-   function getArticlesByPrice($db, $price, $currency){
-      if($currency == "dol"){
+   function getArticlesByPrice($db, $price){
+      if(isset($_SESSION['currency']) && $_SESSION['currency'] == "dol"){
          $stmt = $db->prepare(
             "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ?"
          );

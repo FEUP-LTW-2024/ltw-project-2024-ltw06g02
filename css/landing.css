@@ -9,6 +9,16 @@ main {
    flex: 1;
 }
 
+input[type='range']::-moz-range-progress {
+   background-color: #344e41;
+   border-radius: 2px;
+}
+
+input[type="range"]::-moz-range-track {  
+   background-color: whitesmoke;
+   border-radius: 2px;
+}
+
 .search-conjunction {
    display: flex;
    flex-direction: column;
