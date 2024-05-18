@@ -38,8 +38,8 @@
       
       
       <input class='price' style="display: none" type="range" min="0" max="500" onchange="updateArticles(this.value, 'price'); document.getElementById('priceValue').innerHTML = '<?= (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? '$' : '€' ?>' + this.value">
-      <span id="priceValueMin" class="price-label-min" style="display: none"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? '$' : '€' ?>0 -</span>
-      <span id="priceValue" class="price-label" style="display: none"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? '$' : '€' ?>250</span>
+      <span id="priceValueMin" class="price-label-min price" style="display: none; font-size: 1em;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? '$' : '€' ?>0 -</span>
+      <span id="priceValue" class="price-label price" style="display: none; font-size: 1em;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? '$' : '€' ?>250</span>
    </div>
 
 <?php
@@ -73,12 +73,5 @@
       });
 
       clickedButton.classList.add('active');
-
-      if (filterType === 'price') {
-         const priceLabel = document.getElementById('priceValue');
-         const priceLabelMin = document.getElementById('priceValueMin');
-         priceLabel.style.display = 'flex';
-         priceLabelMin.style.display = 'flex';
-      }
    }
 </script>

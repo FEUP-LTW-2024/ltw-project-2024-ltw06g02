@@ -17,7 +17,11 @@
          exit();
       }
 
-      removeProductFromCart($db, $userId, $articleId);
+      if(!removeProductFromCart($db, $userId, $articleId)){
+         $session->addMessage('error', 'Error occurred');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
+      };
       
       $session->addMessage('success', 'Product removed');
       header('Location: ' . $_SERVER['HTTP_REFERER']);
