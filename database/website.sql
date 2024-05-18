@@ -124,6 +124,8 @@ CREATE TABLE sale (
 INSERT INTO productCategory (name) VALUES
 ('Electronics'),
 ('Clothing'),
+('Sports'),
+('Decoration'),
 ('Books');
 
 INSERT INTO productSize (name) VALUES
