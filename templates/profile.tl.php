@@ -174,10 +174,11 @@
          photoUploadDialog.close();
       })
 
-      addPreferences.addEventListener("click", () => {
-         preferencesEditDialog.showModal();
-      })
-
+      if(addPreferences){
+         addPreferences.addEventListener("click", () => {
+            preferencesEditDialog.showModal();
+         })
+      }
       editPreferences.addEventListener("click", () => {
          preferencesEditDialog.showModal();
       })
