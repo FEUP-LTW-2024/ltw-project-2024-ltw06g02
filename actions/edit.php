@@ -17,7 +17,11 @@
       $new_password = empty($_POST['password']) ? retrieveUser($session->getUserId())['password'] : password_hash($_POST['password'], PASSWORD_DEFAULT);
       $new_email = empty($_POST['email']) ? retrieveUser($session->getUserId())['email'] : $_POST['email'];;
 
-      updateUser($new_username, $new_password, $new_email, $session->getUserId());
+      if(!updateUser($new_username, $new_password, $new_email, $session->getUserId())) {
+         $session->addMessage('error', 'Username or email already exists');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
+      }
       $session->setUsername($new_username);
 
       $session->addMessage('success', 'Profile edited');

@@ -135,11 +135,18 @@
 
       return $user;
    }
-   function updateUser($username, $password, $email, $id){
+   function updateUser($username, $password, $email, $id) : bool{
       $db = getDatabaseConnection();
+
+      $stmt = $db->prepare("SELECT * FROM users WHERE (username = ? and userID != ?) OR (email = ? and userID != ?)");
+      $stmt->execute(array($username, $id, $email, $id));
+      $result = $stmt->fetch();
+      if($result) return false;
       
       $stmt = $db->prepare("UPDATE users SET username = ?, email = ?, password = ? WHERE userID = ?");
       $stmt->execute(array($username, $email, $password, $id));
+
+      return true;
    }
 
    function changePhoto($filepath, $id){
