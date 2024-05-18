@@ -15,7 +15,7 @@
    }
 
    $new_price = empty($_POST['price']) ? $article['price'] : $_POST['price'];
-   $new_name = empty($_POST['name']) ? $article['name'] : $_POST['name'];;
+   $new_name = empty($_POST['name']) ? $article['name'] : preg_replace("/[^a-zA-Z0-9\s]/", '', $_POST['name']);
 
    updateArticle($id, $new_price, $new_name);
 

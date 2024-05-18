@@ -9,6 +9,10 @@
 
     $session = new Session();
 
+    if(isset($_SESSION['userID'])) $user = retrieveUser($_SESSION['userID']);
+
+    if(!isset($_SESSION['userID']) || $user['admin'] == '') header('Location: index.php');
+
     printHeader('Bazinga!', $session);
     printAdminSection();
     printFooter();

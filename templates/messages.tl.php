@@ -60,7 +60,7 @@
             const formData = new FormData(form);
             const inputForm = this.querySelector('.input-field');
 
-            const messageText = inputForm.value;
+            const messageText = (inputForm.value).replace(/[^a-zA-Z0-9\s]/g, '');
 
             formData.append('messageText', messageText.trim());
             formData.append('senderID', currentSenderID);

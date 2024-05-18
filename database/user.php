@@ -34,7 +34,7 @@
       $credentials = $stmt->fetch();
 
       if($credentials) {
-         if(password_verify('bazinga' . $password . 'bazinga', $credentials['password'])) {
+         if(password_verify($password, $credentials['password'])) {
              return true;
          }
      }

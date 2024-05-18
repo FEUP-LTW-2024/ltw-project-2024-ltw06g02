@@ -5,7 +5,7 @@
          $this->fullName = $fullName;
          $this->username = $username;
          $this->email = $email;
-         $this->password = password_hash('bazinga'.$password.'bazinga', PASSWORD_DEFAULT);
+         $this->password = password_hash($password, PASSWORD_DEFAULT);
          $this->admin = false;
          $this->avatar = $avatar;
          $this->followers = 0;

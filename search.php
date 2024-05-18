@@ -7,7 +7,7 @@
    $session = new Session();
    $db = getDatabaseConnection();
 
-   printHeader('Bazinga!');
+   printHeader('Bazinga!', $session);
    printArticleSection($searchedArticles, 'based on your search.');
    printFooter();
 

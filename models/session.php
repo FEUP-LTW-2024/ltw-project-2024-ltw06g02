@@ -5,6 +5,7 @@ class Session {
     private $userID;
 
     public function __construct() {
+        session_set_cookie_params(0, '/', 'www.fe.up.pt', true, true);
         session_start();
         $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
         $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();

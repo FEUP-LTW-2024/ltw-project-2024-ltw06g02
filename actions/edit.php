@@ -14,7 +14,7 @@
       }
 
       $new_username = empty($_POST['username']) ? retrieveUser($session->getUserId())['username'] : $_POST['username'];
-      $new_password = empty($_POST['password']) ? retrieveUser($session->getUserId())['password'] : password_hash('bazinga'.$_POST['password'].'bazinga', PASSWORD_DEFAULT);
+      $new_password = empty($_POST['password']) ? retrieveUser($session->getUserId())['password'] : password_hash($_POST['password'], PASSWORD_DEFAULT);
       $new_email = empty($_POST['email']) ? retrieveUser($session->getUserId())['email'] : $_POST['email'];;
 
       updateUser($new_username, $new_password, $new_email, $session->getUserId());

@@ -83,10 +83,6 @@
       $stmt->execute(array($article['category']));
       $categoryID = $stmt->fetch();
 
-      $stmt = $db->prepare("SELECT userID FROM users WHERE username=?");
-      $stmt->execute(array($_SESSION['username']));
-      $userID = $stmt->fetch();
-
       $stmt = $db->prepare("SELECT sizeID FROM productSize WHERE name=?");
       $stmt->execute(array($article['size']));
       $sizeID = $stmt->fetch();
@@ -99,20 +95,18 @@
          "INSERT INTO product(name, description, price, categoryID, userID, sizeID, conditionID, brand, model, images, likes) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
      );
 
-      $brand = isset($article['brand']) ? $article['brand'] : null;
-      $model = isset($article['model']) ? $article['model'] : null;
       $likes = 0;
 
       $stmt->execute(array(
-         $article['name'],
-         $article['description'],
+         preg_replace("/[^a-zA-Z0-9\s]/", '', $article['name']),
+         preg_replace("/[^a-zA-Z0-9\s]/", '', $article['description']),
          $article['price'],
          $categoryID['categoryID'],
-         $userID['userID'],
+         $_SESSION['userID'],
          $sizeID['sizeID'],
          $conditionID['conditionID'],
-         $brand,
-         $model,
+         preg_replace("/[^a-zA-Z0-9\s]/", '', $article['brand']),
+         preg_replace("/[^a-zA-Z0-9\s]/", '', $article['model']),
          $images,
          $likes
      ));

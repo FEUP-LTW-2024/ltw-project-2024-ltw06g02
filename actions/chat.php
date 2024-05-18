@@ -23,8 +23,10 @@
 
             $messageClass = $isSenderMessage ? 'message-sent' : 'message-received';
 
+            $m = preg_replace ("/[^a-zA-Z0-9\s]/", '', $message['messageText']);
+
             echo '<div class="' . $messageClass . '">
-                  <p>' . $message['messageText'] . '</p></div>';
+                  <p>' . $m . '</p></div>';
          }
 
    echo  '</div>

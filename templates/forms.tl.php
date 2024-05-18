@@ -83,7 +83,7 @@
    </button>
    <p>edit.</p>
    <form class="form" action=<?= "../actions/edit_article.php?q=" . $article['productID']?> method="POST">
-      <input type="text" name="price" placeholder="New price">
+      <input type="number" name="price" placeholder="New price">
       <input type="text" name="name" placeholder="New name">
       <?php if(!isset($article['promotion'])) ?> <div class="promotion-icon" id="add-promotion"><i class="material-icons">add</i><?= !isset($article['promotion']) ? 'add promotion' : 'edit promotion' ?></div>
       <button type="submit" class="form-button">edit</button>

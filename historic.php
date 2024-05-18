@@ -9,6 +9,8 @@
    $db = getDatabaseConnection();
    $session = new Session();
 
+   if(!isset($_SESSION['userID'])) header('Location: index.php');
+
    $purchases = getPurchasesByUserId($db, $_SESSION['userID']);
    $sales = getSalesByUserId($db, $_SESSION['userID']);
 
