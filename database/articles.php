@@ -164,4 +164,20 @@
       $articles = $stmt->fetchAll();
       return $articles;
    }
+
+   function editPromotion($prom, $id) : bool {
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare("UPDATE product SET promotion = ? WHERE productID = ?");
+      $stmt->execute(array($prom, $id));
+
+      return true;
+   }
+
+   function removePromotion($id) : bool {
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare("UPDATE product SET promotion = ? WHERE productID = ?");
+      $stmt->execute(array(null, $id));
+
+      return true;
+   }
 ?>

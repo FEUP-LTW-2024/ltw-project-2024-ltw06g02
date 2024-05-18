@@ -74,7 +74,7 @@
 <?php
    }
 
-   function buildEditArticle($id) {
+   function buildEditArticle($article) {
 ?>
 
 <dialog id="editArticleDialog" class="dialog">
@@ -82,9 +82,10 @@
       <span aria-hidden="true">&times;</span>
    </button>
    <p>edit.</p>
-   <form class="form" action=<?= "../actions/edit_article.php?q=" . $id ?> method="POST">
+   <form class="form" action=<?= "../actions/edit_article.php?q=" . $article['productID']?> method="POST">
       <input type="text" name="price" placeholder="New price">
       <input type="text" name="name" placeholder="New name">
+      <?php if(!isset($article['promotion'])) ?> <div class="promotion-icon" id="add-promotion"><i class="material-icons">add</i><?= !isset($article['promotion']) ? 'add promotion' : 'edit promotion' ?></div>
       <button type="submit" class="form-button">edit</button>
    </form>
 </dialog> 
@@ -120,4 +121,26 @@
 
 <?php 
    }
+
+   function buildPromotionDialog($article){
 ?>
+
+<dialog id="editPromotionDialog" class="dialog">
+   <button class="close-button" aria-label="Close alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+   </button>
+   <p>edit promotion.</p>
+   <div style="display: flex; flex-direction: column; row-gap: 1em;">
+      <div class="default-promotions">
+         <div class="promotion" value="0.1">10%</div>
+         <div class="promotion" value="0.5">50%</div>
+         <div class="promotion" value="0.9">90%</div>
+      </div>
+      <div class="promotion-icon" style="margin-bottom: 0;" id="custom-discount"><i class="material-icons">edit</i>custom discount</div>
+      <input class="custom-promotion" style="display: none;" type="number" max="99" min="0" id="custom-discount-input">
+      <?php if($article['promotion']) { ?> <div class="promotion-icon" id="remove-promotion"><i class="material-icons">delete</i>delete promotion</div><?php } ?>
+   </div>
+   <button class="form-button" id="promotionbtn" style="display:flex; margin: 1em auto 0 auto;">edit</button>
+</dialog> 
+
+<?php } ?>

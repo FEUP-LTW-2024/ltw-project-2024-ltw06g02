@@ -12,7 +12,7 @@
    if(sizeof($articles) > 0) {
       foreach($articles as $article) {
          if(!isset($_SESSION['userID']) || (isset($_SESSION['userID']) && ($article['userID'] != $_SESSION['userID']))) {
-            getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
+            getSingleArticle($article);
          }
       }
    } else {

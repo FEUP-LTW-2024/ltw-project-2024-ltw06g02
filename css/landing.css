@@ -29,6 +29,17 @@ main {
    }
 }
 
+.discount-tag {
+   display: flex;
+   align-items: center;
+   background-color: #344e41;
+   border-radius: 5px;
+   margin: 0 0 0.5em 0;
+   font-size: x-small;
+   padding: 0.1em 0.3em;
+   color: white;
+}
+
 .preference-icon:hover{
    background-color: whitesmoke;
    border-radius: 5px;

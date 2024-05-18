@@ -100,7 +100,7 @@
                   <?php
                } else {
                   foreach ($articles as $article) {
-                     getSingleProfileArticle($article['productID'] ,$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
+                     getSingleProfileArticle($article);
                   }
                }
             ?>
@@ -110,23 +110,29 @@
    
 <?php
    }
-   function getSingleProfileArticle($productID ,$name, $price, $image, $avatar, $likes){
-      $images = explode(",", $image);
+   function getSingleProfileArticle($article){
+      $images = explode(",", $article['images']);
 ?>
 
    <article class="profile-article">
-      <a href="product.php?id=<?=$productID?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
+      <a href="product.php?id=<?=$article['productID']?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
       <div class="article-details">
          <div>
-            <h3><?= $name ?></h3>
-            <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $price * 1.09 . '$' : $price . '€'; ?></p>
+            <div style="display: flex; column-gap: 0.5em;">
+               <h3><?= $article['name'] ?></h3>
+               <?php if($article['promotion']) { ?> <div class="discount-tag"><?= $article['promotion'] * 100 . '%'?> discount</div> <?php } ?>
+            </div>
+            <div style="display: flex;">
+               <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>')?></p>
+               <?php if($article['promotion']) {?><p style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></p><?php } ?>
+            </div>  
          </div>
          <div style="display: flex; flex-direction: row; align-items: center; column-gap: 0.5em;">
             <div class="like-container">
                <i class="material-icons heart-icon">favorite</i>
-               <p class="number" style="color: #c1121f;"><?= $likes ?></p>
+               <p class="number" style="color: #c1121f;"><?= $article['likes'] ?></p>
             </div>
-            <img src=<?= $avatar ?>>
+            <img src=<?= $article['avatar'] ?>>
          </div>
       </div>
    </article>
@@ -149,6 +155,8 @@
       const addPreferences = document.getElementById("addPreferences");
       const preferencesEditDialog = document.getElementById("editPreferencesDialog");
       const closePreferencesBtn = preferencesEditDialog.querySelector(".close-button");
+
+      
 
       editProfile.addEventListener("click", () => {
          editProfileDialog.showModal();
@@ -178,11 +186,4 @@
          preferencesEditDialog.close();
       })
    })
-
-   document.querySelectorAll('button.disabled').foreach((button) =>
-      button.addEventListener('click', (e) => {
-         e.preventDefault()
-         loginDialog.showModal();
-      }
-   ))
 </script>

@@ -1,21 +1,27 @@
 <?php
-   function getSingleArticle($productID, $name, $price, $image, $avatar, $likes){
-      $images = explode(",", $image);
+   function getSingleArticle($article){
+      $images = explode(",", $article['images']);
 ?>
    
    <article class="article">
-      <a href="product.php?id=<?=$productID?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
+      <a href="product.php?id=<?=$article['productID']?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
       <div class="article-details">
          <div>
-            <h3><?= $name ?></h3>
-            <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $price * 1.09 . '$' : $price . '€'; ?></p>
+            <div style="display: flex; column-gap: 0.5em;">
+               <h3><?= $article['name'] ?></h3>
+               <?php if($article['promotion']) { ?> <div class="discount-tag"><?= $article['promotion'] * 100 . '%'?> discount</div> <?php } ?>
+            </div>
+            <div style="display: flex;">
+               <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>')?></p>
+               <?php if($article['promotion']) {?><p style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></p><?php } ?>
+            </div>        
          </div>
          <div style="display: flex; flex-direction: row; align-items: center; column-gap: 0.5em;">
             <div class="like-container">
                <i class="material-icons heart-icon">favorite</i>
-               <p class="number" style="color: #c1121f;"><?= $likes ?></p>
+               <p class="number" style="color: #c1121f;"><?= $article['likes'] ?></p>
             </div>
-            <img src=<?= $avatar ?>>
+            <img src=<?= $article['avatar'] ?>>
          </div>
       </div>
    </article>
@@ -25,20 +31,23 @@
 ?>
 
 <?php
-   function getSingleCartArticle($productID, $name, $price, $image, $userID){
-      $images = explode(",", $image);
+   function getSingleCartArticle($article){
+      $images = explode(",", $article['images']);
 ?>
    <article class="article">
       <form id="removeFromCartForm" action="../actions/remove_from_cart.php" method="POST">
-         <input type="hidden" name="userId" value="<?=$userID?>">
-         <input type="hidden" name="articleId" value="<?=$productID?>">
+         <input type="hidden" name="userId" value="<?=$article['userID']?>">
+         <input type="hidden" name="articleId" value="<?=$article['productID']?>">
          <button type="submit" id="removeFromCartBtn" class="material-icons">delete</button>
       </form>
       <img src=<?= $images[0] ?> alt="" class="product-img">
       <div class="article-details">
          <div>
-            <h3><?= $name ?></h3>
-            <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $price * 1.09 . '$' : $price . '€'; ?></p>
+            <h3><?= $article['name'] ?></h3>
+            <div style="display: flex;">
+               <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>')?></p>
+               <?php if($article['promotion']) {?><p style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></p><?php } ?>
+            </div> 
          </div>
       </div>
    </article>
@@ -83,7 +92,7 @@
          <?php 
             foreach($articles as $article){
                if(!isset($_SESSION['userID']) || (isset($_SESSION['userID']) && ($article['userID'] != $_SESSION['userID']))) {
-                  getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
+                  getSingleArticle($article);
                } 
             }
          ?>
@@ -138,7 +147,7 @@
                   }
                   foreach($favoriteArticles as $favorite){
                      $article = getArticleById($favorite['productID']);
-                     getSingleArticle($article['productID'], $article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
+                     getSingleArticle($article);
                   }
                ?>
             </section>
@@ -147,7 +156,8 @@
 <?php
    }
    function printArticleById($db, $article, $userID){
-      buildEditArticle($article['productID']);
+      buildEditArticle($article);
+      buildPromotionDialog($article);
 
       $images = explode(",", $article['images']);
       $category = getCategoryByID($db, $article['categoryID']);
@@ -159,7 +169,11 @@
    <div class="container">
       <img src="<?=$images[0]?>" alt="product">
       <aside class="product-column">
-         <h1 class="price"><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? $article['price'] * 1.09 . '$' : $article['price'] . '€'; ?> <span style="font-size: 0.7em; color: #344e41;">by <?= $username ?></span></h1>
+         <h1 class="price">
+            <?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>'); ?>
+            <?php if($article['promotion']) {?><span style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></span><?php } ?>
+            <span style="font-size: 0.7em; color: #344e41;">by <?= $username ?></span>
+         </h1>
          <hr class="separator">
          <h2 class="name"><?=$article['name']?></h2>
          <h2 class="description">Description: <?=$article['description']?></h2>
@@ -208,6 +222,52 @@
       </aside>
    </div>
    <script>
+      const values = document.querySelectorAll(".promotion");
+      const addPromotion = document.getElementById('promotionbtn');
+      const removePromotion = document.getElementById('remove-promotion');
+
+      const customDiscount = document.getElementById('custom-discount');
+      const customDiscountInput = document.getElementById('custom-discount-input');
+
+      customDiscount.addEventListener("click", () => {
+         customDiscountInput.style = "display: flex";
+
+         values.forEach((b) => {
+            b.classList = 'promotion'
+         })
+      })
+
+      if(removePromotion){
+         removePromotion.addEventListener("click", () => {
+            location.replace("../actions/remove_promotion.php");
+         })
+      }
+      
+      addPromotion.addEventListener("click", () => {
+         let prom;
+         try {
+            prom = document.querySelector('.promotion.selected').getAttribute('value');
+         } catch {
+            prom = customDiscountInput.value / 100;
+         }
+         
+         if(prom > 0 && prom < 1) {
+            location.replace("../actions/edit_promotion.php?prom=" + prom);
+         }
+      })
+
+      values.forEach((e) => {
+         e.addEventListener("click", () => {
+
+            values.forEach((b) => {
+               b.classList = 'promotion'
+            })
+
+            e.classList += ' selected'
+            customDiscountInput.style = "display: none;";
+         })
+      })
+
       document.querySelectorAll('button.disabled').forEach((button) => 
          button.addEventListener('click', (e) => {
             e.preventDefault()
@@ -244,7 +304,7 @@ function printCartArticleSection($db, $cartArticles, $userID){
             <?php
                foreach($cartArticles as $cart){
                   $article = getArticleById($cart['productID']);
-                  getSingleCartArticle($article['productID'], $article['name'], $article['price'], $article['images'], $userID);
+                  getSingleCartArticle($article);
                }
             ?>
          </div>
@@ -308,6 +368,10 @@ function printCartArticleSection($db, $cartArticles, $userID){
       const openEditBtn = document.getElementById("edit");
       const closeEditBtn = editDialog.querySelector(".close-button");
 
+      const promotionDialog = document.getElementById("editPromotionDialog");
+      const closePromotionBtn = promotionDialog.querySelector(".close-button");
+      const openPromotionBtn = document.getElementById("add-promotion");
+
       openEditBtn.addEventListener("click", () => {
          editDialog.showModal();
       });
@@ -315,5 +379,15 @@ function printCartArticleSection($db, $cartArticles, $userID){
       closeEditBtn.addEventListener("click", () => {
          editDialog.close();
       });
+
+      openPromotionBtn.addEventListener("click", () => {
+         editDialog.close();
+         promotionDialog.showModal();
+      })
+
+      closePromotionBtn.addEventListener("click", () => {
+         promotionDialog.close();
+      })
+
    });
 </script>
