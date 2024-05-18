@@ -10,13 +10,13 @@
                $product = getArticleById($chat['productID']);
                $user = retrieveUser($chat['senderID']);
             ?>
-            <div class="chat" sender-id="<?= $chat['senderID'] ?>">
+            <div class="chat" sender-id="<?= $chat['senderID'] ?>" product-id="<?= $chat['productID'] ?>">
                <div class="chat-info">
                   <img src=<?= $user['avatar'] ?> alt=""/>
                   <h3><?= $chat['username']?></h3>
                   <h3 style="color: #344e41"><?= "(" . $product['name'] . ")" ?></h3>
                </div>
-               <h4 class="chat-message"><?= $chat['lastAction']?></h4>
+               <h4 class="chat-message" id=<?= $chat['productID'] . $chat['senderID'] ?>><?= $chat['lastAction']?></h4>
             </div>
 
          <?php } ?>
@@ -35,12 +35,14 @@
 <script>
    document.addEventListener("DOMContentLoaded", function() {
       let currentSenderID = null;
-      let lastMessage = document.querySelector('.chat-message');
+      let lastMessage = null;
 
       const chats = document.querySelectorAll(".chat");
       for (const chat of chats)
          chat.addEventListener('click', function() {
             currentSenderID = this.getAttribute('sender-id');
+            lastMessage = document.getElementById(this.getAttribute('product-id') + this.getAttribute('sender-id'));
+            console.log(this.getAttribute('sender-id'));
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
                document.getElementById("message-box").innerHTML = this.responseText;

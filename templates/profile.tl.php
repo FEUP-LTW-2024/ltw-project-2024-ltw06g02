@@ -32,7 +32,7 @@
                         $size = getSizeByID($db, $preferences['sizeID']) ?? null;
                         $category = getCategoryByID($db, $preferences['categoryID']) ?? null;
                         
-                        if ($condition || $size || $category) { // Verifica se pelo menos uma das preferências não é null
+                        if ($condition || $size || $category) {
                            if ($condition) { ?>
                               <div class="preference" style="background-color: #ae2012"><?php echo $condition['name']; ?></div>
                            <?php }
@@ -46,7 +46,7 @@
                         <?php } else { ?>
                            <div class="preference-icon" id="addPreferences"><i class="material-icons">add</i> add preferences</div>
                         <?php }
-                     } else { ?>
+                     } elseif(isset($_SESSION['userID']) && $_SESSION['userID'] == $user['userID']) { ?>
                         <div class="preference-icon" id="addPreferences"><i class="material-icons">add</i> add preferences</div>
                      <?php } ?>
                   </div>

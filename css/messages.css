@@ -25,6 +25,7 @@
    padding: 1em;
    border-radius: 5px;
    justify-content: center;
+   overflow: hidden;
 
    h4 {
       margin: 0.5em 0 0 0 ;
@@ -63,6 +64,8 @@
    border-radius: 5px;
    padding: 1em;
    justify-content: space-between;
+   min-width: 50%;
+   max-width: 50%;
 }
 
 .messages {
@@ -70,15 +73,33 @@
    flex-direction: column;
    overflow-y: auto;
    padding: 1.5em;
+   height: 100%;
+   row-gap: 0.5em;
 
    p {
       margin: 0.5em 0;
    }
 }
 
+.message-received {
+   color: white;
+   align-self: baseline;
+   background-color: #344e41;
+   border-radius: 5px;
+   padding: 0.5em 1em;
+   overflow-wrap: break-word;
+   max-width: 50%;
+}
+
 .message-sent {
-   color: green;
+   color: white;
    align-self: end;
+   background-color: #344e41;
+   width: auto;
+   border-radius: 5px;
+   padding: 0.5em 1em;
+   overflow-wrap: break-word;
+   max-width: 50%;
 }
 
 .message-input {
