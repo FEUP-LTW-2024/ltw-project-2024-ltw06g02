@@ -12,7 +12,7 @@
       $articles = getArticlesByFilter($db, $_GET['q']);
    }
    if($_GET['filter'] == 'price'){
-      $articles = getArticlesByPrice($db, $_GET['q']);
+      $articles = getArticlesByPrice($db, $_GET['q'], $_SESSION['currency']);
    }
    if($_GET['filter'] == 'condition'){
       $articles = getArticlesByCondition($db, $_GET['q']);

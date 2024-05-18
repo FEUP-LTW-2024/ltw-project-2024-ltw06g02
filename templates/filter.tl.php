@@ -35,7 +35,19 @@
             printConditionButton($condition);
          }
       ?>
-      <input class='price' style="display: none" type="range" min="0" max="100" onchange="updateArticles(this.value, 'price')">
+      <input class='price' style="display: none" type="range" min="0" max="500" onchange="updateArticles(this.value, 'price'); document.getElementById('priceValue').textContent = '$' + this.value">
+      <?php if(isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol'){
+         ?>
+         <span id="priceValueMin" class="price-label-min" style="display: none">$0 -</span>
+         <span id="priceValue" class="price-label" style="display: none">$250</span>
+         <?php
+      }
+      else{
+         ?>
+         <span id="priceValueMin" class="price-label-min" style="display: none">€0 -</span>
+         <span id="priceValue" class="price-label" style="display: none">€250</span>
+         <?php
+      }?>
    </div>
 
 <?php
@@ -69,5 +81,12 @@
       });
 
       clickedButton.classList.add('active');
+
+      if (filterType === 'price') {
+         const priceLabel = document.getElementById('priceValue');
+         const priceLabelMin = document.getElementById('priceValueMin');
+         priceLabel.style.display = 'inline';
+         priceLabelMin.style.display = 'inline';
+      }
    }
 </script>

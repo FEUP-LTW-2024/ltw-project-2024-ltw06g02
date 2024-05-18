@@ -38,12 +38,22 @@
       return $articles;
    }
 
-   function getArticlesByPrice($db, $price){
-      $stmt = $db->prepare(
-         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ?"
-      );
-      $stmt->execute(array(intval($price)));
-      $articles = $stmt->fetchAll();
+   function getArticlesByPrice($db, $price, $currency){
+      if($currency == "dol"){
+         $stmt = $db->prepare(
+            "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ?"
+         );
+         $stmt->execute(array(intval($price/1.09)));
+         $articles = $stmt->fetchAll();
+      }
+      else{
+         $stmt = $db->prepare(
+            "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ?"
+         );
+         $stmt->execute(array(intval($price)));
+         $articles = $stmt->fetchAll();
+      }
+      
       return $articles;
    }
 
