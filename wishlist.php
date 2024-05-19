@@ -17,6 +17,6 @@
    $favoriteArcticles = getFavoriteArticlesByUserId($db, $_SESSION['userID']);
 
    printHeader('Bazinga!', $session);
-   printFavoriteArticleSection($db ,$favoriteArcticles);
+   printDifferentArticleSection($db ,$favoriteArcticles, 'favorites');
    printFooter();
 ?>

@@ -241,6 +241,14 @@ input[type="range"]::-moz-range-track {
    .products-title {
       font-size: large;
    }
+
+   .search-bar-wrapper {
+      width: 90%;
+   }
+
+   .filter-section {
+      flex-wrap: wrap;
+   }
 }
 
 #messages article {

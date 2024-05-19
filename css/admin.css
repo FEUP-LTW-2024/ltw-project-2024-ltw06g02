@@ -115,6 +115,8 @@ th {
     }
 
     .metrics-section {
+        display: flex;
         margin: 1em;
+        column-gap: 1em;
     }
 }

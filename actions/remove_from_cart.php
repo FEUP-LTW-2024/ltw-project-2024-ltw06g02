@@ -7,17 +7,15 @@
 
    $db = getDatabaseConnection();
 
-   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $userId = $_POST['userId'];
-      $articleId = $_POST['articleId'];
+   if(isset($_GET['userID']) && isset($_GET['articleID'])){
 
-      if(empty($userId) || empty($articleId)){
+      if(empty($_GET['userID']) || empty($_GET['articleID'])){
          $session->addMessage('error', 'Error occurred');
          header('Location: ' . $_SERVER['HTTP_REFERER']);
          exit();
       }
 
-      if(!removeProductFromCart($db, $userId, $articleId)){
+      if(!removeProductFromCart($db, $_GET['userID'], $_GET['articleID'])){
          $session->addMessage('error', 'Error occurred');
          header('Location: ' . $_SERVER['HTTP_REFERER']);
          exit();

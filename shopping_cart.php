@@ -17,6 +17,7 @@
    $cartArticles = getCartArticlesByUserId($db, $_SESSION['userID']);
 
    printHeader('Bazinga!', $session);
-   printCartArticleSection($db, $cartArticles, $_SESSION['userID']);
+   printDifferentArticleSection($db, $cartArticles, 'cart');
+   printCheckoutSection($cartArticles);
    printFooter();
 ?>

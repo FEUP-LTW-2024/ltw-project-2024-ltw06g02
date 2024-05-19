@@ -146,4 +146,57 @@
    <button class="form-button" id="promotionbtn" style="display:flex; margin: 1em auto 0 auto;">edit</button>
 </dialog> 
 
+<?php 
+   } 
+
+   function buildCheckoutDialog($cartArticles){
+?>
+
+   <dialog id="checkoutDialog" class="dialog">
+      <button class="close-button" aria-label="Close alert" type="button" data-close>
+         <span aria-hidden="true">&times;</span>
+      </button>
+      <p>checkout.</p>
+      <div class="promotion-icon" style="margin-bottom: 0;" id="shipping"><i class="material-icons">add</i>generate shipping costs</div>
+      <p id="shipping-cost" style="margin: 0; display: none; justify-content: center;"><?= (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ) ? '$' : '€' ?></p>
+      <div class="default-promotions" id="payments" style="display:none; margin-top: 1em;">
+         <div class="promotion">credit card</div>
+         <div class="promotion">paypal</div>
+      </div>
+      <form action="../actions/buy.php" method="post">
+         <?php foreach ($cartArticles as $cart): ?>
+            <input type="hidden" name="cartItems[]" value="<?= $cart['productID'] ?>">
+         <?php endforeach; ?>
+         <button class="form-button" id="checkout" type="submit" disabled style="display:flex; margin: 1em auto 0 auto;">buy</button>
+      </form>
+   </dialog> 
+
+   <script>
+      const shippingBtn = document.getElementById("shipping");
+      const shippingCost = document.getElementById("shipping-cost")
+      const payments = document.getElementById("payments")
+      const paymentBtn = payments.querySelectorAll(".promotion")
+      const buy = document.getElementById("checkout")
+
+      shippingBtn.addEventListener("click", () => {
+         if(shippingCost.style.display == "none") {
+            shippingCost.innerHTML = Math.round(Math.random() * 300) / 10 + shippingCost.innerHTML;
+         }
+         shippingCost.style.display = "flex";
+         payments.style.display = "flex";
+      })
+
+      paymentBtn.forEach((e) => {
+         e.addEventListener("click", () => {
+            paymentBtn.forEach((b) => {
+               b.classList = 'promotion'
+            })
+
+            e.classList += ' selected'
+            buy.removeAttribute("disabled");
+         })
+      })
+      
+   </script>
+
 <?php } ?>

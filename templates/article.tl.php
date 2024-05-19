@@ -85,7 +85,7 @@
          if(sizeof($articles) == 0 || $check == sizeof($articles)) echo "
             <div class='no-product-section'>
                <img class='no-product-img' style='margin-top: 1em;' src='../assets/no_items.svg'>
-               <h3 class='playfair-display-font' style='margin-top: 2em;'>não foram encontrados artigos.</h3>
+               <h3 style='margin-top: 2em;'>não foram encontrados artigos.</h3>
             </div>
             "
          ?>
@@ -131,22 +131,23 @@
 ?>
 
 <?php
-   function printFavoriteArticleSection($db, $favoriteArticles){
+   function printDifferentArticleSection($db, $articles, $identifier){
 ?>
 
          <div class="product-section">
-            <h3 class="products-title">Artigos marcados como favoritos</h3>
+            <h3 class="products-title"><?= $identifier == 'favorites' ? 'favorites.' : 'shopping cart.' ?></h3>
             <section class="article-grid">
-               <?php if(empty($favoriteArticles)){ ?>
+               <?php if(empty($articles)){ ?>
 
                   <div class="no-favorite-articles">
-                     <h2>Não tens artigos favoritos!</h2>
-                     <a href="index.php"></hre><button>Começa a procurar!</button></a>
+                     <img class='no-product-img' style='margin-top: 1em;' src='../assets/no_items.svg'>
+                     <h3 style='margin-top: 2em; text-align: center;'>nothing here.</h3>
+                     <a href="index.php"></hre><button>start looking.</button></a>
                   </div>
                <?php
                   }
-                  foreach($favoriteArticles as $favorite){
-                     $article = getArticleById($favorite['productID']);
+                  foreach($articles as $article){
+                     $article = getArticleById($article['productID']);
                      getSingleArticle($article);
                   }
                ?>
@@ -164,10 +165,11 @@
       $size = getSizeByID($db, $article['sizeID']);
       $condition = getConditionByID($db, $article['conditionID']);
       $username = retrieveUser($article['userID'])['username'];
+      $inCart = checkCartArticle($article['productID'], $userID);
 ?>
 
    <div class="container">
-      <div style="display: flex; flex-direction: column; row-gap: 1em; max-width: 25em">
+      <div style="display: flex; flex-direction: column; row-gap: 1em; max-width: 25em; align-items: center;">
          <img src=<?=$images[0]?> alt="product" class="product-image">
          <div style="display: flex; column-gap: 1em;">
             <?php for($i = 1; $i < sizeof($images) - 1; $i++) { ?>
@@ -194,10 +196,17 @@
 
          <?php if($userID != $article['userID']) { ?>
 
-         <a href=<?= "../actions/add_to_cart.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
-            <button id="buyBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">Adicionar ao carrinho</button>
-         </a>
-         <a href=<?= "../actions/initialize_chat.php?q=" . $article['productID'] ?> ><button type="submit" id="sendBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">Enviar mensagem</button></a>
+            <?php if($inCart) { ?>
+               <a href=<?= "../actions/remove_from_cart.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
+                  <button id="buyBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">Remover do carrinho</button>
+               </a>
+            <?php } else { ?>
+               <a href=<?= "../actions/add_to_cart.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
+                  <button id="buyBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">Adicionar ao carrinho</button>
+               </a>
+            <?php } ?>
+            
+            <a href=<?= "../actions/initialize_chat.php?q=" . $article['productID'] ?> ><button type="submit" id="sendBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">Enviar mensagem</button></a>
 
          <?php
             $favoriteArticles = getFavoriteArticlesByUserId($db, $userID);
@@ -285,89 +294,30 @@
 
 <?php
    }
+
+   function printCheckoutSection($articles) {
+      buildCheckoutDialog($articles);
 ?>
 
-<?php
+   <section style="display: flex; justify-content: end; margin: 1em 2em;">
+      <button class="filter-btn" id="checkoutBtn">procceed to checkout</button>
+   </section>
 
-function printCartArticleSection($db, $cartArticles, $userID){
+   <script>
+      const checkoutBtn = document.getElementById("checkoutBtn");
+      const checkoutDialog = document.getElementById("checkoutDialog")
+      const closeCheckoutBtn = checkoutDialog.querySelector(".close-button");
 
-   if (empty($cartArticles)) {
-      ?>
-      <div class="product-section-cart">
-         <h3 class="products-title">Shopping Cart</h3>
-         <section class="article-grid">
-            <div class="no-favorite-articles">
-               <h2>Não tens artigos no carrinho!</h2>
-               <a href="index.php"></hre><button>Adiciona!</button></a>
-            </div>
-         </section>
-      </div>
-      <?php
-   } else {
-      ?>
-      <div class="product-section-carousel">
-         <h3 class="products-title-carousel">Shopping Cart</h3>
-         <div class="carousel-container">
-            <?php
-               foreach($cartArticles as $cart){
-                  $article = getArticleById($cart['productID']);
-                  getSingleCartArticle($article);
-               }
-            ?>
-         </div>
-         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-         <a class="next" onclick="plusSlides(1)">&#10095;</a>
-         <div style="text-align:center">
-            <?php for($i = 0; $i < count($cartArticles); $i++): ?>
-               <span class="dot" onclick="currentSlide(<?php echo $i + 1; ?>)"></span>
-            <?php endfor; ?>
-         </div>
-         <section class="article-grid-cart">
-            <div class="emptyBox">
-               <h4 class="emptyParagrah">Add more articles and find them here</h4>
-               <a href="../index.php" class="find">Search</a>
-            </div>
-         </section>
-         <form id="removeFromCartForm" action="../actions/buy.php" method="POST">
-            <?php foreach ($cartArticles as $cart): ?>
-               <input type="hidden" name="cartItems[]" value="<?= $cart['productID'] ?>">
-            <?php endforeach; ?>
-            <button type="submit" id="buyCartBtn">Finalize purchase</button>
-         </form>
-      </div>
+      checkoutBtn.addEventListener("click", () => {
+         checkoutDialog.showModal();
+      })
 
-      <script>
-         let slideIndex = 1;
-         showSlides(slideIndex);
+      closeCheckoutBtn.addEventListener("click", () => {
+         checkoutDialog.close();
+      })
+   </script>
 
-         function plusSlides(n) {
-            showSlides(slideIndex += n);
-         }
-
-         function currentSlide(n) {
-            showSlides(slideIndex = n);
-         }
-
-         function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("article");
-            let dots = document.getElementsByClassName("dot");
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-               slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-               dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex-1].style.display = "block";
-            dots[slideIndex-1].className += " active";
-         }
-      </script>
-      <?php
-   } 
-}
-?>
+<?php } ?>
 
 <script>
    document.addEventListener("DOMContentLoaded", function() {
@@ -378,6 +328,7 @@ function printCartArticleSection($db, $cartArticles, $userID){
       const promotionDialog = document.getElementById("editPromotionDialog");
       const closePromotionBtn = promotionDialog.querySelector(".close-button");
       const openPromotionBtn = document.getElementById("add-promotion");
+
 
       openEditBtn.addEventListener("click", () => {
          editDialog.showModal();
@@ -391,10 +342,9 @@ function printCartArticleSection($db, $cartArticles, $userID){
          editDialog.close();
          promotionDialog.showModal();
       })
-
+      
       closePromotionBtn.addEventListener("click", () => {
          promotionDialog.close();
-      })
-
+      })    
    });
 </script>

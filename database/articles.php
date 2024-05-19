@@ -113,7 +113,7 @@
    }
 
   function getUserArticles($userID){
-   $db = getDatabaseConnection();
+     $db = getDatabaseConnection();
      $stmt = $db->prepare(
         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.userID = ?"
      );
@@ -131,6 +131,16 @@
 
       $cartArticles = $stmt->fetchAll();
       return $cartArticles;
+   }
+
+   function checkCartArticle($id, $userID) : bool {
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare(
+         "SELECT * FROM cart WHERE productID = ? AND userID = ?"
+      );
+      $stmt->execute(array($id, $userID));
+
+      return $stmt->fetch() ? true : false;
    }
 
    function removeArticle($db, $id) : bool{

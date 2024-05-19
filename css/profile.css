@@ -147,6 +147,12 @@
       column-gap: 1em;
     }
   }
+
+  .preferences-tag {
+    margin: 1em 0; 
+    flex-direction: column;
+    row-gap: 0.5em;
+  }
 }
 
 @media (max-width: 850px){

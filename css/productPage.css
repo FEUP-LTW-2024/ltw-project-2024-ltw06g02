@@ -154,5 +154,15 @@ form#addToCartForm {
     margin: 0;
 }
 
+@media (max-width: 480px) {
+    .product-image {
+        max-width: 20em;
+    }
+}
 
-
+@media (max-width: 850px) {
+    .container{
+        flex-direction: column;
+        row-gap: 1em;
+    }
+}
