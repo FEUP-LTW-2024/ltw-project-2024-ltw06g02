@@ -135,4 +135,8 @@ INSERT INTO productSize (name) VALUES
 
 INSERT INTO productCondition (name) VALUES
 ('Semi-used'),
-('Very used');
+('Very used'),
+('New');
+
+INSERT INTO users (username, password, email, fullName, admin) VALUES
+('john-doe', '$2y$10$pWjAf.F.MJ09wKYEs9MRS.v72YNjPJCfSYaMpWdWUTARXj4l/7Etu', 'johndoe@gmail.com', 'John Doe', true);
