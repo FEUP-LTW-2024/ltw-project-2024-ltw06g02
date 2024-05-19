@@ -3,7 +3,7 @@
 ?>
 
    <div class="outer-rectangle">
-      <h2>Adiciona fotografias</h2>
+      <h2>add photos</h2>
       <div class="inner-rectangle">
          <form action="actions/upload.php" method="post" enctype="multipart/form-data">
             <input type="file" name="files[]" required multiple>
@@ -17,7 +17,7 @@
 ?>
 
    <div class="outer-rectangle-info">
-      <h2>Descreve o produto</h2>
+      <h2>describe the product</h2>
          <div class="input-grp">
             <label>Title</label>
             <input type="text" name="name" required>

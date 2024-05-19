@@ -117,7 +117,7 @@
             <?php
                if (empty($articles)) {
                   ?>
-                  <h5 style="margin: auto auto; font-weight: normal;"><?= $userID == $_SESSION['userID'] ? 'Não tens nenhum artigo à venda!' : 'Sem artigos para venda!' ?></h5>
+                  <h5 style="margin: auto auto; font-weight: normal;">without articles to sell</h5>
                   <?php
                } else {
                   foreach ($articles as $article) {

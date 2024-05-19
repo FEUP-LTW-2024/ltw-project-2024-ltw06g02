@@ -23,7 +23,7 @@
          </div>
    </div>
       <?php if(isset($_SESSION['username'])){ ?>
-         
+            <div class="not-dropdown-icons">
             <?php
             if(checkIfUserIsAdmin($_SESSION['username'])){
             ?>   
@@ -42,9 +42,13 @@
             <a class="nav-button" href="../sell.php">
                sell
             </a>
+            </div>
             <div class="dropdown">
                <button class="nav-button"><?= $_SESSION['username'] ?></button>
                <div class="dropdown-content">
+                  <?php if(checkIfUserIsAdmin($_SESSION['username'])){ ?><a class="responsive" href="../admin.php">Admin</a> <?php } ?>
+                  <a class="responsive" href="../shopping_cart.php">Cart</a>
+                  <a class="responsive" href="../wishlist.php">Wishlist</a>
                   <a href="../profile.php">Profile</a>
                   <a href="../messages.php">Messages</a>
                   <a href="../historic.php">Historic</a>

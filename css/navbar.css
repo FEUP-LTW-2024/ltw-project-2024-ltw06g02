@@ -7,6 +7,7 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  text-transform: lowercase;
 }
  
 .navbar {
@@ -48,18 +49,6 @@ body {
    margin-left: auto;
 }
 
-@media screen and (max-width: 600px) {
-   .navbar .register {
-   margin-left: auto ;
-   display: block;
-   text-align: center;
-   }
-
-   .navbar .register {
-      padding: 14px 16px;
-   }
-}
-
 .dropdown {
    display: block;
    margin-left: auto;
@@ -68,6 +57,7 @@ body {
 .dropdown-content {
    display: none;
    position: absolute;
+   margin-right: 2em;
    background-color: #f9f9f9;
    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
    z-index: 1;
@@ -132,6 +122,28 @@ a.nav-icon:hover {
    font-size: medium;
 }
 
+.not-dropdown-icons {
+   display: flex;
+}
+
+.dropdown .dropdown-content .responsive {
+   display: none;
+}
+
 .search-form button:hover {
    background-color: #ccc; 
+}
+
+@media (max-width: 850px) {
+   .search-form input[type="text"], .search-form button {
+      display: none;
+   }
+
+   .not-dropdown-icons {
+      display: none;
+   }
+
+   .dropdown .dropdown-content .responsive {
+      display: block;
+   }
 }

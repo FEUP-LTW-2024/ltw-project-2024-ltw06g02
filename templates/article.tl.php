@@ -85,7 +85,7 @@
          if(sizeof($articles) == 0 || $check == sizeof($articles)) echo "
             <div class='no-product-section'>
                <img class='no-product-img' style='margin-top: 1em;' src='../assets/no_items.svg'>
-               <h3 style='margin-top: 2em;'>não foram encontrados artigos.</h3>
+               <h3 style='margin-top: 2em;'>nothing here.</h3>
             </div>
             "
          ?>
@@ -198,15 +198,15 @@
 
             <?php if($inCart) { ?>
                <a href=<?= "../actions/remove_from_cart.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
-                  <button id="buyBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">Remover do carrinho</button>
+                  <button id="buyBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">remove from cart</button>
                </a>
             <?php } else { ?>
                <a href=<?= "../actions/add_to_cart.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
-                  <button id="buyBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">Adicionar ao carrinho</button>
+                  <button id="buyBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">add to cart</button>
                </a>
             <?php } ?>
             
-            <a href=<?= "../actions/initialize_chat.php?q=" . $article['productID'] ?> ><button type="submit" id="sendBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">Enviar mensagem</button></a>
+            <a href=<?= "../actions/initialize_chat.php?q=" . $article['productID'] ?> ><button type="submit" id="sendBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">send message</button></a>
 
          <?php
             $favoriteArticles = getFavoriteArticlesByUserId($db, $userID);
@@ -220,18 +220,18 @@
 
             if($exists === false){ ?>
                   <a href=<?= "../actions/favorite.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
-                     <button id="removeBtn" class="<?php if (!$userID) echo "disabled"?> product-btn fav-btn">Adicionar aos favoritos</button>
+                     <button id="removeBtn" class="<?php if (!$userID) echo "disabled"?> product-btn fav-btn">add to favorites</button>
                   </a>
                <?php } else { ?>
                   <a href=<?= "../actions/remove_favorite.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
-                     <button id="removeBtn" class="<?php if (!$userID) echo "disabled"?> product-btn fav-btn">Remover aos favoritos</button>
+                     <button id="removeBtn" class="<?php if (!$userID) echo "disabled"?> product-btn fav-btn">remove from favorites</button>
                   </a>
                <?php } }?>
 
          <?php if(isset($userID) && $userID == $article['userID']){ ?>
             <div class="product-btn-row">
-               <a ><button class="product-btn" id="edit">Editar artigo</button></a>
-               <a href=<?= "../actions/remove_article.php?articleID=" . $article['productID']?>><button class="product-btn rm-btn">Remover artigo</button></a>
+               <a ><button class="product-btn" id="edit">edit article</button></a>
+               <a href=<?= "../actions/remove_article.php?articleID=" . $article['productID']?>><button class="product-btn rm-btn">remove article</button></a>
             </div>
          <?php } ?>
 

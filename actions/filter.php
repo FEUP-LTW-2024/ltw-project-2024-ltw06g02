@@ -34,7 +34,7 @@
       echo "
          <div class='no-product-section'>
             <img class='no-product-img' style='margin-top: 1em;' src='../assets/no_items.svg'>
-            <h3 class='playfair-display-font' style='margin-top: 2em;'>não foram encontrados artigos.</h3>
+            <h3 class='playfair-display-font' style='margin-top: 2em;'>nothing here.</h3>
          </div>
       ";
    }
