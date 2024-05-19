@@ -9,9 +9,15 @@
 ## Install Instructions
 
     git clone git@github.com:FEUP-LTW-2024/ltw-project-2024-ltw06g02.git
+    cd ltw-project-2024-ltw06g02
     git checkout final-delivery-v1
-    sqlite database/website.db < database/website.sql
+    sqlite3 database/website.db < database/website.sql
     php -S localhost:9000
+
+## Admin Account
+
+- username: john-doe
+- password: admin-123
 
 ## Screenshots
 
