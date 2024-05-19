@@ -5,7 +5,7 @@
    <div class="outer-rectangle">
       <h2>add photos</h2>
       <div class="inner-rectangle">
-         <form action="actions/upload.php" method="post" enctype="multipart/form-data">
+         <form action="../actions/upload.php" method="post" enctype="multipart/form-data">
             <input type="file" name="files[]" required multiple>
       </div>
    </div>
