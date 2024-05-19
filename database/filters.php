@@ -1,6 +1,6 @@
 <?php 
-   require_once(dirname(__DIR__) . "/database/user.php");
-   require_once('connection.php');
+   require_once(__DIR__ . '/user.php');
+   require_once(__DIR__ . '/connection.php');
 
    $db = getDatabaseConnection();
 
@@ -149,7 +149,7 @@
       $categories = $stmt->fetchAll();
 
       foreach($categories as $cat){
-         if($cat['name'] == $category) return true;
+         if(strtolower($cat['name']) == strtolower($category)) return true;
       }
 
       return false;
@@ -182,7 +182,7 @@
       $conditions = $stmt->fetchAll();
 
       foreach($conditions as $c){
-         if($c['name'] == $condition) return true;
+         if(strtolower($c['name']) == strtolower($condition)) return true;
       }
 
       return false;
@@ -215,7 +215,7 @@
       $sizes = $stmt->fetchAll();
 
       foreach($sizes as $s){
-         if($s['name'] == $size) return true;
+         if(strtolower($s['name']) == strtolower($size)) return true;
       }
 
       return false;

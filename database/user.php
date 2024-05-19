@@ -1,7 +1,7 @@
 <?php
-   require_once('connection.php');
-   require_once('articles.php');
-   require_once(dirname(__DIR__) . '/models/user.php');
+   require_once(__DIR__ . '/connection.php');
+   require_once(__DIR__ . '/articles.php');
+   require_once(__DIR__ . '/../models/user.php');
 
    $db = getDatabaseConnection();
 

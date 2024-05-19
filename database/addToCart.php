@@ -1,5 +1,5 @@
 <?php
-    require_once('connection.php');
+    require_once(__DIR__ . '/connection.php');
 
     $db = getDatabaseConnection();
     function addProductToCart($cart) : bool{

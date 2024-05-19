@@ -1,9 +1,9 @@
 <?php
-   require_once("../database/removeFromCart.php");
-   require_once('../database/favorites.php');
-   require_once('../database/articles.php');
-   require_once('../database/messages.php');
-   require_once("../models/session.php");
+   require_once(__DIR__ . '/../database/removeFromCart.php');
+   require_once(__DIR__ . '/../database/favorites.php');
+   require_once(__DIR__ . '/../database/articles.php');
+   require_once(__DIR__ . '/../database/messages.php');
+   require_once(__DIR__ . '/../models/session.php');
 
    $session = new Session();
 
@@ -14,7 +14,7 @@
       removeChat($_GET['articleID']);
 
       $session->addMessage('success', 'Product deleted successfully');
-      header('Location: ../profile.php');
+      header('Location: ../pages/profile.php');
       exit();
    }
 

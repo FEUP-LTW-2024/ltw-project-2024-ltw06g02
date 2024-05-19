@@ -1,5 +1,4 @@
 <?php
-
    class User{
       public function __construct($fullName, $username, $email, $password, $avatar){
          $this->fullName = $fullName;

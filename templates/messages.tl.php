@@ -1,6 +1,6 @@
 <?php 
-   require_once(dirname(__DIR__) . '/database/articles.php');
-   require_once(dirname(__DIR__) . '/database/user.php');
+   require_once(__DIR__ . '/../database/articles.php');
+   require_once(__DIR__ . '/../database/user.php');
    function printMessagesBlock($chats) {
 ?>
 

@@ -1,13 +1,11 @@
 <?php
-
 class Session {
     private array $messages;
     private $userID;
 
     public function __construct() {
-        session_set_cookie_params(0, '/', 'www.fe.up.pt', true, true);
         session_start();
-        $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
+        $this->userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
         $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
         unset($_SESSION['messages']);
     }

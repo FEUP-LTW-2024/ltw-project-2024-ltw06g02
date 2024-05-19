@@ -1,6 +1,6 @@
 <?php
-   require_once('forms.tl.php');
-   require_once('database/user.php');
+   require_once(__DIR__ . '/forms.tl.php');
+   require_once(__DIR__ . '/../database/user.php');
    function printNavBar(){
       buildLoginForm();
       buildRegisterForm();
@@ -27,31 +27,31 @@
             <?php
             if(checkIfUserIsAdmin($_SESSION['username'])){
             ?>   
-               <a href="../admin.php" class="nav-icon">
+               <a href="../pages/admin.php" class="nav-icon">
                <i class="material-icons">settings</i>
                </a>
             <?php
             }
             ?>
-            <a href="../shopping_cart.php" class="nav-icon">
+            <a href="../pages/shopping_cart.php" class="nav-icon">
                <i class="material-icons">shopping_cart</i>
             </a>
-            <a href="../wishlist.php" class="nav-icon">
+            <a href="../pages/wishlist.php" class="nav-icon">
               <i class="material-icons">favorite</i>
             </a>
-            <a class="nav-button" href="../sell.php">
+            <a class="nav-button" href="../pages/sell.php">
                sell
             </a>
             </div>
             <div class="dropdown">
                <button class="nav-button"><?= $_SESSION['username'] ?></button>
                <div class="dropdown-content">
-                  <?php if(checkIfUserIsAdmin($_SESSION['username'])){ ?><a class="responsive" href="../admin.php">Admin</a> <?php } ?>
-                  <a class="responsive" href="../shopping_cart.php">Cart</a>
-                  <a class="responsive" href="../wishlist.php">Wishlist</a>
-                  <a href="../profile.php">Profile</a>
-                  <a href="../messages.php">Messages</a>
-                  <a href="../historic.php">Historic</a>
+                  <?php if(checkIfUserIsAdmin($_SESSION['username'])){ ?><a class="responsive" href="../pages/admin.php">Admin</a> <?php } ?>
+                  <a class="responsive" href="../pages/shopping_cart.php">Cart</a>
+                  <a class="responsive" href="../pages/wishlist.php">Wishlist</a>
+                  <a href="../pages/profile.php">Profile</a>
+                  <a href="../pages/messages.php">Messages</a>
+                  <a href="../pages/historic.php">Historic</a>
                   <a href="../actions/logout.php">Logout</a>
                </div>
             </div>
@@ -69,9 +69,8 @@
                Register
             </a>
          </div>
-
+      </div>
       <?php } ?>
-
 </div>
 
 <?php

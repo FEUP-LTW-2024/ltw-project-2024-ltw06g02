@@ -1,5 +1,5 @@
 <?php 
-   require_once('connection.php');
+   require_once(__DIR__ . '/connection.php');
    
    $db = getDatabaseConnection();
    function getAllArticles(){
@@ -115,7 +115,7 @@
       $stmt->execute(array(
          preg_replace("/[^a-zA-Z0-9\s]/", '', $article['name']),
          preg_replace("/[^a-zA-Z0-9\s]/", '', $article['description']),
-         $article['price'],
+         isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ?  $article['price'] / 1.09 : $article['price'],
          $categoryID['categoryID'],
          $_SESSION['userID'],
          $sizeID['sizeID'],
