@@ -5,7 +5,6 @@
    require_once('templates/article.tl.php');
 
    $session = new Session();
-   $db = getDatabaseConnection();
 
    printHeader('Bazinga!', $session);
    printArticleSection($searchedArticles, 'based on your search.');

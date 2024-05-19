@@ -1,8 +1,10 @@
 <?php
    require_once('connection.php');
 
+   $db = getDatabaseConnection();
+
    function addPurchase($userID, $article) : bool {
-      $db = getDatabaseConnection();
+      global $db;
 
       $notificationText = "Compra efetuada com sucesso";
       $notificationDate = date('Y-m-d H:i:s');
@@ -21,25 +23,27 @@
    }
 
    function addSale($article) : bool {
-    $db = getDatabaseConnection();
+      global $db;
 
-    $notificationText = "Venda efetuada com sucesso";
-    $notificationDate = date('Y-m-d H:i:s');
+      $notificationText = "Venda efetuada com sucesso";
+      $notificationDate = date('Y-m-d H:i:s');
 
-    $sql = "INSERT INTO sale (userID, productName, productPrice, notificationText, notificationDate) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(1, $article['userID']);
-    $stmt->bindParam(2, $article['name']);
-    $price = $article['promotion'] ? $article['price'] - $article['price'] * $article['promotion'] : $article['price'];
-    $stmt->bindParam(3, $price);
-    $stmt->bindParam(4, $notificationText);
-    $stmt->bindParam(5, $notificationDate);
-    $stmt->execute();
+      $sql = "INSERT INTO sale (userID, productName, productPrice, notificationText, notificationDate) VALUES (?, ?, ?, ?, ?)";
+      $stmt = $db->prepare($sql);
+      $stmt->bindParam(1, $article['userID']);
+      $stmt->bindParam(2, $article['name']);
+      $price = $article['promotion'] ? $article['price'] - $article['price'] * $article['promotion'] : $article['price'];
+      $stmt->bindParam(3, $price);
+      $stmt->bindParam(4, $notificationText);
+      $stmt->bindParam(5, $notificationDate);
+      $stmt->execute();
 
-    return true;
+      return true;
    }
 
-   function getPurchasesByUserId($db, $userID){
+   function getPurchasesByUserId($userID){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT * FROM purchase WHERE userID = ?"
       );
@@ -49,7 +53,9 @@
       return $purchases;
    }
 
-   function getSalesByUserId($db, $userID){
+   function getSalesByUserId($userID){
+      global $db;
+      
       $stmt = $db->prepare(
          "SELECT * FROM sale WHERE userID = ?"
       );

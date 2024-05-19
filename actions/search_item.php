@@ -3,8 +3,6 @@
    require_once('../database/articles.php');
    require_once('../templates/article.tl.php');
 
-   $db = getDatabaseConnection();
-
    $session = new Session();
 
    $articles = getArticlesByName($_GET['q']);
@@ -19,7 +17,7 @@
       echo "
          <div class='no-product-section'>
             <img class='no-product-img' style='margin-top: 1em;' src='../assets/no_items.svg'>
-            <h3 class='playfair-display-font' style='margin-top: 2em;'>nothing here.</h3>
+            <h3 style='margin-top: 2em;'>nothing here.</h3>
          </div>
       ";
    }

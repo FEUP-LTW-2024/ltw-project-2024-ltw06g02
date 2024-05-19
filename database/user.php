@@ -3,8 +3,10 @@
    require_once('articles.php');
    require_once(dirname(__DIR__) . '/models/user.php');
 
+   $db = getDatabaseConnection();
+
    function registerUser($user) : bool{
-      $db = getDatabaseConnection();
+      global $db;
 
       if(!checkUserExists($user)){
          $stmt = $db->prepare(
@@ -25,7 +27,8 @@
    }
 
    function loginUser($username, $password) : bool {
-      $db = getDatabaseConnection();
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT username, password FROM users WHERE username=?"
       );
@@ -42,7 +45,8 @@
    }
 
    function checkUserExists($user) : bool{
-      $db = getDatabaseConnection();
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT username FROM users WHERE username=? OR email=?"
       );
@@ -58,7 +62,8 @@
    }
 
    function checkUserExistsByName($username) : bool{
-      $db = getDatabaseConnection();
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT username FROM users WHERE username=?"
       );
@@ -73,7 +78,7 @@
    }
 
    function elevateUser($username) : bool {
-      $db = getDatabaseConnection();
+      global $db;
 
       if(checkUserExistsByName($username)){
          $sql = "UPDATE users SET admin = TRUE WHERE username = ?";
@@ -87,7 +92,7 @@
    }
 
    function checkIfUserIsAdmin($username) : bool{
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare(
          "SELECT username FROM users WHERE admin=TRUE"
@@ -103,7 +108,7 @@
    }
 
    function getAllUsersRegistered(){
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare(
          "SELECT username, userID FROM users ORDER BY userID"
@@ -115,7 +120,7 @@
    }
 
    function displayUserItems($userId) {
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare("SELECT * FROM product WHERE userID = :userId");
       $stmt->execute(['userId' => $userId]);
@@ -125,7 +130,7 @@
    }
 
    function retrieveUser($id){
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare("SELECT * FROM users WHERE userID = ?");
       $stmt->bindParam(1, $id);
@@ -136,7 +141,7 @@
       return $user;
    }
    function updateUser($username, $password, $email, $id) : bool{
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare("SELECT * FROM users WHERE (username = ? and userID != ?) OR (email = ? and userID != ?)");
       $stmt->execute(array($username, $id, $email, $id));
@@ -150,14 +155,14 @@
    }
 
    function changePhoto($filepath, $id){
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare("UPDATE users SET avatar = ? WHERE userID = ?");
       $stmt->execute(array($filepath, $id));
    }
 
    function getUserFollowers($userId){
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare(
          "SELECT followers FROM users WHERE userID=?"
@@ -170,8 +175,6 @@
    }
 
    function getUserTotalLikes($userId){
-      $db = getDatabaseConnection();
-
       $articles = getUserArticles($userId);
 
       $totalLikes = 0;
@@ -195,7 +198,7 @@
    }
 
    function getUserIdByName($name){
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare(
          "SELECT userID FROM users WHERE username=?"

@@ -3,20 +3,17 @@
    require_once('templates/header.tl.php');
    require_once('templates/article.tl.php');
    require_once('templates/filter.tl.php');
-   require_once('database/connection.php');
    require_once('database/articles.php');
    require_once('database/filters.php');
    require_once('models/session.php');
 
    $session = new Session();
 
-   $db = getDatabaseConnection();
-
    if(!isset($_SESSION['userID'])) header('Location: index.php');
 
-   $favoriteArcticles = getFavoriteArticlesByUserId($db, $_SESSION['userID']);
+   $favoriteArcticles = getFavoriteArticlesByUserId($_SESSION['userID']);
 
    printHeader('Bazinga!', $session);
-   printDifferentArticleSection($db ,$favoriteArcticles, 'favorites');
+   printDifferentArticleSection($favoriteArcticles, 'favorites');
    printFooter();
 ?>

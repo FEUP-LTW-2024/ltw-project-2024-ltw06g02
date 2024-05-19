@@ -94,10 +94,9 @@
    } 
 
    function buildPreferencesDialog($preferences) {
-      $db = getDatabaseConnection();
-      $categories = getAllCategories($db);
-      $sizes = getAllSizes($db);
-      $conditions = getAllConditions($db);
+      $categories = getAllCategories();
+      $sizes = getAllSizes();
+      $conditions = getAllConditions();
 ?>
 
 <dialog id="editPreferencesDialog" class="dialog">

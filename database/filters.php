@@ -1,6 +1,12 @@
 <?php 
    require_once(dirname(__DIR__) . "/database/user.php");
-   function getAllCategories($db){
+   require_once('connection.php');
+
+   $db = getDatabaseConnection();
+
+   function getAllCategories(){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT * FROM productCategory"
       );
@@ -9,7 +15,9 @@
       return $categories;
    }
 
-   function getAllSizes($db){
+   function getAllSizes(){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT * FROM productSize"
       );
@@ -18,7 +26,9 @@
       return $sizes;
    }
 
-   function getAllConditions($db){
+   function getAllConditions(){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT * FROM productCondition"
       );
@@ -27,7 +37,9 @@
       return $conditions;
    }
 
-   function getCategoryByID($db, $id){
+   function getCategoryByID($id){
+      global $db;
+      
       $stmt = $db->prepare(
          "SELECT * FROM productCategory WHERE categoryID=?"
       );
@@ -37,7 +49,9 @@
       return $category;
    }
 
-   function getSizeByID($db, $id){
+   function getSizeByID($id){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT * FROM productSize WHERE sizeID=?"
       );
@@ -47,7 +61,9 @@
       return $size;
    }
 
-   function getConditionByID($db, $id){
+   function getConditionByID($id){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT * FROM productCondition WHERE conditionID=?"
       );
@@ -57,7 +73,9 @@
       return $condition;
    }
 
-   function retrievePreferences($db, $id){
+   function retrievePreferences($id){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT * FROM preferences WHERE preferencesID=?"
       );
@@ -66,10 +84,11 @@
       return $preferences;
    }
 
-   function updatePreferences($db, $categoryID, $sizeID, $conditionID) : bool{
+   function updatePreferences($categoryID, $sizeID, $conditionID) : bool {
+      global $db;
 
       if(!isset(retrieveUser($_SESSION['userID'])['preferencesID'])){
-         createPreferences($db, $categoryID, $sizeID, $conditionID);
+         createPreferences($categoryID, $sizeID, $conditionID);
       }
 
       $stmt = $db->prepare(
@@ -80,7 +99,9 @@
       return true;
    }
 
-   function createPreferences($db, $categoryID, $sizeID, $conditionID) : bool{
+   function createPreferences($categoryID, $sizeID, $conditionID) : bool {
+      global $db;
+
       $stmt = $db->prepare(
          "INSERT INTO preferences (categoryID, sizeID, conditionID, userID) VALUES(?, ?, ?, ?)"
       );
@@ -99,5 +120,104 @@
       $stmt->execute(array($id['preferencesID'], $_SESSION['userID']));
       
       return true;
+   }
+
+   function addCategory($category) : bool {
+      global $db;
+
+      if(!checkIfCategoryExists($category)){
+         $sql = "INSERT INTO productCategory(name) VALUES (?)";
+         $stmt = $db->prepare($sql);
+         $stmt->bindParam(1, $category);
+         $stmt->execute();
+
+         return true;
+      }
+      else{
+         return false;
+      }
+
+   }
+
+   function checkIfCategoryExists($category) : bool{
+      global $db;
+
+      $stmt = $db->prepare(
+         "SELECT name FROM productCategory"
+      );
+      $stmt->execute();
+      $categories = $stmt->fetchAll();
+
+      foreach($categories as $cat){
+         if($cat['name'] == $category) return true;
+      }
+
+      return false;
+   }
+
+   function addCondition($condition) : bool {
+      global $db;
+
+      if(!checkIfConditionExists($condition)){
+         $sql = "INSERT INTO productCondition(name) VALUES (?)";
+         $stmt = $db->prepare($sql);
+         $stmt->bindParam(1, $condition);
+         $stmt->execute();
+
+         return true;
+      }
+      else{
+         return false;
+      }
+
+   }
+
+   function checkIfConditionExists($condition) : bool{
+      global $db;
+
+      $stmt = $db->prepare(
+         "SELECT name FROM productCondition"
+      );
+      $stmt->execute();
+      $conditions = $stmt->fetchAll();
+
+      foreach($conditions as $c){
+         if($c['name'] == $condition) return true;
+      }
+
+      return false;
+   }
+
+   function addSize($size) : bool {
+      global $db;
+
+      if(!checkIfSizeExists($size)){
+         $sql = "INSERT INTO productSize(name) VALUES (?)";
+         $stmt = $db->prepare($sql);
+         $stmt->bindParam(1, $size);
+         $stmt->execute();
+
+         return true;
+      }
+      else{
+         return false;
+      }
+
+   }
+
+   function checkIfSizeExists($size) : bool{
+      global $db;
+
+      $stmt = $db->prepare(
+         "SELECT name FROM productSize"
+      );
+      $stmt->execute();
+      $sizes = $stmt->fetchAll();
+
+      foreach($sizes as $s){
+         if($s['name'] == $size) return true;
+      }
+
+      return false;
    }
 ?>

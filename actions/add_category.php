@@ -1,5 +1,5 @@
 <?php
-   require_once("../database/add_category.php");
+   require_once("../database/filters.php");
    require_once("../models/session.php");
 
    $session = new Session();

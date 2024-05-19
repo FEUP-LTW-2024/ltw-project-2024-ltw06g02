@@ -3,13 +3,11 @@
    require_once('database/follow.php');
    require_once('database/filters.php');
    require_once('database/user.php');
-   require_once('database/connection.php');
    function printBioSection($userID){
-      $db = getDatabaseConnection();
       $user = retrieveUser($userID);
       buildEditProfile();
       buildUploadPhoto();
-      buildPreferencesDialog(retrievePreferences($db, $user['preferencesID']));
+      buildPreferencesDialog(retrievePreferences($user['preferencesID']));
 ?>
    <div class="info">
       <div class="conjunction">
@@ -26,11 +24,11 @@
                   <div class="preferences-tag">
                      <?php 
                      if (isset($_SESSION['userID']) && isset($user['preferencesID']) && $_SESSION['userID'] == $user['userID']) {
-                        $preferences = retrievePreferences($db, $user['preferencesID']);
+                        $preferences = retrievePreferences($user['preferencesID']);
                         
-                        $condition = getConditionByID($db, $preferences['conditionID']) ?? null;
-                        $size = getSizeByID($db, $preferences['sizeID']) ?? null;
-                        $category = getCategoryByID($db, $preferences['categoryID']) ?? null;
+                        $condition = getConditionByID($preferences['conditionID']) ?? null;
+                        $size = getSizeByID($preferences['sizeID']) ?? null;
+                        $category = getCategoryByID($preferences['categoryID']) ?? null;
                         
                         if ($condition || $size || $category) {
                            if ($condition) { ?>

@@ -131,7 +131,7 @@
 ?>
 
 <?php
-   function printDifferentArticleSection($db, $articles, $identifier){
+   function printDifferentArticleSection($articles, $identifier){
 ?>
 
          <div class="product-section">
@@ -156,14 +156,14 @@
 
 <?php
    }
-   function printArticleById($db, $article, $userID){
+   function printArticleById($article, $userID){
       buildEditArticle($article);
       buildPromotionDialog($article);
 
       $images = explode(",", $article['images']);
-      $category = getCategoryByID($db, $article['categoryID']);
-      $size = getSizeByID($db, $article['sizeID']);
-      $condition = getConditionByID($db, $article['conditionID']);
+      $category = getCategoryByID($article['categoryID']);
+      $size = getSizeByID($article['sizeID']);
+      $condition = getConditionByID($article['conditionID']);
       $username = retrieveUser($article['userID'])['username'];
       $inCart = checkCartArticle($article['productID'], $userID);
 ?>
@@ -209,7 +209,7 @@
             <a href=<?= "../actions/initialize_chat.php?q=" . $article['productID'] ?> ><button type="submit" id="sendBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">send message</button></a>
 
          <?php
-            $favoriteArticles = getFavoriteArticlesByUserId($db, $userID);
+            $favoriteArticles = getFavoriteArticlesByUserId($userID);
             $exists = false;
 
             foreach($favoriteArticles as $favorite){

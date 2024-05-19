@@ -1,8 +1,10 @@
 <?php
    require_once('connection.php');
 
+   $db = getDatabaseConnection();
+
    function addFollow($userId, $requesterId) : bool {
-      $db = getDatabaseConnection();
+      global $db;
 
       $sql = "INSERT INTO follow(userID, requesterID) VALUES (?,?)";
       $stmt = $db->prepare($sql);
@@ -18,7 +20,7 @@
    }
 
    function removeFollow($userId, $requesterId) : bool {
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare(
         "DELETE FROM follow WHERE userID = ? AND requesterID=?"
@@ -36,7 +38,7 @@
    }
 
    function checkIfFollows($userId, $requesterId) : bool{
-      $db = getDatabaseConnection();
+      global $db;
 
       $sql = "SELECT * FROM follow WHERE userID=? AND requesterID=?";
       $stmt = $db->prepare($sql);

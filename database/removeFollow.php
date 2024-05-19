@@ -1,8 +1,10 @@
 <?php
    require_once('connection.php');
 
+   $db = getDatabaseConnection();
+
    function removeFollow($userId, $requesterId) : bool {
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare(
         "DELETE FROM follow WHERE userID = ? AND requesterID=?"

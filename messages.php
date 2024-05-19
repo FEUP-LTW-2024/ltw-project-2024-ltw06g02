@@ -1,5 +1,4 @@
 <?php
-   require_once('database/connection.php');
    require_once('models/session.php');
    require_once('templates/messages.tl.php');
    require_once('templates/header.tl.php');
@@ -10,8 +9,7 @@
 
    if(!isset($_SESSION['userID'])) header('Location: index.php');
 
-   $db = getDatabaseConnection();
-   $chats = getUserChats($db);
+   $chats = getUserChats();
 
    printHeader('Bazinga!', $session);
    printMessagesBlock($chats);

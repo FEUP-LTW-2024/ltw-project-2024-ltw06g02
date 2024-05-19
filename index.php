@@ -12,13 +12,11 @@
 
    $session = new Session();
 
-   $db = getDatabaseConnection();
+   $recommendedArticles = getAllArticles();
+   if(isset($_SESSION['userID'])) $followedArticles = getFollowedArticles();
 
-   $recommendedArticles = getAllArticles($db);
-   if(isset($_SESSION['userID'])) $followedArticles = getFollowedArticles($db);
-
-   $filters = getAllCategories($db);
-   $conditions = getAllConditions($db);
+   $filters = getAllCategories();
+   $conditions = getAllConditions();
 
    printHeader('Bazinga!', $session);
    printArticleSection($recommendedArticles, 'explore. love. buy.');
