@@ -69,9 +69,8 @@
                Register
             </a>
          </div>
-
+      </div>
       <?php } ?>
-
 </div>
 
 <?php

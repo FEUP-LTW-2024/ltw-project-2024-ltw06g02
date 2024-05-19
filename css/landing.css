@@ -217,6 +217,32 @@ input[type="range"]::-moz-range-track {
    cursor: pointer;
 }
 
+#messages article {
+   display: flex;
+   width: 30%;
+   margin: 1em auto;
+   border-radius: 5px;
+   padding: 1em;
+   color: white;
+   justify-content: center;
+}
+
+#messages article.success {
+background-color: #DFF2BF;
+}
+
+#messages article.warning {
+background-color: #FEEFB3;
+}
+
+#messages article.error {
+background-color: #FFD2D2;
+}
+
+#messages article.info {
+background-color: #BDE5F8;
+}
+
 @media (max-width: 850px) {
  .product-section {
       padding: 1em;
@@ -250,29 +276,3 @@ input[type="range"]::-moz-range-track {
       flex-wrap: wrap;
    }
 }
-
-#messages article {
-   display: flex;
-   width: 30%;
-   margin: 1em auto;
-   border-radius: 5px;
-   padding: 1em;
-   color: white;
-   justify-content: center;
- }
- 
- #messages article.success {
-   background-color: #DFF2BF;
- }
- 
- #messages article.warning {
-   background-color: #FEEFB3;
- }
- 
- #messages article.error {
-   background-color: #FFD2D2;
- }
- 
- #messages article.info {
-   background-color: #BDE5F8;
- }
