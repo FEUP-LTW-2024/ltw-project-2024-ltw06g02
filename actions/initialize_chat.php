@@ -6,8 +6,14 @@
    $session = new Session();
 
    if(isset($_GET['q'])){
-      createChat($_GET['q']);
+      if(!createChat($_GET['q'])){
+         $session->addMessage('error', 'Chat already exists');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
+      }
+      $session->addMessage('success', 'Chat created');
       header('Location: ../messages.php');
+      exit();
    }
-   exit;
+   exit();
 ?>

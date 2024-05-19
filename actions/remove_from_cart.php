@@ -1,21 +1,25 @@
 <?php
-   session_start();
-
    require_once("../database/removeFromCart.php");
-   require_once('../database/connection.php');
+   require_once("../models/session.php");
 
-   $db = getDatabaseConnection();
+   $session = new Session();
 
-   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $userId = $_POST['userId'];
-      $articleId = $_POST['articleId'];
+   if(isset($_GET['userID']) && isset($_GET['articleID'])){
 
-      if(empty($userId) || empty($articleId)){
-         die(header('Location: ../#'));
+      if(empty($_GET['userID']) || empty($_GET['articleID'])){
+         $session->addMessage('error', 'Error occurred');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
       }
 
-      if(!removeProductFromCart($db, $userId, $articleId)) die(header('Location: ../#'));
+      if(!removeProductFromCart($_GET['userID'], $_GET['articleID'])){
+         $session->addMessage('error', 'Error occurred');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
+      };
       
-      header('Location: ../shopping_cart.php');   
+      $session->addMessage('success', 'Product removed');
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      exit();   
    }
 ?>

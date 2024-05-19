@@ -11,7 +11,7 @@
    $user = retrieveUser($_GET['q']);
 
    echo '<div class="chat-info">
-            <img src="../assets/goiana.jpg" alt=""/>
+            <img src=' . $user['avatar'] .  ' alt=""/>
             <h3>' . $user['username'] . '</h3>
          </div>
          <div class="messages">';
@@ -23,8 +23,10 @@
 
             $messageClass = $isSenderMessage ? 'message-sent' : 'message-received';
 
+            $m = preg_replace ("/[^a-zA-Z0-9\s]/", '', $message['messageText']);
+
             echo '<div class="' . $messageClass . '">
-                  <p>' . $message['messageText'] . '</p></div>';
+                  <p>' . $m . '</p></div>';
          }
 
    echo  '</div>

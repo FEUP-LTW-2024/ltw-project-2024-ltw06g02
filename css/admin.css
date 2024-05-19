@@ -1,6 +1,6 @@
 .admin-title,.admin-subtitle {
     text-align: center;
-    color: #98C9A3;
+    color: #344e41;
     font-weight: 200;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .admin-btn {
-    background-color: #98C9A3;
+    background-color: #344e41;
     font-size: 1em;
     color: white;
     padding: 0.7em 1.2em;
@@ -59,14 +59,36 @@ table {
 }
   
 th, td {
-    border: 1px solid #98C9A3; 
+    border: 1px solid #344e41; 
     padding: 8px; 
     text-align: center; 
 }
 
 th {
-    background-color: #98C9A3;
+    background-color: #344e41;
     color: white;
+}
+
+.metrics-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 7em;
+    margin-bottom: 1em;
+}
+
+.metric {
+    background-color: #344e41;
+    min-width: 10em;
+    width: auto;
+    height: 8em;
+    padding: 1em;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 @media (max-width: 850px) {
@@ -90,5 +112,11 @@ th {
 
    .admin-btn {
         padding: 0.4em 0.8em;
+    }
+
+    .metrics-section {
+        display: flex;
+        margin: 1em;
+        column-gap: 1em;
     }
 }

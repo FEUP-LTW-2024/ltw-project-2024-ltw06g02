@@ -7,13 +7,23 @@
 ?>
 
 <div class="navbar">
-  <a style="text-decoration:none" href="../index.php"><h1>Bazinga</h1></a>
+  <a style="text-decoration:none" href="../index.php"><h1 class="playfair-display-font">bazinga.</h1></a>
   <form action="../actions/search.php" method="POST" class="search-form">
-    <input type="text" name="query" placeholder="Search a user...">
+    <input type="text" name="query" style="outline:none;" placeholder="search a user...">
     <button type="submit">Search</button>
   </form>
+  <div class="nav-buttons">
+   <div class="dropdown">
+         <button class="nav-button" style="margin-right: 1em;"><?php echo(isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? 'dol' : 'eur') ?></button>
+         <div class="dropdown-content">
+            <?php 
+               $currency = isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? 'eur' : 'dol';
+            ?>
+            <a href=<?= "../actions/change_currency.php?q=" . $currency?> ><?=$currency?></a>
+         </div>
+   </div>
       <?php if(isset($_SESSION['username'])){ ?>
-         <div class="nav-buttons">
+            <div class="not-dropdown-icons">
             <?php
             if(checkIfUserIsAdmin($_SESSION['username'])){
             ?>   
@@ -32,9 +42,13 @@
             <a class="nav-button" href="../sell.php">
                sell
             </a>
+            </div>
             <div class="dropdown">
                <button class="nav-button"><?= $_SESSION['username'] ?></button>
                <div class="dropdown-content">
+                  <?php if(checkIfUserIsAdmin($_SESSION['username'])){ ?><a class="responsive" href="../admin.php">Admin</a> <?php } ?>
+                  <a class="responsive" href="../shopping_cart.php">Cart</a>
+                  <a class="responsive" href="../wishlist.php">Wishlist</a>
                   <a href="../profile.php">Profile</a>
                   <a href="../messages.php">Messages</a>
                   <a href="../historic.php">Historic</a>
@@ -74,27 +88,36 @@
       const closeRegisterBtn = registerDialog.querySelector(".close-button");
       const registerLink = document.getElementById("registerLink");
 
-      showLoginBtn.addEventListener("click", () => {
-         loginDialog.showModal();
-      });
+      if(showLoginBtn){
+         showLoginBtn.addEventListener("click", () => {
+            loginDialog.showModal();
+         });
+      }
 
-      closeLoginBtn.addEventListener("click", () => {
-         loginDialog.close();
-      });
+      if(closeLoginBtn){
+         closeLoginBtn.addEventListener("click", () => {
+            loginDialog.close();
+         });
+      }
 
-      closeRegisterBtn.addEventListener("click", () => {
-         registerDialog.close();
-      });
+      if(closeRegisterBtn){
+         closeRegisterBtn.addEventListener("click", () => {
+            registerDialog.close();
+         });
+      }
 
-      showRegisterBtn.addEventListener("click", (event) => {
-         registerDialog.showModal();
-      });
+      if(showRegisterBtn){
+         showRegisterBtn.addEventListener("click", (event) => {
+            registerDialog.showModal();
+         });
+      }
 
-      registerLink.addEventListener("click", (event) => {
-         event.preventDefault();
-         loginDialog.close();
-         registerDialog.showModal();
-      });
-
+      if(registerLink){
+         registerLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            loginDialog.close();
+            registerDialog.showModal();
+         });
+      }
    });
 </script>

@@ -1,6 +1,10 @@
 <?php 
    require_once('connection.php');
-   function getAllArticles($db){
+   
+   $db = getDatabaseConnection();
+   function getAllArticles(){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID"
       );
@@ -9,7 +13,9 @@
       return $articles;
    }
 
-   function getFollowedArticles($db) {
+   function getFollowedArticles() {
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE EXISTS (SELECT 1 FROM follow WHERE follow.requesterID = ? AND follow.userID = users.userID)"
       );
@@ -18,17 +24,9 @@
       return $articles;
    }
 
-   function getArticlesExcludingUser($db) {
-      $stmt = $db->prepare(
-         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE users.userID != ?"
-      );
-      $stmt->execute(array($_SESSION['userID']));
-      $articles = $stmt->fetchAll();
-      return $articles;
-   }
-
    function getArticleById($id){
-      $db = getDatabaseConnection();
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE productID = ?"
       );
@@ -37,7 +35,9 @@
       return $article;
    }
 
-   function getArticlesByFilter($db, $filter){
+   function getArticlesByFilter($filter){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.categoryID = ?"
       );
@@ -47,34 +47,30 @@
       return $articles;
    }
 
-   function getArticlesByPrice($db, $price){
-      $stmt = $db->prepare(
-         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ?"
-      );
-      $stmt->execute(array(intval($price)));
-      $articles = $stmt->fetchAll();
+   function getArticlesByPrice($price){
+      global $db;
+
+      if(isset($_SESSION['currency']) && $_SESSION['currency'] == "dol"){
+         $stmt = $db->prepare(
+            "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ?"
+         );
+         $stmt->execute(array(intval($price/1.09)));
+         $articles = $stmt->fetchAll();
+      }
+      else{
+         $stmt = $db->prepare(
+            "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ?"
+         );
+         $stmt->execute(array(intval($price)));
+         $articles = $stmt->fetchAll();
+      }
+      
       return $articles;
    }
 
-   function getArticlesByPriceExcludingUser($db, $price){
-      $stmt = $db->prepare(
-         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.price <= ? AND users.userID != ?"
-      );
-      $stmt->execute(array(intval($price), $_SESSION['userID']));
-      $articles = $stmt->fetchAll();
-      return $articles;
-   }
+   function getArticlesByCondition($condition){
+      global $db;
 
-   function getArticlesByConditionExcludingUser($db, $condition){
-      $stmt = $db->prepare(
-         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.conditionID = ? AND users.userID != ?"
-      );
-      $stmt->execute(array($condition, $_SESSION['userID']));
-      $articles = $stmt->fetchAll();
-      return $articles;
-   }
-
-   function getArticlesByCondition($db, $condition){
       $stmt = $db->prepare(
          "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.conditionID = ?"
       );
@@ -83,16 +79,9 @@
       return $articles;
    }
 
-   function getArticlesByFilterExcludingUser($db, $filter){
-      $stmt = $db->prepare(
-         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.categoryID = ? AND users.userID != ?"
-      );
-      $stmt->execute(array($filter, $_SESSION['userID']));
-      $articles = $stmt->fetchAll();
-      return $articles;
-   }
+   function getFavoriteArticlesByUserId($id){
+      global $db;
 
-   function getFavoriteArticlesByUserId($db, $id){
       $stmt = $db->prepare(
          "SELECT * FROM favorites WHERE userID = ?"
       );
@@ -103,15 +92,11 @@
    }
 
    function addArticle($article, $images){
-      $db = getDatabaseConnection();
+      global $db;
 
       $stmt = $db->prepare("SELECT categoryID FROM productCategory WHERE name=?");
       $stmt->execute(array($article['category']));
       $categoryID = $stmt->fetch();
-
-      $stmt = $db->prepare("SELECT userID FROM users WHERE username=?");
-      $stmt->execute(array($_SESSION['username']));
-      $userID = $stmt->fetch();
 
       $stmt = $db->prepare("SELECT sizeID FROM productSize WHERE name=?");
       $stmt->execute(array($article['size']));
@@ -125,26 +110,26 @@
          "INSERT INTO product(name, description, price, categoryID, userID, sizeID, conditionID, brand, model, images, likes) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
      );
 
-      $brand = isset($article['brand']) ? $article['brand'] : null;
-      $model = isset($article['model']) ? $article['model'] : null;
       $likes = 0;
 
       $stmt->execute(array(
-         $article['name'],
-         $article['description'],
+         preg_replace("/[^a-zA-Z0-9\s]/", '', $article['name']),
+         preg_replace("/[^a-zA-Z0-9\s]/", '', $article['description']),
          $article['price'],
          $categoryID['categoryID'],
-         $userID['userID'],
+         $_SESSION['userID'],
          $sizeID['sizeID'],
          $conditionID['conditionID'],
-         $brand,
-         $model,
+         preg_replace("/[^a-zA-Z0-9\s]/", '', $article['brand']),
+         preg_replace("/[^a-zA-Z0-9\s]/", '', $article['model']),
          $images,
          $likes
      ));
    }
 
-  function getUserArticles($db, $userID){
+  function getUserArticles($userID){
+      global $db;
+
      $stmt = $db->prepare(
         "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.userID = ?"
      );
@@ -154,7 +139,9 @@
      return $userArticles;
   }
 
-  function getCartArticlesByUserId($db, $id){
+  function getCartArticlesByUserId($id){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT * FROM cart WHERE userID = ?"
       );
@@ -164,20 +151,89 @@
       return $cartArticles;
    }
 
-   function removeArticle($db, $id) : bool{
+   function checkCartArticle($id, $userID) : bool {
+      global $db;
+
+      $stmt = $db->prepare(
+         "SELECT * FROM cart WHERE productID = ? AND userID = ?"
+      );
+      $stmt->execute(array($id, $userID));
+
+      return $stmt->fetch() ? true : false;
+   }
+
+   function removeArticle($id) : bool{
+      global $db;
+
       $stmt = $db->prepare(
          "DELETE FROM product WHERE productID = ?"
       );
       $stmt->bindParam(1, $id);
 
       $stmt->execute();
-        
+
       return true;
    }
 
    function updateArticle($id, $new_price, $new_name) {
-      $db = getDatabaseConnection();
+      global $db;
+
       $stmt = $db->prepare("UPDATE product SET price = ?, name = ? WHERE productID = ?");
       $stmt->execute(array($new_price, $new_name, $id));
+   }
+
+   function getArticlesByName($name){
+      global $db;
+
+      $stmt = $db->prepare("SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE product.name LIKE ?");
+      $stmt->execute(array($name . '%'));
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
+
+   function getArticlesByPreference(){
+      global $db;
+
+      $stmt = $db->prepare("SELECT * FROM preferences WHERE userID = ?");
+      $stmt->execute(array($_SESSION['userID']));
+      $preference = $stmt->fetch();
+
+      $query = "SELECT product.*, users.avatar FROM product LEFT JOIN users ON product.userID = users.userID WHERE 1 = 1";
+      $preferences = [];
+      if ($preference['conditionID']) {
+         $query .= " AND product.conditionID = ?";
+         $preferences[] = $preference['conditionID'];
+      }
+      if ($preference['sizeID']) {
+         $query .= " AND product.sizeID = ?";
+         $preferences[] = $preference['sizeID'];
+      }
+      if ($preference['categoryID']) {
+         $query .= " AND product.categoryID = ?";
+         $preferences[] = $preference['categoryID'];
+      }
+
+      $stmt = $db->prepare($query);
+      $stmt->execute($preferences);
+      $articles = $stmt->fetchAll();
+      return $articles;
+   }
+
+   function editPromotion($prom, $id) : bool {
+      global $db;
+
+      $stmt = $db->prepare("UPDATE product SET promotion = ? WHERE productID = ?");
+      $stmt->execute(array($prom, $id));
+
+      return true;
+   }
+
+   function removePromotion($id) : bool {
+      global $db;
+      
+      $stmt = $db->prepare("UPDATE product SET promotion = ? WHERE productID = ?");
+      $stmt->execute(array(null, $id));
+
+      return true;
    }
 ?>

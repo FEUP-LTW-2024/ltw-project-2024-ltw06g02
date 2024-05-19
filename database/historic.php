@@ -1,41 +1,49 @@
 <?php
    require_once('connection.php');
 
-   function addPurchase($userID, $productName) : bool {
-      $db = getDatabaseConnection();
+   $db = getDatabaseConnection();
+
+   function addPurchase($userID, $article) : bool {
+      global $db;
 
       $notificationText = "Compra efetuada com sucesso";
       $notificationDate = date('Y-m-d H:i:s');
 
-      $sql = "INSERT INTO purchase (userID, productName, notificationText, notificationDate) VALUES (?, ?, ?, ?)";
+      $sql = "INSERT INTO purchase (userID, productName, productPrice, notificationText, notificationDate) VALUES (?, ?, ?, ?, ?)";
       $stmt = $db->prepare($sql);
       $stmt->bindParam(1, $userID);
-      $stmt->bindParam(2, $productName);
-      $stmt->bindParam(3, $notificationText);
-      $stmt->bindParam(4, $notificationDate);
+      $stmt->bindParam(2, $article['name']);
+      $price = $article['promotion'] ? $article['price'] - $article['price'] * $article['promotion'] : $article['price'];
+      $stmt->bindParam(3, $price);
+      $stmt->bindParam(4, $notificationText);
+      $stmt->bindParam(5, $notificationDate);
       $stmt->execute();
 
       return true;
    }
 
-   function addSale($userID, $productName) : bool {
-    $db = getDatabaseConnection();
+   function addSale($article) : bool {
+      global $db;
 
-    $notificationText = "Venda efetuada com sucesso";
-    $notificationDate = date('Y-m-d H:i:s');
+      $notificationText = "Venda efetuada com sucesso";
+      $notificationDate = date('Y-m-d H:i:s');
 
-    $sql = "INSERT INTO sale (userID, productName, notificationText, notificationDate) VALUES (?, ?, ?, ?)";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(1, $userID);
-    $stmt->bindParam(2, $productName);
-    $stmt->bindParam(3, $notificationText);
-    $stmt->bindParam(4, $notificationDate);
-    $stmt->execute();
+      $sql = "INSERT INTO sale (userID, productName, productPrice, notificationText, notificationDate) VALUES (?, ?, ?, ?, ?)";
+      $stmt = $db->prepare($sql);
+      $stmt->bindParam(1, $article['userID']);
+      $stmt->bindParam(2, $article['name']);
+      $price = $article['promotion'] ? $article['price'] - $article['price'] * $article['promotion'] : $article['price'];
+      $stmt->bindParam(3, $price);
+      $stmt->bindParam(4, $notificationText);
+      $stmt->bindParam(5, $notificationDate);
+      $stmt->execute();
 
-    return true;
+      return true;
    }
 
-   function getPurchasesByUserId($db, $userID){
+   function getPurchasesByUserId($userID){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT * FROM purchase WHERE userID = ?"
       );
@@ -45,7 +53,9 @@
       return $purchases;
    }
 
-   function getSalesByUserId($db, $userID){
+   function getSalesByUserId($userID){
+      global $db;
+      
       $stmt = $db->prepare(
          "SELECT * FROM sale WHERE userID = ?"
       );

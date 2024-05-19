@@ -6,5 +6,6 @@
    if($session->isLoggedIn()){
       $session->logout();
       header('Location: ../index.php');
+      exit();
    }
 ?>

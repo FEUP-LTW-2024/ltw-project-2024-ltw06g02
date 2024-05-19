@@ -7,7 +7,7 @@
 
 .profile-article{
   border: 1px solid grey;
-  margin: 0 0.5em;
+  margin: 0 0 0 0.5em;
   border-radius: 3px;
 
   p, h3 {
@@ -16,9 +16,34 @@
   }
 
   p {
-    color: #98C9A3;
+    color: #344e41;
     font-weight: bold;
   }
+}
+
+.preferences-tag {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1em;
+  align-items: center;
+
+  i {
+    cursor: pointer;
+  }
+}
+
+.preference {
+  border-radius: 13px;
+  padding: 0.5em;
+  text-transform: lowercase;
+  color: white;
+  font-size: 0.8em
+}
+
+.preferences-section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
 }
 
 .conjunction {
@@ -122,6 +147,12 @@
       column-gap: 1em;
     }
   }
+
+  .preferences-tag {
+    margin: 1em 0; 
+    flex-direction: column;
+    row-gap: 0.5em;
+  }
 }
 
 @media (max-width: 850px){
@@ -135,10 +166,6 @@
       column-gap: 1em;
     }
   }
-}
-
-.like-container {
-  display: inline-block;
 }
 
 .profile-article .heart-icon {
@@ -164,7 +191,7 @@
   margin-left: 1em;
   margin-top: 1em;
   background-color: whitesmoke;
-  color: #98C9A3;
+  color: #344e41;
   text-align: center;
   font-size: 16px;
   text-decoration: none;
@@ -182,7 +209,7 @@
   margin-left: 0.2em;
   margin-top: 1em;
   background-color: whitesmoke;
-  color: #98C9A3;
+  color: #344e41;
   text-align: center;
   font-size: 16px;
   text-decoration: none;

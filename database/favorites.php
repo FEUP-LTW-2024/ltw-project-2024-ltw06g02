@@ -1,7 +1,9 @@
 <?php
     require_once('connection.php');
-    function addFavorite($favorite, $articleId) : bool{
-        $db = getDatabaseConnection();
+
+    $db = getDatabaseConnection();
+    function addFavorite($favorite, $articleId){
+        global $db;
 
         $stmt = $db->prepare("INSERT INTO favorites (userID, productID) VALUES (?, ?)");
         $stmt->bindParam(1, $favorite->userId);
@@ -11,12 +13,10 @@
         $stmt = $db->prepare("UPDATE product SET likes = likes + 1 WHERE productID = ?");
         $stmt->bindParam(1, $articleId);
         $stmt->execute();
-
-        return true;
     }
     
-    function removeFavorite($userId, $articleId) : bool {
-        $db = getDatabaseConnection();
+    function removeFavorite($userId, $articleId){
+        global $db;
     
         $stmt = $db->prepare("DELETE FROM favorites WHERE userID = ? AND productID = ?");
         $stmt->bindParam(1, $userId);
@@ -26,18 +26,15 @@
         $stmt = $db->prepare("UPDATE product SET likes = likes - 1 WHERE productID = ?");
         $stmt->bindParam(1, $articleId);
         $stmt->execute();
-        
-        return true;
     }
 
     function removeFavoriteFromUsers($articleId) : bool{
-        $db = getDatabaseConnection();
+        global $db;
     
         $stmt = $db->prepare("DELETE FROM favorites WHERE productID = ?");
         $stmt->bindParam(1, $articleId);
-        
         $stmt->execute();
-        
+
         return true;
     }
 ?>

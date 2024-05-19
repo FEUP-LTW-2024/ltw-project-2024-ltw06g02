@@ -9,16 +9,16 @@
       $username = $_POST['username'];
       $password = $_POST['password'];
 
-      if(empty($username) || empty($password)){
-         die(header('Location: ../#'));
+      if(!loginUser($username, $password)){
+         $session->addMessage('error', 'Try again');
+         header('Location: ../#');
+         exit();
       }
-
-      if(!loginUser($username, $password)) die(header('Location: ../#'));
       
       $session->setUsername($username);
       $session->setUserId();
 
       header('Location: ../index.php');
-      die(0);
+      exit();
    }
 ?>

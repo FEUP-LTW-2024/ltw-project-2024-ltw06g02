@@ -1,17 +1,20 @@
 <?php
-   session_start();
+   require_once("../database/filters.php");
+   require_once("../models/session.php");
 
-   require_once("../database/add_condition.php");
+   $session = new Session();
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $condition = $_POST['condition'];
 
-      if(empty($condition)){
-         die(header('Location: ../#'));
+      if(!addCondition($condition)) {
+         $session->addMessage('error', 'Condition already exists');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
       }
 
-      if(!addCondition($condition)) die(header('Location: ../#'));
-      
-      header('Location: ../admin.php');   
+      $session->addMessage('success', 'Condition added');
+      header('Location: ' . $_SERVER['HTTP_REFERER']);  
+      exit(); 
    }
 ?>

@@ -1,7 +1,9 @@
 <?php
     require_once('connection.php');
+
+    $db = getDatabaseConnection();
     function addProductToCart($cart) : bool{
-        $db = getDatabaseConnection();
+        global $db;
 
         $stmt_check = $db->prepare("SELECT COUNT(*) as count FROM cart WHERE userID = ? AND productID = ?");
         $stmt_check->bindParam(1, $cart->userId);

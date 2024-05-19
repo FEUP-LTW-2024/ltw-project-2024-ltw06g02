@@ -2,7 +2,11 @@
    require_once('connection.php');
    require_once('articles.php');
 
-   function getUserChats($db){
+   $db = getDatabaseConnection();
+
+   function getUserChats(){
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT * FROM chat LEFT JOIN users ON users.userID = chat.senderID WHERE receiverID = ?"
       );
@@ -14,7 +18,8 @@
    }
 
    function getSpecificChat($id){
-      $db = getDatabaseConnection();
+      global $db;
+
       $stmt = $db->prepare("SELECT * FROM chat LEFT JOIN users ON users.userID = chat.senderID WHERE chatID = ?");
       $stmt->execute(array($id));
       $chat = $stmt->fetch();
@@ -22,7 +27,8 @@
    }
 
    function getUserSenderChatID($senderID) {
-      $db = getDatabaseConnection();
+      global $db;
+
       $stmt = $db->prepare("SELECT chatID FROM chat WHERE senderID = ? AND receiverID = ?");
       $stmt->execute(array($_SESSION['userID'], $senderID));
       $chat = $stmt->fetch();
@@ -30,7 +36,8 @@
    }
 
    function getUserReceiverChatID($senderID){
-      $db = getDatabaseConnection();
+      global $db;
+
       $stmt = $db->prepare("SELECT chatID FROM chat WHERE senderID = ? AND receiverID = ?");
       $stmt->execute(array($senderID, $_SESSION['userID']));
       $chat = $stmt->fetch();
@@ -38,7 +45,8 @@
    }
 
    function joinMessages($senderID){
-      $db = getDatabaseConnection();
+      global $db;
+
       $stmt = $db->prepare("SELECT chatID FROM chat WHERE (receiverID = ? AND senderID = ?) OR (senderID = ? AND receiverID = ?)");
       $stmt->execute(array($_SESSION['userID'], $senderID, $_SESSION['userID'], $senderID,));
       $chats = $stmt->fetchAll();
@@ -50,7 +58,8 @@
    }
 
    function insertMessage($message, $senderID) {
-      $db = getDatabaseConnection();
+      global $db;
+
       $chatID_1 = getUserSenderChatID($senderID);
       $chatID_2 = getUserReceiverChatID($senderID);
       $stmt = $db->prepare(
@@ -64,14 +73,17 @@
       $stmt->execute(array($message, $chatID_1, $chatID_2));
    }
 
-   function removeChat($id){
+   function removeChat($id) : bool{
       $db = getDatabaseConnection();
       $stmt = $db->prepare("DELETE FROM chat WHERE productID = ?");
       $stmt->execute(array($id));
+
+      return true;
    }
 
    function verifyChatExists($id){
-      $db = getDatabaseConnection();
+      global $db;
+
       $stmt = $db->prepare(
          "SELECT chatID from chat WHERE (senderID = ? and receiverID = ?)"
       );
@@ -81,7 +93,7 @@
    }
 
    function createChat($productID){
-      $db = getDatabaseConnection();
+      global $db;
 
       $article = getArticleById($productID);
 
@@ -95,6 +107,10 @@
             "INSERT INTO chat(receiverID, senderID, productID) VALUES (?,?,?)"
          );
          $stmt->execute(array($article['userID'], $_SESSION['userID'], $productID));
+
+         return true;
       }
+
+      return false;
    }
 ?>

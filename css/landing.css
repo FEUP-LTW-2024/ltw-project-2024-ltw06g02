@@ -1,7 +1,3 @@
-* {
-   font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
 body {
    min-height: 100svh;
    margin: 0;
@@ -13,10 +9,78 @@ main {
    flex: 1;
 }
 
+input[type='range']::-moz-range-progress {
+   background-color: #344e41;
+   border-radius: 2px;
+}
+
+input[type="range"]::-moz-range-track {  
+   background-color: whitesmoke;
+   border-radius: 2px;
+}
+
+.search-conjunction {
+   display: flex;
+   flex-direction: column;
+   row-gap: 1em;
+   margin-bottom: 2em
+}
+
+.preference-icon{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   margin: 0 auto;
+   cursor: pointer;
+   padding: 0.5em;
+
+   i {
+      font-size: 1em;
+   }
+}
+
+.discount-tag {
+   display: flex;
+   align-items: center;
+   background-color: #344e41;
+   border-radius: 5px;
+   margin: 0 0 0.5em 0;
+   font-size: x-small;
+   padding: 0.1em 0.3em;
+   color: white;
+}
+
+.preference-icon:hover{
+   background-color: whitesmoke;
+   border-radius: 5px;
+}
+
+.search-bar-wrapper{
+   background-color: whitesmoke;
+   border-radius: 5px;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   padding: 0.5em;
+   align-items: center;
+   width: 25em;
+   margin: 1.5em auto 0 auto;
+   height: 2em;
+}
+
+.search-bar {
+   border: none;
+   outline: none;
+   background-color: whitesmoke;
+   width: 25em;
+   height: 2em;
+}
+
 .article-grid {
    display: flex;
    flex-wrap: wrap;
    row-gap: 1em;
+   column-gap: 0.4em;
 }
 
 .no-favorite-articles {
@@ -33,7 +97,7 @@ main {
    }
 
    button {
-      background-color: #98C9A3;
+      background-color: #344e41;
       font-size: 1em;
       color: white;
       padding: 0.7em 1.2em;
@@ -47,7 +111,6 @@ main {
    margin-right: 0.5em;
    border: 1px solid gray;
    border-radius: 3px;
-   
 }
 
 .article-details {
@@ -60,11 +123,12 @@ main {
 
 .article-details img {
    width: 1.5em;
+   height: 1.5em;
    object-fit: cover;
 }
 
 .product-section {
-   padding: 1em 7em;
+   padding: 1em 6em;
 }
 
 .filter-choose {
@@ -72,6 +136,7 @@ main {
    button {
       margin: 0;
       border: none;
+      padding: 1em;
       background-color: white;
       cursor: pointer;
    }
@@ -92,6 +157,17 @@ main {
    font-weight: normal;
 }
 
+.no-product-section {
+   display: flex;
+   flex-direction: column;
+   margin: 0 auto;
+   align-items: center;
+}
+
+.no-product-img {
+   width: 15em;
+}
+
 .article h3 {
    margin: 0 0 0.5em 0.5em;
    font-size: small;
@@ -100,12 +176,15 @@ main {
 .article p { 
    margin: 0 0 0.5em 0.5em;
    font-size: small;
-   color: #98C9A3;
+   color: #344e41;
    font-weight: bold;
 }
 
 .like-container {
-   display: inline-block;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   column-gap: 0.2em;
 }
 
 .article .heart-icon {
@@ -126,14 +205,14 @@ main {
 .filter-btn, .condition-btn {
    padding: 0.5em;
    font-size: 16px;
-   color: #BFD8BD;
-   border: 1px solid #98C9A3;
+   color: #344e41;
+   border: 1px solid #344e41;
    border-radius: 3px;
    background-color: white;
    margin-bottom: 0.5em;
 }
 
-.filter-btn:hover {
+.filter-btn:hover, .condition-btn:hover {
    background-color: whitesmoke;
    cursor: pointer;
 }
@@ -162,4 +241,38 @@ main {
    .products-title {
       font-size: large;
    }
+
+   .search-bar-wrapper {
+      width: 90%;
+   }
+
+   .filter-section {
+      flex-wrap: wrap;
+   }
 }
+
+#messages article {
+   display: flex;
+   width: 30%;
+   margin: 1em auto;
+   border-radius: 5px;
+   padding: 1em;
+   color: white;
+   justify-content: center;
+ }
+ 
+ #messages article.success {
+   background-color: #DFF2BF;
+ }
+ 
+ #messages article.warning {
+   background-color: #FEEFB3;
+ }
+ 
+ #messages article.error {
+   background-color: #FFD2D2;
+ }
+ 
+ #messages article.info {
+   background-color: #BDE5F8;
+ }

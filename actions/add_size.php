@@ -1,17 +1,20 @@
 <?php
-   session_start();
+   require_once("../database/filters.php");
+   require_once("../models/session.php");
 
-   require_once("../database/add_size.php");
+   $session = new Session();
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $size = $_POST['size'];
 
-      if(empty($size)){
-         die(header('Location: ../#'));
+      if(!addSize($size)){
+         $session->addMessage('error', 'Size already exists');
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+         exit();
       }
-
-      if(!addSize($size)) die(header('Location: ../#'));
       
-      header('Location: ../admin.php');   
+      $session->addMessage('success', 'Size added');
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      exit();  
    }
 ?>

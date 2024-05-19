@@ -13,12 +13,8 @@
 
     if(!isset($_SESSION['userID'])) header('Location: index.php');
 
-    $db = getDatabaseConnection();
-    $articles = getUserArticles($db, $session->getUserId());
-    $user = retrieveUser($session->getUserId());
-
-    printHeader('Bazinga!');
-    printBioSection($user);
-    printProfileArticleSection($articles);
+    printHeader('Bazinga!', $session);
+    printBioSection($session->getUserId());
+    printProfileArticleSection($session->getUserId());
     printFooter();
 ?>

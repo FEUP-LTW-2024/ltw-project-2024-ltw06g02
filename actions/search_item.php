@@ -1,28 +1,13 @@
 <?php 
-   require_once('../database/connection.php');
-   require_once('../templates/article.tl.php');
    require_once('../models/session.php');
    require_once('../database/articles.php');
+   require_once('../templates/article.tl.php');
 
    $session = new Session();
 
-   if($_GET['filter'] == 'category') {
-      $articles = getArticlesByFilter($_GET['q']);
-   }
-   if($_GET['filter'] == 'price'){
-      $articles = getArticlesByPrice($_GET['q']);
-   }
-   if($_GET['filter'] == 'condition'){
-      $articles = getArticlesByCondition($_GET['q']);
-   }
+   $articles = getArticlesByName($_GET['q']);
 
-   $check = 0;
-
-   foreach($articles as $article){
-      if(isset($_SESSION['userID']) && $article['userID'] == $_SESSION['userID']) $check += 1;
-   }
-
-   if(sizeof($articles) > 0 && $check < sizeof($articles)) {
+   if(sizeof($articles) > 0) {
       foreach($articles as $article) {
          if(!isset($_SESSION['userID']) || (isset($_SESSION['userID']) && ($article['userID'] != $_SESSION['userID']))) {
             getSingleArticle($article);
@@ -36,5 +21,4 @@
          </div>
       ";
    }
-  exit;
 ?>

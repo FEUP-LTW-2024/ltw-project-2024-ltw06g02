@@ -1,33 +1,45 @@
 <?php
-    session_start();
-
     require_once('../database/articles.php');
     require_once('../database/removeFromCart.php');
     require_once('../database/favorites.php');
     require_once('../database/user.php');
     require_once('../database/historic.php');
-    require_once('../database/connection.php');
+    require_once('../database/messages.php');
+    require_once('../models/session.php');
+    require_once(dirname(__DIR__) . '/templates/article.tl.php');
+    require_once(dirname(__DIR__) . '/models/session.php');
 
-    $db = getDatabaseConnection();
-
+    $session = new Session();
     
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["cartItems"])) {
         $cartItems = $_POST["cartItems"];
-        $userId = $_SESSION['userID'];
+        $userID = $session->getUserId();
         
-        if(!removeProductsFromCartByUserId($db,$userId)) die(header('Location: ../#'));
+        if(!removeProductsFromCartByUserID($userID)){
+            $session->addMessage('error', 'Error occurred');
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
 
         foreach ($cartItems as $productId) {
             $article = getArticleById($productId);
-            if(!addPurchase($userId, $article['name'])) die(header('Location: ../#'));
-            if(!addSale($article['userID'], $article['name'])) die(header('Location: ../#'));
+            if(!addPurchase($userID, $article) || !addSale($article)){
+                $session->addMessage('error', 'Error occurred');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit();
+            }
         }
       
         foreach ($cartItems as $productId) {
-            if(!removeFavoriteFromUsers($productId)) die(header('Location: ../#'));
-            if(!removeArticle($db, $productId)) die(header('Location: ../#'));
+            if(!removeFavoriteFromUsers($productId) || !removeArticle($productId) || !removeChat($productId)){
+                $session->addMessage('error', 'Error occurred');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit();
+            }
         }
 
-        header('Location: ../shopping_cart.php'); 
+        $session->addMessage('success', 'Bought!');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit(); 
     }
 ?>

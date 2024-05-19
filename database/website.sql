@@ -4,10 +4,11 @@ CREATE TABLE users (
    password VARCHAR,              
    email VARCHAR,
    fullName VARCHAR,
-   paymentMethodPassword VARCHAR,
-   admim BOOLEAN,
+   admin BOOLEAN,
    avatar VARCHAR,
-   followers INTEGER
+   followers INTEGER,
+   preferencesID INTEGER,
+   FOREIGN KEY (preferencesID) REFERENCES preferences(preferencesID)
 );
 
 CREATE TABLE follow (
@@ -29,8 +30,9 @@ CREATE TABLE product (
    userID INTEGER,
    brand VARCHAR,
    model VARCHAR,
-   images VARCHAR, -- check out later
-   likes INTEGER, 
+   images VARCHAR,
+   likes INTEGER,
+   promotion REAL,
    FOREIGN KEY (userID) REFERENCES users(userID),
    FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID),
    FOREIGN KEY (sizeID) REFERENCES productSize(sizeID),
@@ -68,15 +70,16 @@ CREATE TABLE productCondition (
    name VARCHAR
 );
 
-CREATE TABLE transactions (
-   transactionID INTEGER PRIMARY KEY,
-   buyerID INTEGER,
-   sellerID INTEGER,
-   productID INTEGER,
-   transactionDate DATETIME,
-   FOREIGN KEY (buyerID) REFERENCES users(userID),
-   FOREIGN KEY (sellerID) REFERENCES users(userID),
-   FOREIGN KEY (productID) REFERENCES product(productID)
+CREATE TABLE preferences (
+   preferencesID INTEGER PRIMARY KEY,
+   userID INTEGER,
+   sizeID INTEGER,
+   categoryID INTEGER,
+   conditionID INTEGER,
+   FOREIGN KEY (userID) REFERENCES users(userID),
+   FOREIGN KEY (sizeID) REFERENCES productSize(sizeID),
+   FOREIGN KEY (categoryID) REFERENCES categoryID(categoryID),
+   FOREIGN KEY (conditionID) REFERENCES conditionID(conditionID)
 );
 
 CREATE TABLE message (
@@ -102,6 +105,7 @@ CREATE TABLE purchase (
    purchaseID INTEGER PRIMARY KEY,
    userID INTEGER,
    productName VARCHAR,
+   productPrice REAL,
    notificationText VARCHAR,
    notificationDate DATETIME,
    FOREIGN KEY (userID) REFERENCES users(userID)
@@ -111,6 +115,7 @@ CREATE TABLE sale (
    saleID INTEGER PRIMARY KEY,
    userID INTEGER,
    productName VARCHAR,
+   productPrice REAL,
    notificationText VARCHAR,
    notificationDate DATETIME,
    FOREIGN KEY (userID) REFERENCES users(userID)
@@ -119,6 +124,8 @@ CREATE TABLE sale (
 INSERT INTO productCategory (name) VALUES
 ('Electronics'),
 ('Clothing'),
+('Sports'),
+('Decoration'),
 ('Books');
 
 INSERT INTO productSize (name) VALUES

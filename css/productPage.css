@@ -1,22 +1,82 @@
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 1em;
+}
 
-    img {
-        width: 25em;
-        height: 30em;
-        object-fit: cover;
-        border-radius: 5%;
+.product-image {
+    width: 25em;
+    height: 24em;
+    object-fit: cover;
+    border-radius: 5%;
+}
+
+.custom-promotion {
+    text-align: center;
+    outline: none;
+    border: none;
+    border: 1px solid #344e41;
+    padding: 0.5em;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 20%;
+}
+
+.promotion-icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1em auto;
+    cursor: pointer;
+    padding: 0.4em;
+    font-size: 0.9em;
+ 
+    i {
+       font-size: 1em;
     }
+}
+
+.default-promotions {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5em;
+}
+
+.promotion {
+    background-color: whitesmoke;
+    padding: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.promotion.selected, .promotion:hover{
+    background-color: lightgray;
+}
+
+.promotion-icon:hover{
+    background-color: whitesmoke;
+    border-radius: 5px;
 }
 
 .product-column {
     display: flex;
     flex-direction: column;
-    width: 22em;
+    width: 20em;
     padding: 1em;
-    margin: 1em;
+    margin: 0 1em;
     background-color: whitesmoke;
 }
 
@@ -76,13 +136,13 @@
 
 #buyBtn {
     color: white;
-    background-color: #98C9A3;
+    background-color: #344e41;
     border: none;
 }
 
 #sendBtn {
-    color: #98C9A3;
-    border: 1px solid #98C9A3;
+    color: #344e41;
+    border: 1px solid #344e41;
 }
 
 .fav-btn{
@@ -94,5 +154,15 @@ form#addToCartForm {
     margin: 0;
 }
 
+@media (max-width: 480px) {
+    .product-image {
+        max-width: 20em;
+    }
+}
 
-
+@media (max-width: 850px) {
+    .container{
+        flex-direction: column;
+        row-gap: 1em;
+    }
+}

@@ -1,19 +1,28 @@
 <?php
-   function getSingleArticle($productID, $name, $price, $image, $avatar, $likes){
-      $images = explode(",", $image);
+   function getSingleArticle($article){
+      $images = explode(",", $article['images']);
 ?>
+   
    <article class="article">
-      <a href="product.php?id=<?=$productID?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
+      <a href="product.php?id=<?=$article['productID']?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
       <div class="article-details">
          <div>
-            <h3><?= $name ?></h3>
-            <p><?= $price ?>€</p>
+            <div style="display: flex; column-gap: 0.5em;">
+               <h3><?= $article['name'] ?></h3>
+               <?php if($article['promotion']) { ?> <div class="discount-tag"><?= $article['promotion'] * 100 . '%'?> discount</div> <?php } ?>
+            </div>
+            <div style="display: flex;">
+               <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>')?></p>
+               <?php if($article['promotion']) {?><p style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></p><?php } ?>
+            </div>        
          </div>
-         <div class="like-container">
-            <i class="material-icons heart-icon">favorite</i>
-            <p class="number"><?= $likes ?></p>
+         <div style="display: flex; flex-direction: row; align-items: center; column-gap: 0.5em;">
+            <div class="like-container">
+               <i class="material-icons heart-icon">favorite</i>
+               <p class="number" style="color: #c1121f;"><?= $article['likes'] ?></p>
+            </div>
+            <img src=<?= $article['avatar'] ?>>
          </div>
-         <img src=<?= $avatar ?>>
       </div>
    </article>
 
@@ -22,20 +31,23 @@
 ?>
 
 <?php
-   function getSingleCartArticle($productID, $name, $price, $image, $userID){
-      $images = explode(",", $image);
+   function getSingleCartArticle($article){
+      $images = explode(",", $article['images']);
 ?>
    <article class="article">
       <form id="removeFromCartForm" action="../actions/remove_from_cart.php" method="POST">
-         <input type="hidden" name="userId" value="<?=$userID?>">
-         <input type="hidden" name="articleId" value="<?=$productID?>">
+         <input type="hidden" name="userId" value="<?=$_SESSION['userID']?>">
+         <input type="hidden" name="articleId" value="<?=$article['productID']?>">
          <button type="submit" id="removeFromCartBtn" class="material-icons">delete</button>
       </form>
       <img src=<?= $images[0] ?> alt="" class="product-img">
       <div class="article-details">
          <div>
-            <h3><?= $name ?></h3>
-            <p><?= $price ?>€</p>
+            <h3><?= $article['name'] ?></h3>
+            <div style="display: flex;">
+               <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>')?></p>
+               <?php if($article['promotion']) {?><p style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></p><?php } ?>
+            </div> 
          </div>
       </div>
    </article>
@@ -48,39 +60,95 @@
    function printArticleSection($articles, $title){
 ?>
    <div class="product-section">
-      <h3 class="products-title playfair-display-font" style="font-size: 3em; text-align: center;"><?= $title ?></h3>
+      <h3 class="products-title playfair-display-font" style="font-size: 3em; text-align: center; margin-top: 0; margin-bottom: 0;"><?php echo $title == 'explore. love. buy.' ? 'explore. <span class="playfair-display-font" style="color: #c1121f;">love.</span> buy.' : $title ?></h3>
+         <?php if($title != 'following.') { ?> 
+            <div class="search-conjunction">
+               <div class="search-bar-wrapper">
+                  <i class="material-icons" style="margin-left: 0.5em">search</i>
+                  <input class="search-bar" id="search-bar" type="text" placeholder="e.g blue hoodie...">
+               </div> 
+               <?php if(isset($_SESSION['userID']) && isset(retrieveUser($_SESSION['userID'])['preferencesID'])) {?>
+                  <div class="preference-icon" id="filter-preference"><i class="material-icons">add</i> apply preferences</div>
+               <?php } ?>
+            </div>
+         <?php } ?>
+      
       <section class="article-grid" id="grid">
          <?php 
-            if(sizeof($articles) == 0) echo "Não tens produtos recomendados! Volta mais tarde"
+
+         $check = 0;
+
+         foreach($articles as $article){
+            if(isset($_SESSION['userID']) && $article['userID'] == $_SESSION['userID']) $check += 1;
+         }
+
+         if(sizeof($articles) == 0 || $check == sizeof($articles)) echo "
+            <div class='no-product-section'>
+               <img class='no-product-img' style='margin-top: 1em;' src='../assets/no_items.svg'>
+               <h3 style='margin-top: 2em;'>nothing here.</h3>
+            </div>
+            "
          ?>
-         <?php foreach($articles as $article){
-            getSingleArticle($article['productID'],$article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
-         } 
+         <?php 
+            foreach($articles as $article){
+               if(!isset($_SESSION['userID']) || (isset($_SESSION['userID']) && ($article['userID'] != $_SESSION['userID']))) {
+                  getSingleArticle($article);
+               } 
+            }
          ?>
       </section>
    </div>
+   <script>
+
+      document.getElementById('search-bar').addEventListener('input', function() {
+         searchItems(this.value);
+      })
+
+      document.getElementById('filter-preference').addEventListener('click', function() {
+         applyPreference();
+      })
+      
+      function applyPreference(){
+         const xhttp = new XMLHttpRequest();
+         xhttp.onload = function() {
+            document.getElementById("grid").innerHTML = this.responseText;
+         }
+         xhttp.open("GET", "../actions/apply_preference.php");
+         xhttp.send();
+      }
+
+      function searchItems(str) {
+         const xhttp = new XMLHttpRequest();
+         xhttp.onload = function() {
+            document.getElementById("grid").innerHTML = this.responseText;
+         }
+         xhttp.open("GET", "../actions/search_item.php?q="+ str);
+         xhttp.send();
+      }
+   </script>
 <?php
    }
 ?>
 
 <?php
-   function printFavoriteArticleSection($db, $favoriteArticles){
+   function printDifferentArticleSection($articles, $identifier){
 ?>
 
          <div class="product-section">
-            <h3 class="products-title">Artigos marcados como favoritos</h3>
+            <h3 class="products-title"><?= $identifier == 'favorites' ? 'favorites.' : 'shopping cart.' ?></h3>
             <section class="article-grid">
-               <?php if(empty($favoriteArticles)){ ?>
+               <?php if(empty($articles)){ ?>
 
                   <div class="no-favorite-articles">
-                     <h2>Não tens artigos favoritos!</h2>
-                     <a href="index.php"></hre><button>Começa a procurar!</button></a>
+                     <img class='no-product-img' style='margin-top: 1em;' src='../assets/no_items.svg'>
+                     <h3 style='margin-top: 2em; text-align: center;'>nothing here.</h3>
+                     <a href="index.php"></hre><button>start looking.</button></a>
                   </div>
                <?php
                   }
-                  foreach($favoriteArticles as $favorite){
-                     $article = getArticleById($favorite['productID']);
-                     getSingleArticle($article['productID'], $article['name'], $article['price'], $article['images'], $article['avatar'], $article['likes']);
+                  foreach($articles as $article){
+                     $article = getArticleById($article['productID']);
+                     getSingleArticle($article);
                   }
                ?>
             </section>
@@ -88,19 +156,33 @@
 
 <?php
    }
-   function printArticleById($db, $article, $userID){
-      buildEditArticle($article['productID']);
+   function printArticleById($article, $userID){
+      buildEditArticle($article);
+      buildPromotionDialog($article);
 
       $images = explode(",", $article['images']);
-      $category = getCategoryByID($db, $article['categoryID']);
-      $size = getSizeByID($db, $article['sizeID']);
-      $condition = getConditionByID($db, $article['conditionID']);
+      $category = getCategoryByID($article['categoryID']);
+      $size = getSizeByID($article['sizeID']);
+      $condition = getConditionByID($article['conditionID']);
+      $username = retrieveUser($article['userID'])['username'];
+      $inCart = checkCartArticle($article['productID'], $userID);
 ?>
 
    <div class="container">
-      <img src="<?=$images[0]?>" alt="product">
+      <div style="display: flex; flex-direction: column; row-gap: 1em; max-width: 25em; align-items: center;">
+         <img src=<?=$images[0]?> alt="product" class="product-image">
+         <div style="display: flex; column-gap: 1em;">
+            <?php for($i = 1; $i < sizeof($images) - 1; $i++) { ?>
+               <img src=<?=$images[$i]?> class="product-image" style="height: 10em; flex: 1; min-width: 0; max-width: 8em">
+            <?php } ?>
+         </div>
+      </div>
       <aside class="product-column">
-         <h1 class="price"><?=$article['price']?> €</h1>
+         <h1 class="price">
+            <?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>'); ?>
+            <?php if($article['promotion']) {?><span style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></span><?php } ?>
+            <span style="font-size: 0.7em; color: #344e41;">by <a style="color: #344e41;" href=<?= '../profile_user.php?id=' . $article['userID']?>> <?= $username ?> </a></span>
+         </h1>
          <hr class="separator">
          <h2 class="name"><?=$article['name']?></h2>
          <h2 class="description">Description: <?=$article['description']?></h2>
@@ -114,13 +196,20 @@
 
          <?php if($userID != $article['userID']) { ?>
 
-         <a href=<?= "../actions/add_to_cart.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
-            <button id="buyBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">Adicionar ao carrinho</button>
-         </a>
-         <a href=<?= "../actions/initialize_chat.php?q=" . $article['productID'] ?> ><button type="submit" id="sendBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">Enviar mensagem</button></a>
+            <?php if($inCart) { ?>
+               <a href=<?= "../actions/remove_from_cart.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
+                  <button id="buyBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">remove from cart</button>
+               </a>
+            <?php } else { ?>
+               <a href=<?= "../actions/add_to_cart.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
+                  <button id="buyBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">add to cart</button>
+               </a>
+            <?php } ?>
+            
+            <a href=<?= "../actions/initialize_chat.php?q=" . $article['productID'] ?> ><button type="submit" id="sendBtn" class="<?php if (!$userID) echo "disabled"?> product-btn">send message</button></a>
 
          <?php
-            $favoriteArticles = getFavoriteArticlesByUserId($db, $userID);
+            $favoriteArticles = getFavoriteArticlesByUserId($userID);
             $exists = false;
 
             foreach($favoriteArticles as $favorite){
@@ -131,24 +220,70 @@
 
             if($exists === false){ ?>
                   <a href=<?= "../actions/favorite.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
-                     <button id="removeBtn" class="<?php if (!$userID) echo "disabled"?> product-btn fav-btn">Adicionar aos favoritos</button>
+                     <button id="removeBtn" class="<?php if (!$userID) echo "disabled"?> product-btn fav-btn">add to favorites</button>
                   </a>
                <?php } else { ?>
                   <a href=<?= "../actions/remove_favorite.php?userID=" . $userID . "&articleID=" . $article['productID']?>>
-                     <button id="removeBtn" class="<?php if (!$userID) echo "disabled"?> product-btn fav-btn">Remover aos favoritos</button>
+                     <button id="removeBtn" class="<?php if (!$userID) echo "disabled"?> product-btn fav-btn">remove from favorites</button>
                   </a>
                <?php } }?>
 
          <?php if(isset($userID) && $userID == $article['userID']){ ?>
             <div class="product-btn-row">
-               <a ><button class="product-btn" id="edit">Editar artigo</button></a>
-               <a href=<?= "../actions/remove_article.php?articleID=" . $article['productID']?>><button class="product-btn rm-btn">Remover artigo</button></a>
+               <a ><button class="product-btn" id="edit">edit article</button></a>
+               <a href=<?= "../actions/remove_article.php?articleID=" . $article['productID']?>><button class="product-btn rm-btn">remove article</button></a>
             </div>
          <?php } ?>
 
       </aside>
    </div>
    <script>
+      const values = document.querySelectorAll(".promotion");
+      const addPromotion = document.getElementById('promotionbtn');
+      const removePromotion = document.getElementById('remove-promotion');
+
+      const customDiscount = document.getElementById('custom-discount');
+      const customDiscountInput = document.getElementById('custom-discount-input');
+
+      customDiscount.addEventListener("click", () => {
+         customDiscountInput.style = "display: flex";
+
+         values.forEach((b) => {
+            b.classList = 'promotion'
+         })
+      })
+
+      if(removePromotion){
+         removePromotion.addEventListener("click", () => {
+            location.replace("../actions/remove_promotion.php");
+         })
+      }
+      
+      addPromotion.addEventListener("click", () => {
+         let prom;
+         try {
+            prom = document.querySelector('.promotion.selected').getAttribute('value');
+         } catch {
+            prom = customDiscountInput.value / 100;
+         }
+         
+         if(prom > 0 && prom < 1) {
+            location.replace("../actions/edit_promotion.php?prom=" + prom);
+         }
+      })
+
+      values.forEach((e) => {
+         e.addEventListener("click", () => {
+
+            values.forEach((b) => {
+               b.classList = 'promotion'
+            })
+
+            e.classList += ' selected'
+            customDiscountInput.style = "display: none;";
+         })
+      })
+
       document.querySelectorAll('button.disabled').forEach((button) => 
          button.addEventListener('click', (e) => {
             e.preventDefault()
@@ -159,95 +294,41 @@
 
 <?php
    }
+
+   function printCheckoutSection($articles) {
+      buildCheckoutDialog($articles);
 ?>
 
-<?php
+   <section style="display: flex; justify-content: end; margin: 1em 2em;">
+      <button class="filter-btn" id="checkoutBtn">procceed to checkout</button>
+   </section>
 
-function printCartArticleSection($db, $cartArticles, $userID){
+   <script>
+      const checkoutBtn = document.getElementById("checkoutBtn");
+      const checkoutDialog = document.getElementById("checkoutDialog")
+      const closeCheckoutBtn = checkoutDialog.querySelector(".close-button");
 
-   if (empty($cartArticles)) {
-      ?>
-      <div class="product-section-cart">
-         <h3 class="products-title">Shopping Cart</h3>
-         <section class="article-grid">
-            <div class="no-favorite-articles">
-               <h2>Não tens artigos no carrinho!</h2>
-               <a href="index.php"></hre><button>Adiciona!</button></a>
-            </div>
-         </section>
-      </div>
-      <?php
-   } else {
-      ?>
-      <div class="product-section-carousel">
-         <h3 class="products-title-carousel">Shopping Cart</h3>
-         <div class="carousel-container">
-            <?php
-               foreach($cartArticles as $cart){
-                  $article = getArticleById($cart['productID']);
-                  getSingleCartArticle($article['productID'], $article['name'], $article['price'], $article['images'], $userID);
-               }
-            ?>
-         </div>
-         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-         <a class="next" onclick="plusSlides(1)">&#10095;</a>
-         <div style="text-align:center">
-            <?php for($i = 0; $i < count($cartArticles); $i++): ?>
-               <span class="dot" onclick="currentSlide(<?php echo $i + 1; ?>)"></span>
-            <?php endfor; ?>
-         </div>
-         <section class="article-grid-cart">
-            <div class="emptyBox">
-               <h4 class="emptyParagrah">Add more articles and find them here</h4>
-               <a href="../index.php" class="find">Search</a>
-            </div>
-         </section>
-         <form id="removeFromCartForm" action="../actions/buy.php" method="POST">
-            <?php foreach ($cartArticles as $cart): ?>
-               <input type="hidden" name="cartItems[]" value="<?= $cart['productID'] ?>">
-            <?php endforeach; ?>
-            <button type="submit" id="buyCartBtn">Finalize purchase</button>
-         </form>
-      </div>
+      checkoutBtn.addEventListener("click", () => {
+         checkoutDialog.showModal();
+      })
 
-      <script>
-         let slideIndex = 1;
-         showSlides(slideIndex);
+      closeCheckoutBtn.addEventListener("click", () => {
+         checkoutDialog.close();
+      })
+   </script>
 
-         function plusSlides(n) {
-            showSlides(slideIndex += n);
-         }
-
-         function currentSlide(n) {
-            showSlides(slideIndex = n);
-         }
-
-         function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("article");
-            let dots = document.getElementsByClassName("dot");
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-               slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-               dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex-1].style.display = "block";
-            dots[slideIndex-1].className += " active";
-         }
-      </script>
-      <?php
-   } 
-}
-?>
+<?php } ?>
 
 <script>
    document.addEventListener("DOMContentLoaded", function() {
       const editDialog = document.getElementById("editArticleDialog");
       const openEditBtn = document.getElementById("edit");
       const closeEditBtn = editDialog.querySelector(".close-button");
+
+      const promotionDialog = document.getElementById("editPromotionDialog");
+      const closePromotionBtn = promotionDialog.querySelector(".close-button");
+      const openPromotionBtn = document.getElementById("add-promotion");
+
 
       openEditBtn.addEventListener("click", () => {
          editDialog.showModal();
@@ -256,5 +337,14 @@ function printCartArticleSection($db, $cartArticles, $userID){
       closeEditBtn.addEventListener("click", () => {
          editDialog.close();
       });
+
+      openPromotionBtn.addEventListener("click", () => {
+         editDialog.close();
+         promotionDialog.showModal();
+      })
+      
+      closePromotionBtn.addEventListener("click", () => {
+         promotionDialog.close();
+      })    
    });
 </script>

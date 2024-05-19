@@ -1,21 +1,20 @@
 <?php
-   session_start();
-
    require_once('templates/footer.tl.php');
    require_once('templates/header.tl.php');
    require_once('templates/article.tl.php');
    require_once('templates/filter.tl.php');
-   require_once('database/connection.php');
    require_once('database/articles.php');
    require_once('database/filters.php');
+   require_once('models/session.php');
 
-   $db = getDatabaseConnection();
+   $session = new Session();
 
    if(!isset($_SESSION['userID'])) header('Location: index.php');
 
-   $cartArticles = getCartArticlesByUserId($db, $_SESSION['userID']);
+   $cartArticles = getCartArticlesByUserId($_SESSION['userID']);
 
-   printHeader('Bazinga!');
-   printCartArticleSection($db, $cartArticles, $_SESSION['userID']);
+   printHeader('Bazinga!', $session);
+   printDifferentArticleSection($cartArticles, 'cart');
+   printCheckoutSection($cartArticles);
    printFooter();
 ?>
