@@ -23,7 +23,7 @@
                <div class="preferences-section">
                   <div class="preferences-tag">
                      <?php 
-                     if (isset($_SESSION['userID']) && isset($user['preferencesID']) && $_SESSION['userID'] == $user['userID']) {
+                     if (isset($user['preferencesID'])) {
                         $preferences = retrievePreferences($user['preferencesID']);
                         
                         $condition = getConditionByID($preferences['conditionID']) ?? null;
@@ -39,9 +39,9 @@
                            <?php }
                            if ($category) { ?>
                               <div class="preference" style="background-color: #457b9d;"><?php echo $category['name']; ?></div>
-                           <?php } ?>
+                           <?php } if(isset($_SESSION['userID']) && $_SESSION['userID'] == $user['userID']) { ?>
                            <i class="material-icons heart-icon" id="editPreferences" style="color: grey; font-size: 1em;">edit</i>
-                        <?php } else { ?>
+                        <?php } } elseif (isset($_SESSION['userID']) && $_SESSION['userID'] == $user['userID']) { ?>
                            <div class="preference-icon" id="addPreferences"><i class="material-icons">add</i> add preferences</div>
                         <?php }
                      } elseif(isset($_SESSION['userID']) && $_SESSION['userID'] == $user['userID']) { ?>

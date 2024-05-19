@@ -138,8 +138,8 @@ INSERT INTO productCondition (name) VALUES
 ('Very used'),
 ('New');
 
-INSERT INTO users (username, password, email, fullName, admin, avatar) VALUES
-('john-doe', '$2y$10$NpKhYrKobB3.oUsCO9kMRuRzjbCY65GJ2OTQCaXJi9oYcyWZAOXAK', 'johndoe@gmail.com', 'John Doe', true, '../assets/users/user.jpg');
+INSERT INTO users (username, password, email, fullName, admin, avatar, followers) VALUES
+('john-doe', '$2y$10$NpKhYrKobB3.oUsCO9kMRuRzjbCY65GJ2OTQCaXJi9oYcyWZAOXAK', 'johndoe@gmail.com', 'John Doe', true, '../assets/users/user.jpg', 0);
 
-INSERT INTO product (name, description, price, categoryID, conditionID, userID, images) VALUES
-('Homo Deus', 'A great book about the future', '14.99', 5, 3, 1, '../assets/products/homo-deus.webp');
+INSERT INTO product (name, description, price, categoryID, conditionID, userID, images, likes) VALUES
+('Homo Deus', 'A great book about the future', '14.99', 5, 3, 1, '../assets/products/homo-deus.webp', 0);
