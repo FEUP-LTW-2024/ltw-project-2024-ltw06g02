@@ -11,7 +11,7 @@
       $email = $_POST['email'];
       $password = $_POST['password'];
 
-      $user = new User($fullName, $username, $email, $password, '../assets/user.jpg');
+      $user = new User($fullName, $username, $email, $password, '../assets/users/user.jpg');
       if(!registerUser($user)){
          $session->addMessage('error', 'Already existent information');
          header('Location: ../#');

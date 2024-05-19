@@ -35,8 +35,8 @@
             <article class="<?=$messsage['type']?>">
               <?=$messsage['text']?>
             </article>
-        <?php } ?>
-    </section>  
+          <?php } ?>
+      </section>  
       </header>
 
 <?php

@@ -138,5 +138,8 @@ INSERT INTO productCondition (name) VALUES
 ('Very used'),
 ('New');
 
-INSERT INTO users (username, password, email, fullName, admin) VALUES
-('john-doe', '$2y$10$pWjAf.F.MJ09wKYEs9MRS.v72YNjPJCfSYaMpWdWUTARXj4l/7Etu', 'johndoe@gmail.com', 'John Doe', true);
+INSERT INTO users (username, password, email, fullName, admin, avatar) VALUES
+('john-doe', '$2y$10$NpKhYrKobB3.oUsCO9kMRuRzjbCY65GJ2OTQCaXJi9oYcyWZAOXAK', 'johndoe@gmail.com', 'John Doe', true, '../users/assets/user.jpg');
+
+INSERT INTO product (name, description, price, categoryID, conditionID, userID, images) VALUES
+('Homo Deus', 'A great book about the future', '14.99', 5, 3, 1, '../products/homo-deus.webp');
