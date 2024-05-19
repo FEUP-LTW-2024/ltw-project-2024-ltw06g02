@@ -1,6 +1,6 @@
 <?php 
-   require_once(dirname(__DIR__) . "/models/session.php");
-   require_once(dirname(__DIR__) . "/database/filters.php");
+   require_once(__DIR__ . '/../models/session.php');
+   require_once(__DIR__ . '/../database/filters.php');
 
    $session = new Session();
 

@@ -1,8 +1,8 @@
 <?php
-   require_once('forms.tl.php'); 
-   require_once('database/follow.php');
-   require_once('database/filters.php');
-   require_once('database/user.php');
+   require_once(__DIR__ . '/forms.tl.php'); 
+   require_once(__DIR__ . '/../database/follow.php');
+   require_once(__DIR__ . '/../database/filters.php');
+   require_once(__DIR__ . '/../database/user.php');
    function printBioSection($userID){
       $user = retrieveUser($userID);
       buildEditProfile();
@@ -134,7 +134,7 @@
 ?>
 
    <article class="profile-article">
-      <a href="product.php?id=<?=$article['productID']?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
+      <a href="../pages/product.php?id=<?=$article['productID']?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
       <div class="article-details">
          <div>
             <div style="display: flex; column-gap: 0.5em;">
@@ -142,7 +142,7 @@
                <?php if($article['promotion']) { ?> <div class="discount-tag"><?= $article['promotion'] * 100 . '%'?> discount</div> <?php } ?>
             </div>
             <div style="display: flex;">
-               <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>')?></p>
+               <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . round($article['price'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span></del>' : round($article['price'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . round($article['price'], 2) . '<span style="font-size: 0.7em;">€</span></del>' : round($article['price'], 2) . '<span style="font-size: 0.7em;">€</span>')?></p>
                <?php if($article['promotion']) {?><p style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></p><?php } ?>
             </div>  
          </div>

@@ -4,7 +4,7 @@
 ?>
    
    <article class="article">
-      <a href="product.php?id=<?=$article['productID']?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
+      <a href="../pages/product.php?id=<?=$article['productID']?>"><img src=<?= $images[0] ?> alt="" class="product-img"></a>
       <div class="article-details">
          <div>
             <div style="display: flex; column-gap: 0.5em;">
@@ -12,7 +12,7 @@
                <?php if($article['promotion']) { ?> <div class="discount-tag"><?= $article['promotion'] * 100 . '%'?> discount</div> <?php } ?>
             </div>
             <div style="display: flex;">
-               <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>')?></p>
+               <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . round($article['price'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span></del>' : round($article['price'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . round($article['price'], 2) . '<span style="font-size: 0.7em;">€</span></del>' : round($article['price'], 2) . '<span style="font-size: 0.7em;">€</span>')?></p>
                <?php if($article['promotion']) {?><p style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></p><?php } ?>
             </div>        
          </div>
@@ -28,35 +28,6 @@
 
 <?php
    }
-?>
-
-<?php
-   function getSingleCartArticle($article){
-      $images = explode(",", $article['images']);
-?>
-   <article class="article">
-      <form id="removeFromCartForm" action="../actions/remove_from_cart.php" method="POST">
-         <input type="hidden" name="userId" value="<?=$_SESSION['userID']?>">
-         <input type="hidden" name="articleId" value="<?=$article['productID']?>">
-         <button type="submit" id="removeFromCartBtn" class="material-icons">delete</button>
-      </form>
-      <img src=<?= $images[0] ?> alt="" class="product-img">
-      <div class="article-details">
-         <div>
-            <h3><?= $article['name'] ?></h3>
-            <div style="display: flex;">
-               <p><?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>')?></p>
-               <?php if($article['promotion']) {?><p style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></p><?php } ?>
-            </div> 
-         </div>
-      </div>
-   </article>
-
-<?php
-   }
-?>
-
-<?php
    function printArticleSection($articles, $title){
 ?>
    <div class="product-section">
@@ -179,9 +150,9 @@
       </div>
       <aside class="product-column">
          <h1 class="price">
-            <?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span></del>' : $article['price'] * 1.09 . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . $article['price'] . '<span style="font-size: 0.7em;">€</span></del>' : $article['price'] . '<span style="font-size: 0.7em;">€</span>'); ?>
+            <?php echo (isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol') ? ($article['promotion'] ? '<del>' . round($article['price'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span></del>' : round($article['price'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>') : ($article['promotion'] ? '<del>' . round($article['price'], 2) . '<span style="font-size: 0.7em;">€</span></del>' : round($article['price'], 2) . '<span style="font-size: 0.7em;">€</span>'); ?>
             <?php if($article['promotion']) {?><span style="color: #344e41;"><?= isset($_SESSION['currency']) && $_SESSION['currency'] == 'dol' ? round($article['price'] * 1.09 - $article['price'] * $article['promotion'] * 1.09, 2) . '<span style="font-size: 0.7em;">$</span>' : round($article['price'] - $article['price'] * $article['promotion'], 2) . '<span style="font-size: 0.7em;">€</span>' ?></span><?php } ?>
-            <span style="font-size: 0.7em; color: #344e41;">by <a style="color: #344e41;" href=<?= '../profile_user.php?id=' . $article['userID']?>> <?= $username ?> </a></span>
+            <span style="font-size: 0.7em; color: #344e41;">by <a style="color: #344e41;" href=<?= '../pages/profile_user.php?id=' . $article['userID']?>> <?= $username ?> </a></span>
          </h1>
          <hr class="separator">
          <h2 class="name"><?=$article['name']?></h2>
@@ -300,7 +271,7 @@
 ?>
 
    <section style="display: flex; justify-content: end; margin: 1em 2em;">
-      <button class="filter-btn" id="checkoutBtn">procceed to checkout</button>
+      <?php if(sizeof($articles) > 0) { ?> <button class="filter-btn" id="checkoutBtn">procceed to checkout</button> <?php } ?>
    </section>
 
    <script>

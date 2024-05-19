@@ -1,7 +1,7 @@
 <?php 
-   require_once('../database/connection.php');
-   require_once('../models/session.php');
-   require_once('../database/messages.php');
+   require_once(__DIR__ . '/../database/connection.php');
+   require_once(__DIR__ . '/../models/session.php');
+   require_once(__DIR__ . '/../database/messages.php');
 
    $session = new Session();
 
@@ -12,7 +12,7 @@
          exit();
       }
       $session->addMessage('success', 'Chat created');
-      header('Location: ../messages.php');
+      header('Location: ../pages/messages.php');
       exit();
    }
    exit();

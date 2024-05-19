@@ -1,6 +1,6 @@
 <?php
-   require_once("../database/user.php");
-   require_once('../models/session.php');
+   require_once(__DIR__ . '/../database/user.php');
+   require_once(__DIR__ . '/../models/session.php');
 
    $session = new Session();
 
@@ -21,6 +21,6 @@
 
       $userID = getUserIdByName($name);
       
-      header('Location: ../profile_user.php?id=' . $userID);  
+      header('Location: ../pages/profile_user.php?id=' . $userID);  
    }
 ?>

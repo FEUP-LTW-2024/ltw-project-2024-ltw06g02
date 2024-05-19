@@ -1,8 +1,8 @@
 <?php 
-   require_once('../database/connection.php');
-   require_once('../database/messages.php');
-   require_once('../database/user.php');
-   require_once('../models/session.php');
+   require_once(__DIR__ . '/../database/connection.php');
+   require_once(__DIR__ . '/../database/messages.php');
+   require_once(__DIR__ . '/../database/user.php');
+   require_once(__DIR__ . '/../models/session.php');
 
    $session = new Session();
 

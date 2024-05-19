@@ -1,13 +1,13 @@
 <?php
-    require_once('../database/articles.php');
-    require_once('../database/removeFromCart.php');
-    require_once('../database/favorites.php');
-    require_once('../database/user.php');
-    require_once('../database/historic.php');
-    require_once('../database/messages.php');
-    require_once('../models/session.php');
-    require_once(dirname(__DIR__) . '/templates/article.tl.php');
-    require_once(dirname(__DIR__) . '/models/session.php');
+    require_once(__DIR__ . '/../database/articles.php');
+    require_once(__DIR__ . '/../database/removeFromCart.php');
+    require_once(__DIR__ . '/../database/favorites.php');
+    require_once(__DIR__ . '/../database/user.php');
+    require_once(__DIR__ . '/../database/historic.php');
+    require_once(__DIR__ . '/../database/messages.php');
+    require_once(__DIR__ . '/../models/session.php');
+    require_once(__DIR__ . '/../templates/article.tl.php');
+    require_once(__DIR__ . '/../models/session.php');
 
     $session = new Session();
     

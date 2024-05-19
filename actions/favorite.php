@@ -1,7 +1,7 @@
 <?php
-   require_once("../models/favorite.php");
-   require_once("../database/favorites.php");
-   require_once("../models/session.php");
+   require_once(__DIR__ . "/../models/favorite.php");
+   require_once(__DIR__ . "/../database/favorites.php");
+   require_once(__DIR__ . "/../models/session.php");
 
    $session = new Session();
 

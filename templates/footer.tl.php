@@ -3,7 +3,7 @@
 ?>
    </main>
       <footer>
-         <p>some footer</p>
+         <p>Copyright &copy; bazinga.</p>
       </footer>
   </body>
 </html>

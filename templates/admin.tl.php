@@ -1,5 +1,5 @@
 <?php
-   require_once('database/user.php');
+   require_once(__DIR__ . '/../database/user.php');
    function printAdminSection(){
 ?>
 

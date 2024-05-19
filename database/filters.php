@@ -1,6 +1,6 @@
 <?php 
-   require_once(dirname(__DIR__) . "/database/user.php");
-   require_once('connection.php');
+   require_once(__DIR__ . '/user.php');
+   require_once(__DIR__ . '/connection.php');
 
    $db = getDatabaseConnection();
 

@@ -1,9 +1,9 @@
 <?php
-   require_once('templates/footer.tl.php');
-   require_once('templates/header.tl.php');
-   require_once('templates/upload.tl.php');
-   require_once('database/filters.php');
-   require_once('models/session.php');
+   require_once(__DIR__ . '/../templates/footer.tl.php');
+   require_once(__DIR__ . '/../templates/header.tl.php');
+   require_once(__DIR__ . '/../templates/upload.tl.php');
+   require_once(__DIR__ . '/../database/filters.php');
+   require_once(__DIR__ . '/../models/session.php');
 
    $session = new Session();
 

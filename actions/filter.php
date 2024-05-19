@@ -1,8 +1,8 @@
 <?php 
-   require_once('../database/connection.php');
-   require_once('../templates/article.tl.php');
-   require_once('../models/session.php');
-   require_once('../database/articles.php');
+   require_once(__DIR__ . '/../database/connection.php');
+   require_once(__DIR__ . '/../templates/article.tl.php');
+   require_once(__DIR__ . '/../models/session.php');
+   require_once(__DIR__ . '/../database/articles.php');
 
    $session = new Session();
 

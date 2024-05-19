@@ -1,7 +1,7 @@
 <?php
-   require_once("../models/cart.php");
-   require_once("../database/addToCart.php");
-   require_once("../models/session.php");
+   require_once(__DIR__ . "/../models/cart.php");
+   require_once(__DIR__ . "/../database/addToCart.php");
+   require_once(__DIR__ . "/../models/session.php");
 
    $session = new Session();
 
