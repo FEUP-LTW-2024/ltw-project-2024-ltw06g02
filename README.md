@@ -3,8 +3,8 @@
 ## Group ltw06g02
 
 - Diogo Martins (up202207944) 40%
-- Afonso Moura () 30%
-- Rodrigo Miranda () 30%
+- Afonso Moura (up202207931) 40%
+- Rodrigo Miranda (202204916) 20%
 
 ## Install Instructions
 
